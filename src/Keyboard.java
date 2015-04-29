@@ -20,10 +20,7 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	
 		
 		System.out.println("You pressed the "+event.getCode()+" key!");
-		
-		
-	
-	
+
 		
 		switch(event.getCode()){
 		case A:
@@ -44,28 +41,28 @@ public class Keyboard implements EventHandler<KeyEvent> {
 				xMove += speedX;
 				r.setLayoutX(xMove);
 			}
-		
-		case W:
-			if(speedY < 0){
-				yMove += speedY;
-				speedY = -speedY;
-				r.setLayoutY(yMove);
-			}else{
-				yMove += speedY;
-				r.setLayoutY(yMove);
-			}
 		case S:
-			if(speedY > 0){
+			if(speedY < 0){
 				yMove -= speedY;
 				speedY = -speedY;
 				r.setLayoutY(yMove);
 			}else{
+				yMove -= speedY;
+				r.setLayoutY(yMove);
+			}
+		case W:
+			if(speedY > 0){
+				yMove += speedY;
+				speedY = -speedY;
+				r.setLayoutY(yMove);
+			}else{
+				yMove += speedY;
 				r.setLayoutY(yMove);
 			}
 			default:
 				
 		}
-		System.out.println("XMOVE: " + xMove + " YMOVE: " + yMove);
+		System.out.println("X-kord: " +r.getLayoutX() + " Y-kord: " + r.getLayoutY());
 		final long startTime = System.nanoTime();
 		final AnimationTimer a = new AnimationTimer() {
 			@Override

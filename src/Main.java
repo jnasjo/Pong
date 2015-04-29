@@ -26,8 +26,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Pong");
-		primaryStage.setHeight(CANVAS_HEIGHT);
-		primaryStage.setWidth(CANVAS_WIDTH);
 
 		Group root = new Group();
 		root.setFocusTraversable(true);
@@ -51,11 +49,14 @@ public class Main extends Application {
 			}.start();
 		}
 
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
 		scene.setOnKeyPressed(keys);
 
 		primaryStage.setScene(scene);
 		primaryStage.getScene().setFill(Color.BLACK);
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene(); // Ensure that we get a correctly sized
+									// canvas and not window
 		primaryStage.show();
 	}
 }

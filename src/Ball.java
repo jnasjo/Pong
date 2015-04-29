@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Circle;
 
@@ -8,7 +10,14 @@ public class Ball {
 
 	private final int CANVAS_HEIGHT;
 	private final int CANVAS_WIDTH;
+
+	private double velX, velY;
 	
+	private final static double START_Y_DIFF = 1.5;
+	private final static double START_X_VEL = 5;
+
+	private Random rand;
+
 	/**
 	 * Creates a new ball and re-locates the ball to the center of the screen
 	 * 
@@ -19,9 +28,10 @@ public class Ball {
 		this.ball = ball;
 		CANVAS_HEIGHT = Main.CANVAS_HEIGHT;
 		CANVAS_WIDTH = Main.CANVAS_WIDTH;
+		rand = new Random();
 
 		reset();
-		
+
 		animator = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -31,31 +41,77 @@ public class Ball {
 		start();
 	}
 
+	/**
+	 * Animates the ball and does various checks such as collision
+	 * 
+	 * @param now
+	 *            The current time in nanoseconds
+	 */
 	private void animate(long now) {
+		moveBall();
+	}
+
+	/**
+	 * Moves the ball and does collision checking
+	 * 
+	 * @return false if the ball went of the edge
+	 */
+	private boolean moveBall() {
+		incrementPos(velX, velY);
+
+		// Collision with walls
+		
+		if (getX() - ball.getRadius() < 0) {
+			setX(ball.getRadius());
+			velX *= -1;
+
+			// PLAYER 1 LOST
+		}
+		if (getY() - ball.getRadius() < 0) {
+			setY(ball.getRadius());
+			velY *= -1;
+		}
+		if (getX() + ball.getRadius() > CANVAS_WIDTH) {
+			setX(CANVAS_WIDTH - ball.getRadius());
+			velX *= -1;
+			
+			// PLAYER 2 LOST
+		}
+		if (getY() + ball.getRadius() > CANVAS_HEIGHT) {
+			setY(CANVAS_HEIGHT - ball.getRadius());
+			velY *= -1;
+		}
+		
+		// Collision with player
+
+		return false;
 	}
 	
+	private int collision() {
+		return 1;
+	}
+
 	/**
 	 * Stops the ball
 	 */
 	public void stop() {
 		animator.stop();
 	}
-	
+
 	/**
 	 * Starts/continues the ball
 	 */
 	public void start() {
 		animator.start();
 	}
-	
+
 	/**
 	 * Moves the ball to the middle of the canvas
 	 */
 	public void reset() {
-	  // SOMETHING IS WRONG SOMEWHERE HERA
-		System.out.println(ball.getLayoutX()+", "+ball.getTranslateX()+", "+ball.getCenterX());
-		setPos(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
-		System.out.println(CANVAS_WIDTH/2);
+		setPos(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+		velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
+		velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) * START_Y_DIFF;
 	}
 
 	/**

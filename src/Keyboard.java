@@ -17,61 +17,61 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	@Override
 	public void handle(KeyEvent event) {
 		if (event.getCode() == KeyCode.W) {
-			
+
 		}
-		
-		System.out.println("You pressed the "+event.getCode()+" key!");
-		
+
+		System.out.println("You pressed the " + event.getCode() + " key!");
+
 		final long startTime = System.nanoTime();
 		final AnimationTimer a = new AnimationTimer() {
 			@Override
-			public void handle(long now) {	
-				//r.setX(r.getX()+1);
-				//r.setRotate(r.getRotate()+.5);
-				if(r.getLayoutX() > 400 || r.getLayoutX() < 0){
-					xMove =xMove*-1;
+			public void handle(long now) {
+				// r.setX(r.getX()+1);
+				// r.setRotate(r.getRotate()+.5);
+				if (r.getLayoutX() > 400 || r.getLayoutX() < 0) {
+					xMove = xMove * -1;
 					speed--;
-				}else if(r.getLayoutY() > 400 || r.getLayoutY() < 0){
-					yMove = yMove*-1;
+				} else if (r.getLayoutY() > 400 || r.getLayoutY() < 0) {
+					yMove = yMove * -1;
 					speed--;
 				}
-				
-				switch(event.getCode()){
+
+				switch (event.getCode()) {
 				case A:
-					if(xMove > 0){
-					xMove = xMove*-1;
-					r.setLayoutX(xMove+speed);
-					}else{
-						r.setLayoutX(xMove +speed);
+					if (xMove > 0) {
+						xMove = xMove * -1;
+						r.setLayoutX(xMove + speed);
+					} else {
+						r.setLayoutX(xMove + speed);
 					}
 				case D:
-					if(xMove < 0){
-						xMove = xMove*-1;
-						r.setLayoutX(xMove+speed);
-					}else{
-						r.setLayoutX(xMove+speed);
+					if (xMove < 0) {
+						xMove = xMove * -1;
+						r.setLayoutX(xMove + speed);
+					} else {
+						r.setLayoutX(xMove + speed);
 					}
-				
+
 				case W:
-					if(yMove < 0){
-						yMove = yMove*-1;
+					if (yMove < 0) {
+						yMove = yMove * -1;
 						r.setLayoutY(yMove);
-					}else{
+					} else {
 						r.setLayoutY(yMove);
 					}
 				case S:
-					if(yMove > 0){
-						yMove = yMove*-1;
+					if (yMove > 0) {
+						yMove = yMove * -1;
 						r.setLayoutY(yMove);
-					}else{
+					} else {
 						r.setLayoutY(yMove);
 					}
-					default:
-						speed++;
+				default:
+					speed++;
 				}
-				
+
 				System.out.println("XMOVE: " + xMove + " YMOVE: " + yMove);
-				if(now > startTime+Math.pow(10, 9)*10)
+				if (now > startTime + Math.pow(10, 9) * 10)
 					this.stop();
 			}
 		};

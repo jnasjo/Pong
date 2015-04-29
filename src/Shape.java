@@ -83,8 +83,10 @@ public class Shape extends Parent {
 	 */
 	public Rectangle drawRectangle(int x, int y, int width, int height,
 			Color color) {
-		Rectangle rect = new Rectangle(x, y, width, height);
-		rect.setFill((color == null) ? Color.WHITE : color);
+		Rectangle rect = new Rectangle(width, height,
+				(color == null) ? Color.WHITE : color);
+		rect.setLayoutX(x);
+		rect.setLayoutY(y);
 		root.getChildren().add(rect);
 		return rect;
 	}

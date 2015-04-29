@@ -47,7 +47,6 @@ public class Main extends Application {
 				@Override
 				public void handle(long arg0) {
 					text.setText(java.util.Arrays.toString(keys.getSpeed()));
-					System.out.println();
 				}
 			}.start();
 		}

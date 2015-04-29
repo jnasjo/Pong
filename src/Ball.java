@@ -26,7 +26,6 @@ public class Ball {
 			@Override
 			public void handle(long now) {
 				animate(now);
-				setX(200);
 			}
 		};
 		start();

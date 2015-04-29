@@ -22,7 +22,7 @@ public class Keyboard implements EventHandler<KeyEvent> {
 		System.out.println("You pressed the "+event.getCode()+" key!");
 		
 		
-		yMove += speedY;
+	
 	
 		
 		switch(event.getCode()){

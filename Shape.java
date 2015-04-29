@@ -78,8 +78,7 @@ public class Shape extends Parent {
 	 * @return The created circle
 	 */
 	public Circle drawCircle(int x, int y, int r, Color color) {
-		Circle circle = new Circle(x, y, r, Color.WHITE);
-		circle.setFill((color == null) ? Color.WHITE : color);
+		Circle circle = new Circle(x, y, r, (color == null) ? Color.WHITE : color);
 		root.getChildren().add(circle);
 		return circle;
 	}

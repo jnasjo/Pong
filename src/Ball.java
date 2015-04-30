@@ -70,11 +70,11 @@ public class Ball {
 	 */
 	private boolean moveBall() {
 		incrementPos(velX, velY);
-		double prevXPos = getX();
-		double prevYPos = getY();
+		// double prevXPos = getX();
+		// double prevYPos = getY();
 
 		// Collision with walls
-		
+
 		if (getX() - getRadius() < 0) {
 			setX(getRadius());
 			velX *= -1;
@@ -240,26 +240,6 @@ public class Ball {
 	}
 
 	/**
-	 * Increments the ball's x-coordinate with the provided value
-	 * 
-	 * @param value
-	 *            The value to increment the x-coordinate with
-	 */
-	private void incrementX(double value) {
-		incrementPos(value, 0);
-	}
-
-	/**
-	 * Increments the ball's y-coordinate with the provided value
-	 * 
-	 * @param value
-	 *            The value to increment the y-coordinate with
-	 */
-	private void incrementY(double value) {
-		incrementPos(0, value);
-	}
-
-	/**
 	 * Increments the ball's position with values
 	 * 
 	 * @param x
@@ -303,7 +283,7 @@ public class Ball {
 		ball.setLayoutX(x);
 		ball.setLayoutY(y);
 	}
-	
+
 	/**
 	 * @return The balls radius
 	 */

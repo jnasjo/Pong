@@ -1,6 +1,5 @@
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
@@ -15,6 +14,11 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	public Keyboard(Rectangle r) {
 		this.r = r;
 	
+	}
+
+	// DEV
+	public int[] getSpeed() {
+		return new int[] { xMove, yMove };
 	}
 
 	@Override
@@ -54,19 +58,4 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	}
 }
 
-/**
- *final long startTime = System.nanoTime();
-		final AnimationTimer a = new AnimationTimer() {
-			@Override
-			public void handle(long now) {	
-								
-				
-				if(now > startTime+Math.pow(10, 9)*10)
-					this.stop();
-			}
 
-		};
-		
-		
-		a.start(); 
-*/

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -67,14 +68,17 @@ public class Main extends Application {
 
 //		Rectangle r = shape.drawRectangle(0, 200, 20, 65, null);
 
-		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR));
+		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), player1, player2);
 		ball.start(); // Useless, men tar bort "unused"
 
 		if (SHOW_DEV_INFO) {
 			Text text = shape.drawText(0, 0, 12, false, "-", null);
 			Text p1Keys = shape.drawText(0, 14, 12, false, "-", null);
 			Text p2Keys = shape.drawText(0, 28, 12, false, "-", null);
+			Text col = shape.drawText(0, 42, 12, false, "-", null);
 			text.setOpacity(0.4);
+			Line colL1 = shape.drawLine(-1, 0, -1, CANVAS_HEIGHT, 1, null);
+			Line colL2 = shape.drawLine(0, -1, CANVAS_WIDTH, -1, 1, null);
 
 			new AnimationTimer() {
 				@Override
@@ -82,6 +86,18 @@ public class Main extends Application {
 					text.setText(player1.getSpeed());
 					p1Keys.setText(keysP1.getKeysDown());
 					p2Keys.setText(keysP2.getKeysDown());
+					
+					// Collision cross
+					double[] cord = ball.colCoords();
+					if(cord != null) {
+						colL1.setLayoutX(cord[0]);
+						colL2.setLayoutY(cord[1]);
+						
+						int[] coords = new int[cord.length];
+						for(int i=0; i<coords.length; i++)
+							coords[i] = (int) (cord[i]);
+						col.setText(java.util.Arrays.toString(coords));
+					}
 				}
 			}.start();
 		}

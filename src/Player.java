@@ -44,4 +44,11 @@ public class Player {
 		self.setLayoutX(xMove);
 		self.setLayoutY(yMove);
 	}
+	
+	/**
+	 * @return The rectangle, or pad, of this player
+	 */
+	public Rectangle getRect() {
+		return self;
+	}
 }

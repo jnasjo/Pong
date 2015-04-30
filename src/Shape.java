@@ -1,3 +1,4 @@
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class Shape extends Parent {
 
@@ -31,15 +33,20 @@ public class Shape extends Parent {
 	 *            Text starting y-coordinate
 	 * @param size
 	 *            The texts size
-	 * @param text
-	 *            The text to be displayed
+	 * @param rightToLeft
+	 *            Draws text from (x-width, y) to (x-width,y) + text dimensions
+	 * @param color
+	 *            The color of the text, white if null
 	 * @return The text that was created
 	 */
-	public Text drawText(double x, double y, int size, String text) {
+	public Text drawText(double x, double y, int size, boolean rightToLeft,
+			String text, Color color) {
 		Text t = new Text(x, y, text);
 		t.setFont(new Font(size));
 		t.setTextOrigin(VPos.TOP);
-		t.setFill(Color.WHITE);
+		if (rightToLeft)
+			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth());
+		t.setFill(color == null ? Color.WHITE : color);
 		root.getChildren().add(t);
 		return t;
 	}
@@ -55,13 +62,16 @@ public class Shape extends Parent {
 	 *            Ending x-coordinate
 	 * @param y2
 	 *            Ending y-coordinate
+	 * @param width
+	 *            The width of the line
 	 * @param color
 	 *            The color of the line, white if null
 	 * @return The created line
 	 */
-	public Line drawLine(int x1, int y1, int x2, int y2, Color color) {
+	public Line drawLine(int x1, int y1, int x2, int y2, int width, Color color) {
 		Line line = new Line(x1, y1, x2, y2);
 		line.setStroke((color == null) ? Color.WHITE : color);
+		line.setStrokeWidth(width);
 		root.getChildren().add(line);
 		return line;
 	}

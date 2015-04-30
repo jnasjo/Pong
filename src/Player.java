@@ -9,14 +9,16 @@ public class Player {
 	private Rectangle self;
 	private Keyboard keyboard;
 
-	private int xMove = 1;
-	private int yMove = 1;
+	private double xMove = 1;
+	private double yMove = 1;
 	private static int speedX = 4;
 	private static int speedY = 4;
 
 	public Player(Keyboard keyboard, Rectangle rect) {
 		this.self = rect;
 		this.keyboard = keyboard;
+		xMove = rect.getLayoutX();
+		yMove = rect.getLayoutY();
 	}
 
 	// DEV

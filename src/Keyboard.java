@@ -17,8 +17,8 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	}
 
 	// DEV
-	public int[] getSpeed() {
-		return new int[] { xMove, yMove };
+	public String getSpeed() {
+		return ""+xMove+", "+yMove;
 	}
 
 	@Override

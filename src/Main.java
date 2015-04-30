@@ -44,17 +44,11 @@ public class Main extends Application {
 		Rectangle p2 = shape.drawRectangle(100, 100,20 , 65, Color.BLUE);
 		Keyboard keysP1 = new Keyboard(p1);
 		
-		
-		Ball ball = new Ball(shape.drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, Color.GREEN));
-		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
 	
 		scene.setOnKeyPressed(keysP1);
 		
 		
-
-
-		Shape shape = new Shape(root);
 		Rectangle r = shape.drawRectangle(0, 200, 20, 65, null);
 		Keyboard keys = new Keyboard(r);
 
@@ -68,13 +62,11 @@ public class Main extends Application {
 			new AnimationTimer() {
 				@Override
 				public void handle(long arg0) {
-					text.setText(java.util.Arrays.toString(keys.getSpeed()));
+					text.setText(keys.getSpeed());
 				}
 			}.start();
 		}
 
-		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
-		scene.setOnKeyPressed(keys);
 
 
 		primaryStage.setScene(scene);

@@ -6,64 +6,56 @@ import javafx.scene.shape.Rectangle;
 
 public class Keyboard implements EventHandler<KeyEvent> {
 	Rectangle r;
-	private int xMove = 1;
-	private int yMove = 1;
+	
+	private static int xMove = 1;
+	private static int yMove = 1;
 	private int speedX = 4;
 	private int speedY = 4;
 
 	public Keyboard(Rectangle r) {
 		this.r = r;
+	
 	}
 
 	@Override
 	public void handle(KeyEvent event) {
 	
-		
-		System.out.println("You pressed the "+event.getCode()+" key!");
-
-		
+	
 		switch(event.getCode()){
-		case A:
-			if(speedX > 0){
-				xMove -= speedX;
-				speedX = -speedX;
-				r.setLayoutX(xMove);
-			}else{
-				xMove -= speedX;
-				r.setLayoutX(xMove);
-			}
 		case D:
-			if(speedX < 0){
-				xMove += speedX;
-				speedX = -speedX;
-				r.setLayoutX(xMove);
-			}else{
-				xMove += speedX;
-				r.setLayoutX(xMove);
-			}
-		case S:
-			if(speedY < 0){
-				yMove -= speedY;
-				speedY = -speedY;
-				r.setLayoutY(yMove);
-			}else{
-				yMove -= speedY;
-				r.setLayoutY(yMove);
-			}
+			xMove += speedX;
+			r.setLayoutX(xMove);
+			break;
+		case A:
+			xMove -= speedX;
+			r.setLayoutX(xMove);
+			break;
 		case W:
-			if(speedY > 0){
-				yMove += speedY;
-				speedY = -speedY;
-				r.setLayoutY(yMove);
-			}else{
-				yMove += speedY;
-				r.setLayoutY(yMove);
-			}
-			default:
+			yMove -= speedY;
+			r.setLayoutY(yMove);
+			break;
+		case S:
+			yMove += speedY;
+			r.setLayoutY(yMove);
+			break;
+		default:
 				
-		}
-		System.out.println("X-kord: " +r.getLayoutX() + " Y-kord: " + r.getLayoutY());
-		final long startTime = System.nanoTime();
+		}	
+
+	}
+	public double getX(Rectangle r)
+	{
+		return r.getLayoutX();
+	}
+	
+	public double getY(Rectangle r)
+	{
+		return r.getLayoutY();
+	}
+}
+
+/**
+ *final long startTime = System.nanoTime();
 		final AnimationTimer a = new AnimationTimer() {
 			@Override
 			public void handle(long now) {	
@@ -72,7 +64,9 @@ public class Keyboard implements EventHandler<KeyEvent> {
 				if(now > startTime+Math.pow(10, 9)*10)
 					this.stop();
 			}
+
 		};
-		a.start();
-	}
-}
+		
+		
+		a.start(); 
+*/

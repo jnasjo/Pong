@@ -1,35 +1,58 @@
-import java.awt.Color;
+
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.*;
+
 
 public class Keyboard implements EventHandler<KeyEvent> {
 	Rectangle r;
-	Ball ball;
+	Group root;
 	
 	private static int xMove = 1;
 	private static int yMove = 1;
 	private int speedX = 8;
 	private int speedY = 8;
 	private int shootSpeed = 4;
-
-	public Keyboard(Rectangle r) {
-		this.r = r;
+	private Rectangle shoot;
+	private int NumberOfShoots =0;
 	
+
+	public Keyboard(Rectangle r, Group root) {
+		this.r = r;
+		this.root = root;
 	}
 
 	// DEV
 	public int[] getSpeed() {
 		return new int[] { xMove, yMove };
 	}
+	
+	
 
 	@Override
 	public void handle(KeyEvent event) {
+		
+		
+		
+		if(event.getCode().isWhitespaceKey() && NumberOfShoots >= 1){
+			new AnimationTimer() {
+				@Override
+				public void handle(long args0) {
+					NumberOfShoots--;
+					shootSpeed += 1;
+					if(shootSpeed > 500){  shootSpeed = 1; System.out.println("Hej"); root.getChildren().remove(shoot);stop();}
+				}
+			}.start();
+			
+		}
 	
-		shootSpeed += shootSpeed;
-		//bounch(r, ball);
+		
 		
 		switch(event.getCode()){
 		case D:
@@ -43,12 +66,31 @@ public class Keyboard implements EventHandler<KeyEvent> {
 		case W:
 			yMove -= speedY;
 			r.setLayoutY(yMove);
-			break;
+			break; 
 		case S:
 			yMove += speedY;
 			r.setLayoutY(yMove);
 			break;
+		case SPACE:
+			Shape sp = new Shape(root);
+			shoot = sp.drawRectangle((int)r.getLayoutX()-20, (int)r.getLayoutY()-20,20 , 20, Color.ORANGE);
+			NumberOfShoots++;
+			System.out.println(NumberOfShoots);
+			new AnimationTimer() {
+				@Override
+				public void handle(long arg0) {
+					shoot.setLayoutX(shootSpeed);
+					if(shoot.getLayoutX() > 500){
+						root.getChildren().remove(shoot);
+						stop();
+					}
+				}
+				
 			
+			}.start();
+		
+		
+		
 		default:
 				
 		}	
@@ -64,11 +106,7 @@ public class Keyboard implements EventHandler<KeyEvent> {
 		return r.getLayoutY();
 	}
 	
-	public void bounch(Rectangle r, Rectangle r2)
-	{
-		System.out.println(r.getX());
-		
-	}
+
 	
 }
 

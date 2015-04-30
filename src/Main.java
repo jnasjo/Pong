@@ -1,7 +1,10 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -29,6 +32,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Pong");
 
 		Group root = new Group();
+		
 		root.setFocusTraversable(true);
 
 		
@@ -37,28 +41,25 @@ public class Main extends Application {
 		PlayerName nameP1 = new PlayerName(root);
 		PlayerName nameP2 = new PlayerName(root);
 		
-		nameP1.pName(100, 100, "Pong_Master");
-		nameP2.pName(2400, 100, "Japanese_PING_");
+		nameP1.pName(100, 40, "Pong_Master");
+		nameP2.pName(650, 40, "Japanese_PING_");
 		
-		Rectangle p1 = shape.drawRectangle(0, 200, 20, 65, Color.RED);
+		Rectangle p1 = shape.drawRectangle(0, 200, 20, 125, Color.RED);
 		Rectangle p2 = shape.drawRectangle(100, 100,20 , 65, Color.BLUE);
-		Keyboard keysP1 = new Keyboard(p1);
+		
+		Keyboard keysP1 = new Keyboard(p1, root);
 		
 		
-		Ball ball = new Ball(shape.drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, Color.GREEN));
 		
-		Scene scene = new Scene(root);
-	
-		scene.setOnKeyPressed(keysP1);
 		
+		Ball ball = new Ball(shape.drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, Color.BLUE));
 		
 
+		Shape shape2 = new Shape(root);
+		Rectangle r = shape.drawRectangle(0, 200, 20, 65, Color.BLUE);
+		Keyboard keys = new Keyboard(r,root);
 
-		Shape shape = new Shape(root);
-		Rectangle r = shape.drawRectangle(0, 200, 20, 65, null);
-		Keyboard keys = new Keyboard(r);
-
-		Ball ball = new Ball(shape.drawCircle(0, 0, 50, Color.GREEN));
+		Ball ball2 = new Ball(shape.drawCircle(0, 0, 50, Color.GREEN));
 		ball.start(); // Useless, men tar bort "unused"
 
 		if (SHOW_DEV_INFO) {
@@ -69,15 +70,29 @@ public class Main extends Application {
 				@Override
 				public void handle(long arg0) {
 					text.setText(java.util.Arrays.toString(keys.getSpeed()));
+					if(keysP1.getX(p1) == ball.getX()){
+					
+						shape.drawRectangle((int)ball.getX(), 200, 125, 125, Color.ORANGE);
+						
+					}
+
 				}
+				
+			
 			}.start();
 		}
+		System.out.println();
+		Rectangle shoot = shape2.drawRectangle(40, 40, 10, 10, Color.BLACK);
+		
+		shoot.setOnKeyPressed(keys);
+		
+	
 
-		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
-		scene.setOnKeyPressed(keys);
+		Scene scene2 = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
+		scene2.setOnKeyPressed(keysP1);
 
 
-		primaryStage.setScene(scene);
+		primaryStage.setScene(scene2);
 		
 		primaryStage.getScene().setFill(Color.BLACK);
 		primaryStage.setResizable(false);
@@ -85,4 +100,7 @@ public class Main extends Application {
 									// canvas and not window
 		primaryStage.show();
 	}
+	
+	
+	
 }

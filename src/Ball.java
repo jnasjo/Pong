@@ -182,19 +182,14 @@ public class Ball {
 	/**
 	 * @return The current x-coordinate of the ball's layout
 	 */
-	public double getX() {
+	private double getX() {
 		return ball.getLayoutX();
 	}
 
 	/**
 	 * @return The current y-coordinate of the ball's layout
 	 */
-	public double getY() {
+	private double getY() {
 		return ball.getLayoutY();
-	}
-	
-	public double getRadius()
-	{
-		return ball.getRadius();
 	}
 }

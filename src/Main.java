@@ -47,11 +47,11 @@ public class Main extends Application {
 		
 		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT/2-35, 20, 70, PLAYER1_COLOR);
 		Rectangle p2 = shape.drawRectangle(CANVAS_WIDTH-30-20, CANVAS_HEIGHT/2-35, 20, 70, PLAYER2_COLOR);
-		Keyboard keysP1 = new Keyboard(KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D);
-		Keyboard keysP2 = new Keyboard(KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT, KeyCode.RIGHT);
+		Keyboard keysP1 = new Keyboard(KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.SPACE);
+		Keyboard keysP2 = new Keyboard(KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT, KeyCode.RIGHT, KeyCode.L);
 		
-		Player player1 = new Player(keysP1, p1);
-		Player player2 = new Player(keysP2, p2);
+		Player player1 = new Player(keysP1, p1, root);
+		Player player2 = new Player(keysP2, p2, root);
 
 		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
 		

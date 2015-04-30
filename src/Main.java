@@ -10,12 +10,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.*;
 
 public class Main extends Application {
 	
 	private final static double SCREEN_SIZE = .1;
 	private final static int SCREEN_HEIGHT = 1080;
 	private final static int SCREEN_WIDTH = 1920;
+	
 	
 	// Drawing space, AKA window height and width
 	public final static int CANVAS_HEIGHT = (int) (SCREEN_HEIGHT*SCREEN_SIZE);
@@ -34,18 +36,29 @@ public class Main extends Application {
 		
 		Group root = new Group();
 		root.setFocusTraversable(true);
-
+		
 
 		Shape shape = new Shape(root);
-		Rectangle r = shape.drawRectangle(0, 200, 20, 65, null);
-		Keyboard keys = new Keyboard(r);
+		PlayerName nameP1 = new PlayerName(root);
+		PlayerName nameP2 = new PlayerName(root);
 		
-		Ball ball = new Ball(shape.drawCircle(0, 0, 50, Color.GREEN));
+		nameP1.pName(100, 100, "Pong_Master");
+		nameP2.pName(2400, 100, "Japanese_PING_");
+		
+		Rectangle p1 = shape.drawRectangle(0, 200, 20, 65, Color.RED);
+		Rectangle p2 = shape.drawRectangle(100, 100,20 , 65, Color.BLUE);
+		Keyboard keysP1 = new Keyboard(p1);
+		
+		
+		Ball ball = new Ball(shape.drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, Color.GREEN));
 		
 		Scene scene = new Scene(root);
-		scene.setOnKeyPressed(keys);
+	
+		scene.setOnKeyPressed(keysP1);
+		
 		
 		primaryStage.setScene(scene);
+		
 		primaryStage.getScene().setFill(Color.BLACK);
 		primaryStage.show();
 	}

@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -5,11 +7,13 @@ import javafx.scene.shape.Rectangle;
 
 public class Keyboard implements EventHandler<KeyEvent> {
 	Rectangle r;
+	Ball ball;
 	
 	private static int xMove = 1;
 	private static int yMove = 1;
-	private int speedX = 4;
-	private int speedY = 4;
+	private int speedX = 8;
+	private int speedY = 8;
+	private int shootSpeed = 4;
 
 	public Keyboard(Rectangle r) {
 		this.r = r;
@@ -24,7 +28,9 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	@Override
 	public void handle(KeyEvent event) {
 	
-	
+		shootSpeed += shootSpeed;
+		//bounch(r, ball);
+		
 		switch(event.getCode()){
 		case D:
 			xMove += speedX;
@@ -42,6 +48,7 @@ public class Keyboard implements EventHandler<KeyEvent> {
 			yMove += speedY;
 			r.setLayoutY(yMove);
 			break;
+			
 		default:
 				
 		}	
@@ -56,6 +63,13 @@ public class Keyboard implements EventHandler<KeyEvent> {
 	{
 		return r.getLayoutY();
 	}
+	
+	public void bounch(Rectangle r, Rectangle r2)
+	{
+		System.out.println(r.getX());
+		
+	}
+	
 }
 
 

@@ -14,7 +14,7 @@ public class PlayerName extends Parent{
 	public Text pName(int x, int y, String theName)
 	{
 		Text name = new Text(x, y, theName);
-		name.setFont(new Font(100));
+		name.setFont(new Font(30));
 		name.setFill(Color.WHITE);
 		
 		root.getChildren().add(name);

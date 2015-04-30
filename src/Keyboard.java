@@ -1,4 +1,3 @@
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;

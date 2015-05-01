@@ -1,8 +1,8 @@
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Bounds;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public class Ball {
 
@@ -69,9 +69,30 @@ public class Ball {
 	 * @return false if the ball went of the edge
 	 */
 	private boolean moveBall() {
+		// Where we are and where we're going
+		Point start = new Point(getX(), getY());
+		Point end = new Point(getX() + velX, getY() + velY);
+
+		// Collision with player
+		for (Player p : players) {
+
+			Intersection intersect = checkCollision(start, end, p);
+			if (intersect != null && !intersect.hasNaN()) {
+				double c = (velX * velX + velY * velY)
+						/ (intersect.nx * intersect.nx + intersect.ny
+								* intersect.ny);
+				c = Math.sqrt(c);
+				velX = intersect.nx * c;
+				velY = intersect.ny * c;
+				setPos(intersect.ix, intersect.iy);
+				System.out.println(intersect);
+				collision = new double[] { intersect.ix, intersect.iy };
+				break;
+			}
+		}
+
+		// Move ball
 		incrementPos(velX, velY);
-		// double prevXPos = getX();
-		// double prevYPos = getY();
 
 		// Collision with walls
 
@@ -96,124 +117,137 @@ public class Ball {
 			velY *= -1;
 		}
 
-		// Collision with player
-		for (Player p : players) {
-			double[] col = checkCollisionWithBall(p);
-			if (col == null) // No collision with this player
-				continue;
-			collision = col;
-			velX *= -1;
+		return false;
+	}
+
+	/**
+	 * Clamps input between -1 and 1 [-1, 1]
+	 * 
+	 * @param value
+	 *            value to be clamped
+	 * @return The clamped value
+	 */
+	private double clamp(double value) {
+		if (value < -1)
+			return -1;
+		else if (value > 1)
+			return 1;
+		return value;
+	}
+
+	private Intersection checkCollision(Point start, Point end, Player p) {
+		Bounds b = p.getRect().getBoundsInParent();
+		double L = b.getMinX(); // Min x-coordinate
+		double T = b.getMinY(); // Min y-coordinate
+		double R = b.getMaxX(); // Max x-coordinate
+		double B = b.getMaxY(); // Max y-coordinate
+		double dx = end.x - start.x;
+		double dy = end.y - start.y;
+		double radius = getRadius();
+
+		double ltime = Double.MAX_VALUE;
+		double rtime = Double.MAX_VALUE;
+		double ttime = Double.MAX_VALUE;
+		double btime = Double.MAX_VALUE;
+
+		if (start.x - radius < L && end.x + radius > L)
+			ltime = (L - radius - start.x) / dx;
+		if (start.x + radius > R && end.x - radius < R)
+			rtime = (start.x - R - radius) / -dx;
+		if (start.y - radius < T && end.y + radius > T)
+			ttime = (T - radius - start.y) / dy;
+		if (start.y + radius > B && end.y - radius < B)
+			btime = (start.y - B - radius) / -dy;
+
+		if (ltime >= 0.0f && ltime <= 1.0f) {
+			double ly = dy * ltime + start.y;
+			if (ly >= T && ly <= B) {
+				return new Intersection(dx * ltime + start.x, ly, ltime, -1, 0);
+			}
+		} else if (rtime >= 0.0f && rtime <= 1.0f) {
+			double ry = dy * rtime + start.y;
+			if (ry >= T && ry <= B) {
+				return new Intersection(dx * rtime + start.x, ry, rtime, 1, 0);
+			}
 		}
 
-		return false;
-	}
+		if (ttime >= 0.0f && ttime <= 1.0f) {
+			double tx = dx * ttime + start.x;
+			if (tx >= L && tx <= R) {
+				return new Intersection(tx, dy * ttime + start.y, ttime, 0, -1);
+			}
+		} else if (btime >= 0.0f && btime <= 1.0f) {
+			double bx = dx * btime + start.x;
+			if (bx >= L && bx <= R) {
+				return new Intersection(bx, dy * btime + start.y, btime, 0, 1);
+			}
+		}
 
-	/**
-	 * Checks if the ball has collided with a player and calculate where this
-	 * happend
-	 * 
-	 * @param p
-	 *            The player to check collision on
-	 * @return A double array of the intersecting point where the ball hit the
-	 *         player where index 0 being the x-coordinate and 1 the
-	 *         y-coordinate, null if no collision
-	 */
-	private double[] checkCollisionWithBall(Player p) {
-		double x = p.getRect().getLayoutX();
-		double y = p.getRect().getLayoutY();
-		double w = p.getRect().getWidth();
-		double h = p.getRect().getHeight();
+		// If there was a collision it was with a corner
 
-		double[] res;
-		res = getBallLineCollisionPoint(x, y, x + w, y);
-		if (res != null)
-			for (int i = 0; i < 2; i += 2)
-				if (checkPointInPlayer(p, res[i], res[i + 1]))
-					return new double[] { res[i], res[i + 1] };
-		res = getBallLineCollisionPoint(x, y, x, y + h);
-		if (res != null)
-			for (int i = 0; i < 2; i += 2)
-				if (checkPointInPlayer(p, res[i], res[i + 1]))
-					return new double[] { res[i], res[i + 1] };
-		res = getBallLineCollisionPoint(x, y + h, x + w, y + h);
-		if (res != null)
-			for (int i = 0; i < 2; i += 2)
-				if (checkPointInPlayer(p, res[i], res[i + 1]))
-					return new double[] { res[i], res[i + 1] };
-		res = getBallLineCollisionPoint(x + w, y, x + w, y + h);
-		if (res != null)
-			for (int i = 0; i < 2; i += 2)
-				if (checkPointInPlayer(p, res[i], res[i + 1]))
-					return new double[] { res[i], res[i + 1] };
-		return null; // No collision found
-	}
+		double cornerX = Double.MAX_VALUE;
+		double cornerY = Double.MAX_VALUE;
 
-	/**
-	 * Checks if the point (x, y) is inside the player
-	 * 
-	 * @param player
-	 *            The player to look at
-	 * @param x
-	 *            The x-coordinate of the point
-	 * @param y
-	 *            The y-coordinate of the point
-	 * @return true if the point is inside the player
-	 */
-	private boolean checkPointInPlayer(Player player, double x, double y) {
-		Rectangle p = player.getRect();
-		if (x >= p.getLayoutX() && x <= p.getLayoutX() + p.getWidth()
-				&& y >= p.getLayoutY() && y <= p.getLayoutY() + p.getHeight())
-			return true;
-		return false;
-	}
+		if (ltime != Double.MAX_VALUE)
+			cornerX = L;
+		else if (rtime != Double.MAX_VALUE)
+			cornerX = R;
 
-	/**
-	 * Calculates the intersecting point of the line (x1, y1),(x2, y2) and the
-	 * ball
-	 * 
-	 * @param x1
-	 *            The x-coordinate for the first point
-	 * @param y1
-	 *            The y-coordinate for the first point
-	 * @param x2
-	 *            The x-coordinate for the second point
-	 * @param y2
-	 *            The y-coordinate for the second point
-	 * @return a double array with the first and second index being the first
-	 *         intersecting point and the third and forth index being the other
-	 *         intersecting point
-	 */
-	private double[] getBallLineCollisionPoint(double x1, double y1, double x2,
-			double y2) {
-		double baX = x2 - x1;
-		double baY = y2 - y1;
-		double caX = getX() - x1;
-		double caY = getY() - y1;
+		if (ttime != Double.MAX_VALUE)
+			cornerY = T;
+		else if (btime != Double.MAX_VALUE)
+			cornerY = B;
 
-		double a = baX * baX + baY * baY;
-		double bBy2 = baX * caX + baY * caY;
-		double c = caX * caX + caY * caY - getRadius() * getRadius();
+		// Account for the times where we don't pass over a side but we do hit
+		// it's corner
+		if (cornerX != Double.MAX_VALUE && cornerY == Double.MAX_VALUE)
+			cornerY = dy > .0d ? B : T;
+		if (cornerY != Double.MAX_VALUE && cornerX == Double.MAX_VALUE)
+			cornerX = dx > .0d ? R : L;
 
-		double pBy2 = bBy2 / a;
-		double q = c / a;
+		double invRadius = 1 / radius;
+		double lineLength = Math.sqrt(dx * dx + dy * dy);
+		double cornerDx = cornerX - start.x;
+		double cornerDy = cornerY - start.y;
+		double cornerDist = Math
+				.sqrt(cornerDx * cornerDx + cornerDy * cornerDy);
+		double v1 = (cornerDx * dx + cornerDy * dy);
+		double innerAngle;
+		if (v1 == Double.POSITIVE_INFINITY
+				&& cornerDist == Double.POSITIVE_INFINITY
+				|| v1 == Double.NEGATIVE_INFINITY
+				&& cornerDist == Double.NEGATIVE_INFINITY)
+			innerAngle = 1;
+		else if (Double.isInfinite(v1) && Double.isInfinite(cornerDist))
+			innerAngle = -1;
+		else
+			innerAngle = v1 / lineLength / cornerDist;
+		innerAngle = clamp(innerAngle);
+		innerAngle = Math.acos(innerAngle);
+		double innerAngleSin = Math.sin(innerAngle);
+		double angle1Sin;
+		if (innerAngleSin == 0 && Double.isInfinite(cornerDist))
+			angle1Sin = 0;
+		else
+			angle1Sin = innerAngleSin * cornerDist * invRadius;
 
-		double disc = pBy2 * pBy2 - q;
-		if (disc < 0)
+		if (Math.abs(angle1Sin) > 1.0d) // Angle too large, no collision
 			return null;
 
-		double abFa1 = -pBy2 + Math.sqrt(disc);
-		double abFa2 = abFa1 - 2 * Math.sqrt(disc);
+		double angle1 = Math.PI - Math.asin(angle1Sin);
+		double angle2 = Math.PI - innerAngle - angle1;
+		double intersectionDist = radius * Math.sin(angle2) / innerAngleSin;
 
-		double rx1 = x1 - baX * abFa1;
-		double ry1 = y1 - baY * abFa1;
+		double time = intersectionDist / lineLength;
+		if (time > 1.0d || time < .0d)
+			return null;
 
-		if (disc == 0)
-			return new double[] { rx1, ry1, -1, -1 };
+		double ix = time * dx + start.x;
+		double iy = time * dy + start.y;
+		double nx = (ix - cornerX) * invRadius;
+		double ny = (iy - cornerY) * invRadius;
 
-		double rx2 = x1 - baX * abFa2;
-		double ry2 = y1 - baY * abFa2;
-
-		return new double[] { rx1, ry1, rx2, ry2 };
+		return new Intersection(ix, iy, time, nx, ny);
 	}
 
 	/**
@@ -237,6 +271,8 @@ public class Ball {
 		setPos(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
 		velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
 		velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) * START_Y_DIFF;
+		// velX = 0.7075466219424853;
+		// velY = 0.7066666666666667;
 	}
 
 	/**

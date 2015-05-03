@@ -1,16 +1,25 @@
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class Shape extends Parent {
 
 	private Group root;
+
+	public static enum TextDirection {
+		RIGHT_TO_LEFT,
+		LEFT_TO_RIGHT,
+		CENTER_TEXT,
+	}
 
 	/**
 	 * Creates a new Shape object used to draw certain shapes
@@ -31,22 +40,39 @@ public class Shape extends Parent {
 	 *            Text starting y-coordinate
 	 * @param size
 	 *            The texts size
-	 * @param rightToLeft
-	 *            Draws text from (x-width, y) to (x-width,y) + text dimensions
+	 * @param textOrder
+	 *            Specifies how to draw the text
 	 * @param color
 	 *            The color of the text, white if null
 	 * @return The text that was created
 	 */
-	public Text drawText(double x, double y, int size, boolean rightToLeft,
+	public Text drawText(double x, double y, int size, TextDirection textOrder,
 			String text, Color color) {
 		Text t = new Text(x, y, text);
 		t.setFont(new Font(size));
 		t.setTextOrigin(VPos.TOP);
-		if (rightToLeft)
+		if (textOrder == TextDirection.RIGHT_TO_LEFT)
 			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth());
+		if (textOrder == TextDirection.CENTER_TEXT) {
+			t.setTextOrigin(VPos.CENTER);
+			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth()/2);
+			t.setTextAlignment(TextAlignment.CENTER);
+		}
 		t.setFill(color == null ? Color.WHITE : color);
 		root.getChildren().add(t);
 		return t;
+	}
+	
+	public Label drawLabel(double x, double y, int size, TextDirection order, String text, Color color) {
+		Label l = new Label(text);
+		l.setTextAlignment(TextAlignment.CENTER);
+		l.setAlignment(Pos.CENTER);
+		l.setLayoutY(x);
+		l.setLayoutY(y);
+		l.setFont(new Font(size));
+		l.setTextFill(color == null ? Color.WHITE : color);
+		root.getChildren().add(l);
+		return l;
 	}
 
 	/**

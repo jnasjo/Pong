@@ -26,7 +26,7 @@ public class Main extends Application {
 	public final static int CANVAS_HEIGHT = (int) (SCREEN_HEIGHT * SCREEN_SIZE);
 	public final static int CANVAS_WIDTH = (int) (SCREEN_WIDTH * SCREEN_SIZE);
 
-	private final static boolean SHOW_DEV_INFO = true;
+	private final static boolean SHOW_DEV_INFO = false;
 
 	public static void main(String... args) {
 		launch(args);
@@ -39,11 +39,15 @@ public class Main extends Application {
 		Group root = new Group();
 		root.setFocusTraversable(true);
 
+		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
+		
+		primaryStage.setScene(scene);
+
 		Shape shape = new Shape(root);
 		shape.drawLine(CANVAS_WIDTH/2-1, 0, CANVAS_WIDTH/2-1, CANVAS_HEIGHT, 2, Color.rgb(234, 234, 234));
 		
-		shape.drawText(CANVAS_WIDTH/2-20, 0, 40, true, "Pong_Master", PLAYER1_COLOR);
-		shape.drawText(CANVAS_WIDTH/2+20, 0, 40, false, "Japanese_PING_", PLAYER2_COLOR);
+		shape.drawText(CANVAS_WIDTH/2-20, 0, 40, Shape.TextDirection.RIGHT_TO_LEFT, "Pong_Master", PLAYER1_COLOR);
+		shape.drawText(CANVAS_WIDTH/2+20, 0, 40, Shape.TextDirection.LEFT_TO_RIGHT, "Japanese_PING_", PLAYER2_COLOR);
 		
 		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT/2-35, 20, 70, PLAYER1_COLOR);
 		Rectangle p2 = shape.drawRectangle(CANVAS_WIDTH-30-20, CANVAS_HEIGHT/2-35, 20, 70, PLAYER2_COLOR);
@@ -52,8 +56,13 @@ public class Main extends Application {
 		
 		Player player1 = new Player(keysP1, p1, root);
 		Player player2 = new Player(keysP2, p2, root);
+		
+		Text p1Score = shape.drawText(CANVAS_WIDTH/4, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
+		Text p2Score = shape.drawText(CANVAS_WIDTH*3/4, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
+		//Label score = shape.drawLabel(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
 
-		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
+		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
+		ball.start(); // Useless, men tar bort "unused"
 		
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
 			@Override
@@ -68,14 +77,11 @@ public class Main extends Application {
 
 //		Rectangle r = shape.drawRectangle(0, 200, 20, 65, null);
 
-		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), player1, player2);
-		ball.start(); // Useless, men tar bort "unused"
-
 		if (SHOW_DEV_INFO) {
-			Text text = shape.drawText(0, 0, 12, false, "-", null);
-			Text p1Keys = shape.drawText(0, 14, 12, false, "-", null);
-			Text p2Keys = shape.drawText(0, 28, 12, false, "-", null);
-			Text col = shape.drawText(0, 42, 12, false, "-", null);
+			Text text = shape.drawText(0, 0, 12, Shape.TextDirection.LEFT_TO_RIGHT, "-", null);
+			Text p1Keys = shape.drawText(0, 14, 12, Shape.TextDirection.LEFT_TO_RIGHT, "-", null);
+			Text p2Keys = shape.drawText(0, 28, 12, Shape.TextDirection.LEFT_TO_RIGHT, "-", null);
+			Text col = shape.drawText(0, 42, 12, Shape.TextDirection.LEFT_TO_RIGHT, "-", null);
 			text.setOpacity(0.4);
 			Line colL1 = shape.drawLine(-1, 0, -1, CANVAS_HEIGHT, 1, null);
 			Line colL2 = shape.drawLine(0, -1, CANVAS_WIDTH, -1, 1, null);
@@ -101,10 +107,6 @@ public class Main extends Application {
 				}
 			}.start();
 		}
-
-
-
-		primaryStage.setScene(scene);
 		
 		primaryStage.getScene().setFill(BACKGROUND);
 		primaryStage.setResizable(false);

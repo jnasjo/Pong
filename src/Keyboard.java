@@ -75,6 +75,24 @@ public class Keyboard {
 	}
 
 	/**
+	 * @return The number of keys on this keyboard
+	 */
+	public int size() {
+		return keys.length;
+	}
+
+	/**
+	 * Gets the key asigned to this index
+	 * 
+	 * @param idx
+	 *            The index for the key
+	 * @return The key on index idx
+	 */
+	public KeyCode get(int idx) {
+		return keys[idx];
+	}
+
+	/**
 	 * @return The KeyCode representing up
 	 */
 	public KeyCode getUp() {

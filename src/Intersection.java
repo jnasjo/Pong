@@ -1,13 +1,30 @@
 public class Intersection {
 
-	public double ix, iy, time, nx, ny;
+	public double cx, cy, time, nx, ny, ix, iy;
 
-	public Intersection(double ix, double iy, double time, double nx, double ny) {
-		this.ix = ix;
-		this.iy = iy;
+	/**
+	 * Creates a new intersection where a collision has occurred
+	 * 
+	 * @param ix
+	 *            The new x-coordinate
+	 * @param iy
+	 *            The new y-coordinate
+	 * @param time
+	 *            The time [0..1] from start to end where the collision occurred
+	 * @param nx
+	 *            The new x-velocity
+	 * @param ny
+	 *            The new y-velocity
+	 */
+	public Intersection(double x, double y, double time, double nx, double ny,
+			double ix, double iy) {
+		this.cx = x;
+		this.cy = y;
 		this.time = time;
 		this.nx = nx;
 		this.ny = ny;
+		this.ix = ix;
+		this.iy = iy;
 	}
 
 	/**
@@ -22,6 +39,9 @@ public class Intersection {
 		return false;
 	}
 
+	/**
+	 * @return A String representation of this intersection
+	 */
 	public String toString() {
 		return "ix: " + ix + ", iy: " + iy + ", time: " + time + ", nx: " + nx
 				+ ", ny: " + ny;

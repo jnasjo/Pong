@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Game {
 
 	private final static double SCREEN_SIZE = .5;
 	private final static int SCREEN_HEIGHT = 1080;
@@ -28,11 +28,11 @@ public class Main extends Application {
 
 	private final static boolean SHOW_DEV_INFO = false;
 
-	public static void main(String... args) {
-		launch(args);
+	public Game(Stage stage) throws Exception{
+		start(stage);
 	}
+	
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Pong");
 
@@ -62,6 +62,7 @@ public class Main extends Application {
 		//Label score = shape.drawLabel(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
 
 		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
+		Ball ball2 = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
 		ball.start(); // Useless, men tar bort "unused"
 		
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {

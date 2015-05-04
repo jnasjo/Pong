@@ -18,9 +18,8 @@ public class Player {
 	private double yMove = 1;
 	private static int speedX = 4;
 	private static int speedY = 4;
-	private int shootSpeed = 4;
-	private Rectangle shoot;
-	private int NumberOfShoots = 0;
+	
+	
 
 	public Player(Keyboard keyboard, Rectangle rect, Group root) {
 		this.root = root;
@@ -40,21 +39,7 @@ public class Player {
 
 		for (KeyCode key : keys) {
 
-			if (event.getCode().isWhitespaceKey() && NumberOfShoots >= 1) {
-				new AnimationTimer() {
-					@Override
-					public void handle(long args0) {
-						NumberOfShoots--;
-						shootSpeed += 1;
-						if (shootSpeed > 500) {
-							shootSpeed = 1;
-							root.getChildren().remove(shoot);
-							stop();
-							System.out.println("Hej");
-						}
-					}
-				}.start();
-			}
+			
 
 			if (key == keyboard.getUp())
 				yMove -= speedY; // Move Up
@@ -68,10 +53,30 @@ public class Player {
 			// WE BE FIRERIN' THE LAZORRZ
 			if (key == keyboard.getFire()) {
 				Shape sp = new Shape(root);
-				shoot = sp.drawRectangle((int) self.getLayoutX() - 20,
-						(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
-				NumberOfShoots++;
-				System.out.println(NumberOfShoots);
+				Rectangle shoot;
+				
+				
+				
+				new AnimationTimer() {
+					Rectangle shoot = sp.drawRectangle((int) self.getLayoutX() - 20,
+							(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
+					int ShootspeedX = 4;
+					@Override
+					public void handle(long args0) {
+						shoot.setLayoutX(self.getLayoutX());
+						shoot.setLayoutY(self.getLayoutY());
+						
+						ShootspeedX += 5;
+						shoot.setLayoutX(self.getLayoutX() + ShootspeedX);
+						
+						if(ShootspeedX > Game.CANVAS_WIDTH/2){
+							root.getChildren().remove(shoot);
+							ShootspeedX = (int) self.getLayoutX() - (int)self.getLayoutX()-5;
+						}
+						
+					}
+				}.start();
+				
 			}
 		}
 

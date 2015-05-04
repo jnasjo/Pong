@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="817.0" prefWidth="824.0" style="-fx-background-color: #3333;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TextArea prefHeight="622.0" prefWidth="824.0" text="This is the help menu&#10;&#10;PLAYER 1:&#10;LEFT = A&#10;RIGHT = D&#10;UP = W&#10;DOWN = S&#10;#####################################&#10;PLAYER 2:&#10;use arrows." />
+      <Button fx:id="back" layoutX="274.0" layoutY="642.0" mnemonicParsing="false" prefHeight="119.0" prefWidth="276.0" text="BACK" />
+   </children>
+</AnchorPane>

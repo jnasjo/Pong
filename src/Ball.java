@@ -46,10 +46,9 @@ public class Ball {
 		this.root = root;
 		this.ball = ball;
 		this.players = player;
-		for (Player p : players)
-			p.setBall(this);
-		CANVAS_HEIGHT = Main.CANVAS_HEIGHT;
-		CANVAS_WIDTH = Main.CANVAS_WIDTH;
+		
+		CANVAS_HEIGHT = Game.CANVAS_HEIGHT;
+		CANVAS_WIDTH = Game.CANVAS_WIDTH;
 		rand = new Random();
 
 		reset();
@@ -182,6 +181,7 @@ public class Ball {
 			// PLAYER 1 LOST
 			player2Score++;
 			p2Score.setText("" + player2Score);
+		
 			// reset();
 		}
 		if (getY() - getRadius() < 0) {
@@ -195,6 +195,7 @@ public class Ball {
 			// PLAYER 2 LOST
 			player1Score++;
 			p1Score.setText("" + player1Score);
+		
 			// reset();
 		}
 		if (getY() + getRadius() > CANVAS_HEIGHT) {

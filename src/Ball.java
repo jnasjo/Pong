@@ -46,7 +46,8 @@ public class Ball {
 		this.root = root;
 		this.ball = ball;
 		this.players = player;
-		
+		for (Player p : players)
+			p.setBall(this);
 		CANVAS_HEIGHT = Game.CANVAS_HEIGHT;
 		CANVAS_WIDTH = Game.CANVAS_WIDTH;
 		rand = new Random();
@@ -126,15 +127,17 @@ public class Ball {
 	 * @return false if the ball went of the edge
 	 */
 	private boolean moveBall() {
-		// Where we are and where we're going
-		Point start = new Point(getX(), getY());
-		Point end = new Point(getX() + velX, getY() + velY);
 
+		// Ball-Ball collision
 		for (Node n : root.getChildrenUnmodifiable()) {
 			if (n instanceof Circle && !n.equals(ball)) {
 				chaoticCircleCollision((Circle) n);
 			}
 		}
+
+		// Where we are and where we're going
+		Point start = new Point(getX(), getY());
+		Point end = new Point(getX() + velX, getY() + velY);
 
 		boolean hitPlayer = false;
 		// Collision with player
@@ -181,7 +184,8 @@ public class Ball {
 			// PLAYER 1 LOST
 			player2Score++;
 			p2Score.setText("" + player2Score);
-		
+			p2Score.setLayoutX(CANVAS_WIDTH * 3 / 4
+					- p2Score.getBoundsInLocal().getWidth() / 2);
 			// reset();
 		}
 		if (getY() - getRadius() < 0) {
@@ -195,7 +199,8 @@ public class Ball {
 			// PLAYER 2 LOST
 			player1Score++;
 			p1Score.setText("" + player1Score);
-		
+			p1Score.setLayoutX(CANVAS_WIDTH / 4
+					- p1Score.getBoundsInLocal().getWidth() / 2);
 			// reset();
 		}
 		if (getY() + getRadius() > CANVAS_HEIGHT) {

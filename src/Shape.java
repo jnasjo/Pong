@@ -1,24 +1,19 @@
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class Shape extends Parent {
 
 	private Group root;
 
 	public static enum TextDirection {
-		RIGHT_TO_LEFT,
-		LEFT_TO_RIGHT,
-		CENTER_TEXT,
+		RIGHT_TO_LEFT, LEFT_TO_RIGHT, CENTER_TEXT,
 	}
 
 	/**
@@ -48,31 +43,21 @@ public class Shape extends Parent {
 	 */
 	public Text drawText(double x, double y, int size, TextDirection textOrder,
 			String text, Color color) {
-		Text t = new Text(x, y, text);
+		Text t = new Text(text);
+		t.setLayoutX(x);
+		t.setLayoutY(y);
 		t.setFont(new Font(size));
 		t.setTextOrigin(VPos.TOP);
 		if (textOrder == TextDirection.RIGHT_TO_LEFT)
 			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth());
-		if (textOrder == TextDirection.CENTER_TEXT) {
+		else if (textOrder == TextDirection.CENTER_TEXT) {
 			t.setTextOrigin(VPos.CENTER);
-			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth()/2);
-			t.setTextAlignment(TextAlignment.CENTER);
+			t.setLayoutX(t.getLayoutX() - t.getBoundsInLocal().getWidth() / 2);
+			// t.setTextAlignment(TextAlignment.CENTER);
 		}
 		t.setFill(color == null ? Color.WHITE : color);
 		root.getChildren().add(t);
 		return t;
-	}
-	
-	public Label drawLabel(double x, double y, int size, TextDirection order, String text, Color color) {
-		Label l = new Label(text);
-		l.setTextAlignment(TextAlignment.CENTER);
-		l.setAlignment(Pos.CENTER);
-		l.setLayoutY(x);
-		l.setLayoutY(y);
-		l.setFont(new Font(size));
-		l.setTextFill(color == null ? Color.WHITE : color);
-		root.getChildren().add(l);
-		return l;
 	}
 
 	/**

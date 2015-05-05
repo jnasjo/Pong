@@ -34,6 +34,7 @@ public class Ball {
 
 	private Text p1Score;
 	private Text p2Score;
+	private SoundEffect effect;
 
 	/**
 	 * Creates a new ball and re-locates the ball to the center of the screen
@@ -51,6 +52,9 @@ public class Ball {
 		CANVAS_HEIGHT = Game.CANVAS_HEIGHT;
 		CANVAS_WIDTH = Game.CANVAS_WIDTH;
 		rand = new Random();
+
+		effect = new SoundEffect("hit1.mp3", "hit2.mp3", "hit3.mp3",
+				"hit4.mp3", "hit5.mp3");
 
 		reset();
 
@@ -163,6 +167,8 @@ public class Ball {
 				double newX = intersect.cx + ndx * remainingTime;
 				double newY = intersect.cy + ndy * remainingTime;
 				setPos(newX, newY);
+				
+				effect.playRandom();
 
 				collision = new double[] { intersect.ix, intersect.iy };
 				break;
@@ -187,10 +193,14 @@ public class Ball {
 			p2Score.setLayoutX(CANVAS_WIDTH * 3 / 4
 					- p2Score.getBoundsInLocal().getWidth() / 2);
 			// reset();
+
+			effect.playRandom();
 		}
 		if (getY() - getRadius() < 0) {
 			setY(getRadius());
 			velY *= -1;
+
+			effect.playRandom();
 		}
 		if (getX() + getRadius() > CANVAS_WIDTH) {
 			setX(CANVAS_WIDTH - getRadius());
@@ -202,10 +212,14 @@ public class Ball {
 			p1Score.setLayoutX(CANVAS_WIDTH / 4
 					- p1Score.getBoundsInLocal().getWidth() / 2);
 			// reset();
+
+			effect.playRandom();
 		}
 		if (getY() + getRadius() > CANVAS_HEIGHT) {
 			setY(CANVAS_HEIGHT - getRadius());
 			velY *= -1;
+
+			effect.playRandom();
 		}
 
 		return false;

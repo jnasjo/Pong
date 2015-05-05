@@ -42,7 +42,7 @@ public class Player {
 	}
 
 	// DEV
-	public String getSpeed() {
+	public String getSpeedDEV() {
 		return "" + xMove + ", " + yMove;
 	}
 
@@ -84,7 +84,6 @@ public class Player {
 							ShootspeedX = (int) self.getLayoutX()
 									- (int) self.getLayoutX() - 5;
 						}
-
 					}
 				}.start();
 			}
@@ -117,12 +116,8 @@ public class Player {
 
 	private class Animator {
 		private AnimationTimer anim;
-		public double speedX = 0;
-		public double speedY = 0;
 
-		public Animator(double xSpeed, double ySpeed) {
-			speedX = xSpeed;
-			speedY = ySpeed;
+		public Animator(double speedX, double speedY) {
 			anim = new AnimationTimer() {
 				@Override
 				public void handle(long now) {
@@ -170,6 +165,7 @@ public class Player {
 		 */
 		public void stop() {
 			anim.stop();
+
 		}
 	}
 }

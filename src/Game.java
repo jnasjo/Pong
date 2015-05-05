@@ -104,7 +104,7 @@ public class Game {
 			new AnimationTimer() {
 				@Override
 				public void handle(long arg0) {
-					text.setText(player1.getSpeed());
+					text.setText(player1.getSpeedDEV());
 					p1Keys.setText(keysP1.getKeysDown());
 					p2Keys.setText(keysP2.getKeysDown());
 

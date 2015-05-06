@@ -72,6 +72,7 @@ public class Menu extends Application{
 				Scene dialogScene = new Scene(dialogBox,300,200);
 				pop.setScene(dialogScene);
 				pop.show();
+				
 			}
 			
 		});
@@ -81,6 +82,7 @@ public class Menu extends Application{
 			@Override
 			public void handle(MouseEvent event) {
 				try {
+					
 					Help help = new Help(primaryStage);
 				} catch (Exception e) {
 					System.out.println("FEL");

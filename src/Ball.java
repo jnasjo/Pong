@@ -5,11 +5,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Sphere;
 import javafx.scene.text.Text;
 
 public class Ball {
 
-	private Circle ball;
+	private Sphere ball;
 	private AnimationTimer animator;
 
 	private final int CANVAS_HEIGHT;
@@ -41,7 +42,7 @@ public class Ball {
 	 * @param ball
 	 *            The Circle object connected to this ball
 	 */
-	public Ball(Circle ball, Group root, Text p1Score, Text p2Score,
+	public Ball(Sphere ball, Group root, Text p1Score, Text p2Score,
 			Player... player) {
 		this.root = root;
 		this.ball = ball;
@@ -85,7 +86,7 @@ public class Ball {
 	 * 
 	 * @param circle
 	 */
-	private void chaoticCircleCollision(Circle circle) {
+	private void chaoticCircleCollision(Sphere circle) {
 		double r = circle.getRadius();
 		double myR = getRadius();
 		double dx = circle.getLayoutX() - getX();
@@ -132,7 +133,7 @@ public class Ball {
 
 		for (Node n : root.getChildrenUnmodifiable()) {
 			if (n instanceof Circle && !n.equals(ball)) {
-				chaoticCircleCollision((Circle) n);
+				chaoticCircleCollision((Sphere) n);
 			}
 		}
 

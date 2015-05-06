@@ -4,9 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -144,5 +146,19 @@ public class Shape extends Parent {
 		circle.setLayoutY(y);
 		root.getChildren().add(circle);
 		return circle;
+	}
+	
+	public Sphere draw3Dball(int radius, int x, int y)
+	{
+		PhongMaterial redMaterial = new PhongMaterial();
+		redMaterial.setSpecularColor(Color.ORANGE);
+		redMaterial.setDiffuseColor(Color.RED);
+		
+		Sphere ball = new Sphere(radius);
+		ball.setLayoutX(x);
+		ball.setLayoutY(y);
+		ball.setMaterial(redMaterial);
+		root.getChildren().add(ball);
+		return ball;
 	}
 }

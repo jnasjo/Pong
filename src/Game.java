@@ -61,8 +61,8 @@ public class Game {
 		Text p2Score = shape.drawText(CANVAS_WIDTH*3/4, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
 		//Label score = shape.drawLabel(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 100, Shape.TextDirection.CENTER_TEXT, "0", Color.rgb(234, 234, 234));
 
-		Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
-		Ball ball2 = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
+		Ball ball = new Ball(shape.draw3Dball(40, 0, 0), root, p1Score, p2Score, player1, player2);
+		//Ball ball2 = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score, player1, player2);
 		ball.start(); // Useless, men tar bort "unused"
 		
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {

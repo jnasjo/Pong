@@ -43,11 +43,12 @@ public class Keyboard {
 	}
 
 	/**
-	 * KeyEventHandler for multiple inputs
+	 * KeyEventHandler for multiple inputs on the keys on this keyboard
 	 * 
 	 * @param event
 	 *            The current KeyEvent
-	 * @return An KeyCode array of every key
+	 * @return An KeyCode array of every key currently pressed down that is also
+	 *         on the keyboard
 	 */
 	public Set<KeyCode> handle(KeyEvent event) {
 

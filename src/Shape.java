@@ -137,7 +137,7 @@ public class Shape extends Parent {
 	{
 		PhongMaterial redMaterial = new PhongMaterial();
 		redMaterial.setSpecularColor(Color.ORANGE);
-		redMaterial.setDiffuseColor(Color.RED);
+		//redMaterial.setDiffuseColor(Color.ORANGE);
 		
 		Sphere ball = new Sphere(radius);
 		ball.setLayoutX(x);

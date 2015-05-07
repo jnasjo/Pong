@@ -2,7 +2,12 @@
 	
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -21,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +34,7 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Menu extends Application{
+	private AnimationTimer timer;
 	
 	private String name;
 	
@@ -47,7 +54,11 @@ public class Menu extends Application{
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Pong");
 		
+	
 		try {
+		
+			
+	
 		
 		Pane myPane = (Pane)FXMLLoader.load(getClass().getResource("MenuFXML.fxml"));
 			
@@ -82,7 +93,6 @@ public class Menu extends Application{
 			@Override
 			public void handle(MouseEvent event) {
 				try {
-					
 					Help help = new Help(primaryStage);
 				} catch (Exception e) {
 					System.out.println("FEL");
@@ -128,7 +138,9 @@ public class Menu extends Application{
 			}
 			
 		});
-			
+		
+		
+		
 			Scene myScene = new Scene(myPane);
 			primaryStage.setScene(myScene);
 			primaryStage.show();

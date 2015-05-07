@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
-public class SoundEffect extends Application {
+public class SoundEffect {
 
 	private AudioClip[] sounds;
 	private Random rand;
@@ -46,9 +46,5 @@ public class SoundEffect extends Application {
 		sounds[i].play();
 	}
 
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

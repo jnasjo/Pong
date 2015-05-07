@@ -135,7 +135,7 @@ public class Ball {
 
 		// Ball-Ball collision
 		for (Node n : root.getChildrenUnmodifiable()) {
-			if (n instanceof Circle && !n.equals(ball)) {
+			if (n instanceof Sphere && !n.equals(ball)) {
 				chaoticCircleCollision((Sphere) n);
 			}
 		}

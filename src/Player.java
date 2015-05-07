@@ -70,16 +70,22 @@ public class Player {
 							(int) self.getLayoutX() - 20,
 							(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
 					int ShootspeedX = 4;
+				
 
 					@Override
 					public void handle(long args0) {
 						shoot.setLayoutX(self.getLayoutX());
 						shoot.setLayoutY(self.getLayoutY());
+						
+						
+						
 
 						ShootspeedX += 5;
 						shoot.setLayoutX(self.getLayoutX() + ShootspeedX);
+						
+						shoot.setLayoutY(120*Math.sin(shoot.getLayoutX()/50));
 
-						if (ShootspeedX > Game.CANVAS_WIDTH / 2) {
+						if (ShootspeedX > Game.CANVAS_WIDTH) {
 							root.getChildren().remove(shoot);
 							ShootspeedX = (int) self.getLayoutX()
 									- (int) self.getLayoutX() - 5;

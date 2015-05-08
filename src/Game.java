@@ -22,9 +22,9 @@ import javafx.util.Duration;
 
 public class Game {
 
-	//Timer for fade in
+	// Timer for fade in
 	private AnimationTimer timer;
-	
+
 	private final static double SCREEN_SIZE = .5;
 	private final static int SCREEN_HEIGHT = 1080;
 	private final static int SCREEN_WIDTH = 1920;
@@ -43,25 +43,21 @@ public class Game {
 
 	public Game(Stage stage) throws Exception {
 		start(stage);
-		
+
 	}
 
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Pong");
-		
+
 		primaryStage.setOpacity(0.1);
-		fadeIn(primaryStage); // Game is fading in and i'm making comments!!!!!!!!!
-		
-		
+		fadeIn(primaryStage); // Game is fading in and i'm making
+								// comments!!!!!!!!!
 
 		Group root = new Group();
 		root.setFocusTraversable(true);
-		
-		
-		
-		
+
 		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
-		
+
 		primaryStage.setScene(scene);
 
 		Shape shape = new Shape(root);
@@ -91,11 +87,13 @@ public class Game {
 		Player player1 = new Player(keysP1, p1, root);
 		Player player2 = new Player(keysP2, p2, root);
 
-		Ball ball = new Ball(shape.draw3Dball(40, 0, 0), root, p1Score, p2Score, player1, player2);
-		
+		Ball ball = new Ball(shape.draw3Dball(40, 0, 0), root, p1Score,
+				p2Score, player1, player2);
 
-		//Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root,p1Score, p2Score, player1, player2);
-		//new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score, p2Score,player1, player2);
+		// Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR),
+		// root,p1Score, p2Score, player1, player2);
+		// new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR), root, p1Score,
+		// p2Score,player1, player2);
 
 		ball.start(); // Useless, men tar bort "unused"
 
@@ -153,30 +151,30 @@ public class Game {
 									// canvas and not window
 		primaryStage.show();
 	}
-	
-	public void fadeIn(Stage primaryStage)
-	{
+
+	public void fadeIn(Stage primaryStage) {
 		Timeline timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
-		
-		timer = new AnimationTimer(){
-			double i = 0.01;	
+
+		timer = new AnimationTimer() {
+			double i = 0.01;
+
 			@Override
 			public void handle(long now) {
-				if(i < 1){
+				if (i < 1) {
 					primaryStage.setOpacity(i);
 					i += 0.01;
 				}
 			}
-			
+
 		};
 		timeline.play();
 		timer.start();
-		if(primaryStage.getOpacity() == 1){
+		if (primaryStage.getOpacity() == 1) {
 			timeline.stop();
 			timer.stop();
 		}
-			
+
 	}
-	
+
 }

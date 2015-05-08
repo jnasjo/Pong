@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Text;
 
@@ -168,7 +167,7 @@ public class Ball {
 				double newX = intersect.cx + ndx * remainingTime;
 				double newY = intersect.cy + ndy * remainingTime;
 				setPos(newX, newY);
-				
+
 				effect.playRandom();
 
 				collision = new double[] { intersect.ix, intersect.iy };
@@ -349,27 +348,27 @@ public class Ball {
 				res[2] = checkCollisionWithCorners(R, T, dx, dy, L, R, T, B,
 						start, radius);
 			} else { // BOTTOM LEFT CORNER
-				res[0] = checkCollisionWithCorners(L, T, dx, dy, L, R, T, B,
+				res[0] = checkCollisionWithCorners(L, B, dx, dy, L, R, T, B,
 						start, radius);
-				res[1] = checkCollisionWithCorners(L, B, dx, dy, L, R, T, B,
+				res[1] = checkCollisionWithCorners(L, T, dx, dy, L, R, T, B,
 						start, radius);
 				res[2] = checkCollisionWithCorners(R, B, dx, dy, L, R, T, B,
 						start, radius);
 			}
 		} else {
 			if (cornerY == T) { // TOP RIGHT CORNER
-				res[0] = checkCollisionWithCorners(L, T, dx, dy, L, R, T, B,
+				res[0] = checkCollisionWithCorners(R, T, dx, dy, L, R, T, B,
 						start, radius);
-				res[1] = checkCollisionWithCorners(R, T, dx, dy, L, R, T, B,
+				res[1] = checkCollisionWithCorners(R, B, dx, dy, L, R, T, B,
 						start, radius);
-				res[2] = checkCollisionWithCorners(R, B, dx, dy, L, R, T, B,
+				res[2] = checkCollisionWithCorners(L, T, dx, dy, L, R, T, B,
 						start, radius);
 			} else { // BOTTOM RIGHT CORNER
 				res[0] = checkCollisionWithCorners(R, B, dx, dy, L, R, T, B,
 						start, radius);
-				res[1] = checkCollisionWithCorners(L, B, dx, dy, L, R, T, B,
+				res[1] = checkCollisionWithCorners(R, T, dx, dy, L, R, T, B,
 						start, radius);
-				res[2] = checkCollisionWithCorners(R, T, dx, dy, L, R, T, B,
+				res[2] = checkCollisionWithCorners(L, B, dx, dy, L, R, T, B,
 						start, radius);
 			}
 		}

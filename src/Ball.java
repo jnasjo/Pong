@@ -4,12 +4,12 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.shape.Sphere;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class Ball {
 
-	private Sphere ball;
+	private Circle ball;
 	private AnimationTimer animator;
 
 	private final int CANVAS_HEIGHT;
@@ -42,7 +42,7 @@ public class Ball {
 	 * @param ball
 	 *            The Circle object connected to this ball
 	 */
-	public Ball(Sphere ball, Group root, Text p1Score, Text p2Score,
+	public Ball(Circle ball, Group root, Text p1Score, Text p2Score,
 			Player... player) {
 		this.root = root;
 		this.ball = ball;
@@ -52,9 +52,9 @@ public class Ball {
 		CANVAS_HEIGHT = Game.CANVAS_HEIGHT;
 		CANVAS_WIDTH = Game.CANVAS_WIDTH;
 		rand = new Random();
-
-		effect = new SoundEffect("hit1.mp3", "hit2.mp3", "hit3.mp3",
-				"hit4.mp3", "hit5.mp3");
+		effect = new SoundEffect("h4.wav", "h5.wav", "h6.wav");
+//		effect = new SoundEffect("hit1.mp3", "hit2.mp3", "hit3.mp3",
+//				"hit4.mp3", "hit5.mp3");
 
 		reset();
 
@@ -90,7 +90,7 @@ public class Ball {
 	 * 
 	 * @param circle
 	 */
-	private void chaoticCircleCollision(Sphere circle) {
+	private void chaoticCircleCollision(Circle circle) {
 		double r = circle.getRadius();
 		double myR = getRadius();
 		double dx = circle.getLayoutX() - getX();
@@ -134,8 +134,8 @@ public class Ball {
 
 		// Ball-Ball collision
 		for (Node n : root.getChildrenUnmodifiable()) {
-			if (n instanceof Sphere && !n.equals(ball)) {
-				chaoticCircleCollision((Sphere) n);
+			if (n instanceof Circle && !n.equals(ball)) {
+				chaoticCircleCollision((Circle) n);
 			}
 		}
 

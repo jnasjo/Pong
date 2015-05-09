@@ -62,7 +62,7 @@ public class Game {
 
 		Shape shape = new Shape(root);
 		shape.drawLine(CANVAS_WIDTH / 2 - 1, 0, CANVAS_WIDTH / 2 - 1,
-				CANVAS_HEIGHT, 2, Color.rgb(234, 234, 234));
+				CANVAS_HEIGHT, 2, SCORE_TEXT_COLOR); //Color.rgb(234, 234, 234)
 
 		shape.drawText(CANVAS_WIDTH / 2 - 20, 0, 40,
 				Shape.TextDirection.RIGHT_TO_LEFT, "Pong_Master", PLAYER1_COLOR);
@@ -87,7 +87,9 @@ public class Game {
 		Player player1 = new Player(keysP1, p1, root);
 		Player player2 = new Player(keysP2, p2, root);
 
-		Ball ball = new Ball(shape.draw3Dball(40, 0, 0), root, p1Score,
+//		Ball ball = new Ball(shape.draw3Dball(40, 0, 0), root, p1Score,
+//				p2Score, player1, player2);
+		Ball ball = new Ball(shape.drawCircle(0, 0, 60, BALLCOLOR), root, p1Score,
 				p2Score, player1, player2);
 
 		// Ball ball = new Ball(shape.drawCircle(0, 0, 75, BALLCOLOR),

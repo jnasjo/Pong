@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <ImageView fitHeight="540.0" fitWidth="960.0">
+         <image>
+            <Image url="@../../../PongMenu/background.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="player2" fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="152.0">
+         <image>
+            <Image url="@../../../PongMenu/playertwo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="514.0" layoutX="346.0">
+         <image>
+            <Image url="@../../../PongMenu/mostPointsWin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="514.0" layoutX="346.0" layoutY="67.0">
+         <image>
+            <Image url="@../../../PongMenu/instruct.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="player1" fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="152.0">
+         <image>
+            <Image url="@../../../PongMenu/playerone.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="202.0">
+         <image>
+            <Image url="@../../../PongMenu/moveUp.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="245.0">
+         <image>
+            <Image url="@../../../PongMenu/moveDown.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="291.0">
+         <image>
+            <Image url="@../../../PongMenu/movep1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="202.0">
+         <image>
+            <Image url="@../../../PongMenu/playermovetwo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="414.0" layoutY="413.0">
+         <image>
+            <Image url="@../../../PongMenu/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="help" fitHeight="76.0" fitWidth="200.0" layoutY="29.0">
+         <image>
+            <Image url="@../../../PongMenu/help.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

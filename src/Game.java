@@ -61,7 +61,7 @@ public class Game {
 		
 		
 		Scene scene = new Scene(root, CANVAS_WIDTH, CANVAS_HEIGHT);
-		
+		System.out.println(scene.getHeight() + "||" + scene.getWidth());
 		primaryStage.setScene(scene);
 
 		Shape shape = new Shape(root);
@@ -176,6 +176,7 @@ public class Game {
 			timeline.stop();
 			timer.stop();
 		}
+		
 			
 	}
 	

@@ -1,5 +1,3 @@
-
-	
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -17,6 +15,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -32,134 +34,125 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-
-public class Menu extends Application{
+public class Menu extends Application {
 	private AnimationTimer timer;
-	
+
 	private String name;
-	
+	private double arrowDown;
+	private double arrowXL;
+	private double arrowXR;
+	private ImageView sL;
+	private ImageView sR;
+
 	@FXML
-	Label header;
-	
-	@FXML
-	Label newGame;
-	
-	@FXML
-	Label help;
-	
-	@FXML
-	Label quit;
-	
+	ImageView head, smallHead, newGame, help, settings, quit, playonline, keys,
+			confirm;
+
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Pong");
-		
-	
+
 		try {
-		
-			
-	
-		
-		Pane myPane = (Pane)FXMLLoader.load(getClass().getResource("MenuFXML.fxml"));
-			
-		Label header =  (Label) myPane.lookup("#Header");
-		Label startGame = (Label) myPane.lookup("#newGame");
-		Label quit = (Label) myPane.lookup("#quit");
-		Label help = (Label) myPane.lookup("#help");
-		
-		quit.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-			@Override
-			public void handle(MouseEvent event) {
-				
-				final Stage pop = new Stage();
-				pop.initModality(Modality.APPLICATION_MODAL);
-				pop.initOwner(primaryStage);
-				VBox dialogBox = new VBox(20);
-				
-				Text tx = new Text("Are you really sure????+");
-				dialogBox.getChildren().add(tx);
-				
-				Scene dialogScene = new Scene(dialogBox,300,200);
-				pop.setScene(dialogScene);
-				pop.show();
-				
-			}
-			
-		});
-		
-		help.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
+					"Menu.fxml"));
 
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					Help help = new Help(primaryStage);
-				} catch (Exception e) {
-					System.out.println("FEL");
-					e.printStackTrace();
-				}
-			}
+			ImageView header = (ImageView) myPane.lookup("#head");
+			ImageView smallHead = (ImageView) myPane.lookup("#smallhead");
+			ImageView newGame = (ImageView) myPane.lookup("#newGame");
+			ImageView help = (ImageView) myPane.lookup("#help");
+			ImageView settings = (ImageView) myPane.lookup("#settings");
+			ImageView quit = (ImageView) myPane.lookup("#quit");
+			ImageView playonline = (ImageView) myPane.lookup("#playonline");
+			ImageView keys = (ImageView) myPane.lookup("#keys");
+			ImageView confirm = (ImageView) myPane.lookup("#confirm");
+
+			Image selectArrowLeft = new Image("selectArrowLeft.png");
+			Image selectArrowRight = new Image("selectArrowRight.png");
+			sL = new ImageView(selectArrowLeft);
+			sR = new ImageView(selectArrowRight);
+			sL.setScaleX(0.3);
+			sL.setScaleY(0.3);
+			sR.setScaleX(0.3);
+			sR.setScaleY(0.3);
+			arrowDown = (int) (newGame.getLayoutY() - 40);
+			arrowXL = newGame.getLayoutX() - 60;
+			arrowXR = newGame.getLayoutX() + newGame.getFitWidth() - 25;
+			sL.setLayoutX(arrowXL);
+			sL.setLayoutY(arrowDown);
+			sR.setLayoutX(arrowXR);
+			sR.setLayoutY(arrowDown);
+
 			
-		});
-		
-	
-		
-		
-		startGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					Game game = new Game(primaryStage);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		
-		header.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-			
-				header.setScaleX(1.2);
-				header.setScaleY(1.2);
-		
-			}
-		});
-		
-		
-		header.setOnMouseExited(new EventHandler<MouseEvent>(){
-			@Override
-			public void handle(MouseEvent event) {
-				
-				header.setScaleX(1);
-				header.setScaleY(1);
-				
-			}
-			
-		});
-		
-		
-		
+			newGame.setOnKeyPressed(select(primaryStage));
+
+			myPane.getChildren().add(sL);
+			myPane.getChildren().add(sR);
 			Scene myScene = new Scene(myPane);
+			myScene.setOnKeyPressed(select(primaryStage));
 			primaryStage.setScene(myScene);
 			primaryStage.show();
-			
-			
-		} catch (IOException e) { 
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
+
+	public EventHandler select(Stage stage) throws Exception{
+
+		EventHandler e = new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent key) {
+				if (key.getCode().equals(KeyCode.DOWN) && arrowDown != 430) {
+
+					arrowDown += 60;
+					sL.setLayoutY(arrowDown);
+					sR.setLayoutY(arrowDown);
+
+				}
+				if (key.getCode().equals(KeyCode.UP) && arrowDown != 190) {
+
+					arrowDown -= 60;
+					sL.setLayoutY(arrowDown);
+					sR.setLayoutY(arrowDown);
+
+				}
+				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 190)
+				{
+						try {
+							Game newGame = new Game(stage);
+						} catch (Exception e) { //should never happen
+							e.printStackTrace(); 
+						}
+					
+				}
+				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 250)
+				{
+						try {
+							Help help = new Help(stage);
+							
+						} catch (Exception e) { //should never happen
+							e.printStackTrace(); 
+						}
+					
+				}
+
+				System.out.println(arrowDown);
+			}
+
+		};
+		return e;
+	}
+
+	
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	
-	public void getItStarted(Stage primaryStage){
+
+	public void getItStarted(Stage primaryStage) throws Exception {
 		start(primaryStage);
-		
+
 	}
 }

@@ -135,8 +135,8 @@ public class Player {
 						Point end = new Point(ball.getX() - speedX, ball.getY()
 								- speedY);
 
-						Intersection intersect = ball.checkCollision(end,
-								start, getPlayer());
+						Intersection intersect = ball.checkCollision(start,
+								end, getPlayer());
 						if (intersect == null) {
 							xMove += speedX;
 							yMove += speedY;

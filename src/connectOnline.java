@@ -101,6 +101,7 @@ public class connectOnline extends Application {
 							connect.setOpacity(i); nameConnect.setOpacity(i); portConnect.setOpacity(i); ip.setOpacity(i);
 							txtipTextConnect.setOpacity(i); txtNameConnect.setOpacity(i); txtPortConnect.setOpacity(i);
 							i -= 0.1;
+							txtNameHost.setFocusTraversable(true);
 						}
 						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;
 						}
@@ -135,6 +136,7 @@ public class connectOnline extends Application {
 						if (host.getOpacity() >= 0.3) {
 							host.setOpacity(i); nameHost.setOpacity(i); portHost.setOpacity(i); txtNameHost.setOpacity(i);
 							txtPortHost.setOpacity(i);
+							
 							i -= 0.1;
 						}
 						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;

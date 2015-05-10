@@ -104,7 +104,6 @@ public class Menu extends Application {
 					try {
 						connect.start(stage);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -118,6 +117,12 @@ public class Menu extends Application {
 						e.printStackTrace();
 					}
 				}
+				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 430) {
+					
+						stage.close();
+
+				}
+				
 				System.out.println(arrowDown);
 			}
 		};

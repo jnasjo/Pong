@@ -76,11 +76,7 @@ public class Menu extends Application {
 		}
 	}
 
-
-	
-
 	public EventHandler<KeyEvent> select(Stage stage) {
-
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override
@@ -101,29 +97,22 @@ public class Menu extends Application {
 					Game newGame = new Game(stage);
 				}
 
-				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 370)
-				{
-					
-							connectOnline connect = new connectOnline();
-						
-							
-									try {
-										connect.start(stage);
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-							
-						
-							
-						
-					
+				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 370) {
+
+					connectOnline connect = new connectOnline();
+
+					try {
+						connect.start(stage);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
-				
-		if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
+
+				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
 					try {
 						Help help = new Help(stage);
-
 
 					} catch (IOException e) { // should never happen
 						e.printStackTrace();

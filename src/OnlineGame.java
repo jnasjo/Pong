@@ -31,7 +31,7 @@ public class OnlineGame {
 	public final static int USE_STANDARD_PORT = 6789;
 
 	// This is our connection as a server or client
-	private NetworkNode myConnection = null;
+	private NetworkNode myConnection;
 
 	/**
 	 * Creates a new game online as server
@@ -47,12 +47,12 @@ public class OnlineGame {
 	public OnlineGame(Stage stage, String playerName, int port) {
 		PLAYER_1_NAME = playerName;
 		PLAYER_2_NAME = "Japanese_PING_";
-
+		myConnection = new Server(port);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				// Create our connection as a server
-				myConnection = new Server(port);
+				myConnection.start();
 
 				// Send our name to the opponent
 				myConnection.sendMessage(PLAYER_1_NAME);
@@ -77,12 +77,13 @@ public class OnlineGame {
 		PLAYER_1_NAME = "Pong_Master";
 		PLAYER_2_NAME = playerName;
 
+		myConnection = new Client(IP, port);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				// Create our connection as a client
-				myConnection = new Client(IP, port);
-
+				myConnection.start();
+				
 				// Send our name to the opponent
 				myConnection.sendMessage(PLAYER_2_NAME);
 			}
@@ -140,7 +141,10 @@ public class OnlineGame {
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
-				myConnection.sendMessage(key.getCode().toString());
+				if(myConnection != null)
+					myConnection.sendMessage(key.getCode().toString());
+				else
+					System.out.println("null");
 				player1.handle(key);
 				player2.handle(key);
 			}

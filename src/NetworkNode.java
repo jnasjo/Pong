@@ -135,6 +135,10 @@ public abstract class NetworkNode {
 	protected void showErrorMessage(String msg) {
 		// TODO
 	}
+	
+	public void start() {
+		
+	}
 
 	/**
 	 * Set's the name of the partner

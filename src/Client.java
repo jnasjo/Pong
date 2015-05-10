@@ -5,7 +5,16 @@ import java.net.Socket;
 
 public class Client extends NetworkNode {
 
+	private String IP;
+	private int port;
+	
 	public Client(String IP, int port) {
+		this.IP = IP;
+		this.port = port;
+	}
+	
+	@Override
+	public void start() {
 		try {
 			connect(IP, port);
 			setup();

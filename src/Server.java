@@ -7,7 +7,8 @@ public class Server extends NetworkNode {
 	private ServerSocket server;
 
 	private final int NR_OF_PLAYERS = 2;
-
+	private int port;
+	
 	/**
 	 * Creates a new server on specified port
 	 * 
@@ -15,6 +16,11 @@ public class Server extends NetworkNode {
 	 *            The port to create the game on
 	 */
 	public Server(int port) {
+		this.port = port;
+	}
+
+	@Override
+	public void start() {
 		if (port > 65535 || port < 0)
 			port = OnlineGame.USE_STANDARD_PORT;
 

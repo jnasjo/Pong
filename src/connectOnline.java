@@ -195,22 +195,7 @@ public class connectOnline extends Application {
 
 	}
 	
-	public void playGameClient(Stage stage, String playerName, String IP, int port)
-	{
-		
-		OnlineGame clientGame = new OnlineGame(stage, playerName, IP, port);
-	}
-	public void playGameHost(Stage stage)
-	{
-		if(host.getOpacity() < 1 && txtNameConnect.getText() != null &&
-				txtPortConnect != null && txtipTextConnect != null){
-			String playerName = txtNameConnect.getText();
-			int port = Integer.parseInt(txtPortConnect.getText());
-			
-			OnlineGame hostGame = new OnlineGame(stage, playerName, port);
-		}
-		
-	}
+
 
 	public void onlineStart(Stage stage) throws Exception {
 		start(stage);

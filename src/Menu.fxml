@@ -36,7 +36,7 @@
       <ImageView fx:id="settings" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="350.0">
          <image>
             <Image url="@../../../PongMenu/settings.png" />
-         </image>
+         </image>  
       </ImageView>
       <ImageView fx:id="quit" fitHeight="76.0" fitWidth="200.0" layoutX="384.0" layoutY="450.0">
          <image>

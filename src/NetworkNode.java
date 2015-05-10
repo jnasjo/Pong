@@ -104,6 +104,7 @@ public abstract class NetworkNode {
 	 *            The message that was received
 	 */
 	protected void handleMessage(String msg) {
+		System.out.println(msg);
 		msg = msg.trim();
 		String[] res = msg.split("\\s+");
 		for(int i=0; i<commands.length; i++) {

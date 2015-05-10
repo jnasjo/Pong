@@ -166,13 +166,14 @@ public class connectOnline extends Application {
 						txtPortHost != null){
 					String playerName = txtNameConnect.getText();
 					int port = Integer.parseInt(txtPortConnect.getText());
-					
+					System.out.println("server");
 					OnlineGame hostGame = new OnlineGame(onlineStage, playerName, port);
 			}else if(host.getOpacity() < 1 && txtNameConnect.getText() != null &&
 					txtPortConnect != null && txtipTextConnect != null){
 				String name = txtNameConnect.getText();
 				int port = Integer.parseInt(txtPortConnect.getText());
 				String ip = txtipTextConnect.getText();
+				System.out.println("client");
 				OnlineGame hostGame = new OnlineGame(onlineStage, name,ip ,port);
 				
 			}

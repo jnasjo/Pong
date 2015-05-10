@@ -26,13 +26,13 @@ public class OnlineGame {
 
 	private String PLAYER_1_NAME;
 	private String PLAYER_2_NAME;
-	
+
 	// Use the standard port (6789)
 	public final static int USE_STANDARD_PORT = 6789;
-	
+
 	// This is our connection as a server or client
 	private NetworkNode myConnection = null;
-	
+
 	/**
 	 * Creates a new game online as server
 	 * 
@@ -41,21 +41,27 @@ public class OnlineGame {
 	 * 
 	 * @param port
 	 *            The port to use
-	 * @throws Exception if we fail something
+	 * @throws Exception
+	 *             if we fail something
 	 */
 	public OnlineGame(Stage stage, String playerName, int port) {
 		PLAYER_1_NAME = playerName;
 		PLAYER_2_NAME = "Japanese_PING_";
 
-		// Create our connection as a server
-		myConnection = new Server(port);
-		
-		// Send our name to the opponent
-		myConnection.sendMessage(PLAYER_1_NAME);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Create our connection as a server
+				myConnection = new Server(port);
+
+				// Send our name to the opponent
+				myConnection.sendMessage(PLAYER_1_NAME);
+			}
+		}).start();
 
 		start(stage);
 	}
-	
+
 	/**
 	 * Creates a new game online as client
 	 * 
@@ -64,21 +70,27 @@ public class OnlineGame {
 	 * 
 	 * @param IP
 	 *            The IP to connect to
-	 * @throws Exception if we fail something
+	 * @throws Exception
+	 *             if we fail something
 	 */
 	public OnlineGame(Stage stage, String playerName, String IP, int port) {
 		PLAYER_1_NAME = "Pong_Master";
 		PLAYER_2_NAME = playerName;
 
-		// Create our connection as a client
-		myConnection = new Client(IP, port);
-		
-		// Send our name to the opponent
-		myConnection.sendMessage(PLAYER_2_NAME);
-		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Create our connection as a client
+				myConnection = new Client(IP, port);
+
+				// Send our name to the opponent
+				myConnection.sendMessage(PLAYER_2_NAME);
+			}
+		}).start();
+
 		start(stage);
 	}
-	
+
 	private void setupPlayfield(Shape shape) {
 		shape.drawLine(CANVAS_WIDTH / 2 - 1, 0, CANVAS_WIDTH / 2 - 1,
 				CANVAS_HEIGHT, 2, SCORE_TEXT_COLOR); // Color.rgb(234, 234, 234)
@@ -86,8 +98,7 @@ public class OnlineGame {
 		shape.drawText(CANVAS_WIDTH / 2 - 20, 0, 40,
 				Shape.TextDirection.RIGHT_TO_LEFT, PLAYER_1_NAME, PLAYER1_COLOR);
 		shape.drawText(CANVAS_WIDTH / 2 + 20, 0, 40,
-				Shape.TextDirection.LEFT_TO_RIGHT, PLAYER_2_NAME,
-				PLAYER2_COLOR);
+				Shape.TextDirection.LEFT_TO_RIGHT, PLAYER_2_NAME, PLAYER2_COLOR);
 	}
 
 	public void start(Stage primaryStage) {
@@ -101,7 +112,7 @@ public class OnlineGame {
 		primaryStage.setScene(scene);
 
 		Shape shape = new Shape(root);
-		
+
 		setupPlayfield(shape);
 
 		Text p1Score = shape.drawText(CANVAS_WIDTH / 4, CANVAS_HEIGHT / 2, 100,
@@ -129,6 +140,7 @@ public class OnlineGame {
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
+				myConnection.sendMessage(key.getCode().toString());
 				player1.handle(key);
 				player2.handle(key);
 			}

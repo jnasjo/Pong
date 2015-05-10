@@ -1,38 +1,17 @@
 import java.io.IOException;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.scene.Group;
-import javafx.scene.Parent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 
 public class Menu extends Application {
 	private AnimationTimer timer;
@@ -49,7 +28,7 @@ public class Menu extends Application {
 			confirm;
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Pong");
 
 		try {
@@ -160,7 +139,7 @@ public class Menu extends Application {
 		launch(args);
 	}
 
-	public void getItStarted(Stage primaryStage) throws Exception {
+	public void getItStarted(Stage primaryStage) {
 		start(primaryStage);
 	}
 }

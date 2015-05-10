@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="540.0" fitWidth="960.0">
          <image>
             <Image url="@../../../PongMenu/background.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="connect" fitHeight="76.0" fitWidth="294.0" layoutX="46.0" layoutY="115.0">
+         <image>
+            <Image url="@resources/connect.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="host" fitHeight="76.0" fitWidth="200.0" layoutX="710.0" layoutY="121.0">
+         <image>
+            <Image url="@resources/host.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="76.0" layoutX="424.0" layoutY="115.0">
+         <image>
+            <Image url="@resources/or.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="name" fitHeight="76.0" fitWidth="200.0" layoutX="46.0" layoutY="232.0">
+         <image>
+            <Image url="@resources/name.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="400.0">
+         <image>
+            <Image url="@resources/connectOnline.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="port" fitHeight="76.0" fitWidth="200.0" layoutX="46.0" layoutY="345.0">
+         <image>
+            <Image url="@resources/port.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="textName" layoutX="322.0" layoutY="232.0" prefHeight="76.0" />
+      <TextField fx:id="portText" layoutX="322.0" layoutY="345.0" prefHeight="76.0" />
+      <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="290.0" layoutY="450.0">
+         <image>
+            <Image url="@resources/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play" fitHeight="76.0" fitWidth="200.0" layoutX="520.0" layoutY="450.0">
+         <image>
+            <Image url="@resources/play.png" />
          </image>
       </ImageView>
    </children>

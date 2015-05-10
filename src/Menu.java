@@ -99,7 +99,7 @@ public class Menu extends Application {
 
 	}
 
-	public EventHandler select(Stage stage) throws Exception{
+	public EventHandler select(Stage stage){
 
 		EventHandler e = new EventHandler<KeyEvent>() {
 			@Override
@@ -137,14 +137,22 @@ public class Menu extends Application {
 						}
 					
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 250)
+				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 370)
 				{
-						try {
-							Help help = new Help(stage);
+					
+							connectOnline connect = new connectOnline();
+						
 							
-						} catch (Exception e) { //should never happen
-							e.printStackTrace(); 
-						}
+									try {
+										connect.start(stage);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+							
+						
+							
+						
 					
 				}
 				

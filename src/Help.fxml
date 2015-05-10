@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="540.0" fitWidth="960.0">
          <image>
@@ -15,7 +14,7 @@
       </ImageView>
       <ImageView fx:id="player2" fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="152.0">
          <image>
-            <Image url="@../../../PongMenu/playertwo.png" />
+            <Image url="@resources/playertwo.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="67.0" fitWidth="514.0" layoutX="346.0">
@@ -25,42 +24,42 @@
       </ImageView>
       <ImageView fitHeight="52.0" fitWidth="514.0" layoutX="346.0" layoutY="67.0">
          <image>
-            <Image url="@../../../PongMenu/instruct.png" />
+            <Image url="@resources/instruct.png" />
          </image>
       </ImageView>
       <ImageView fx:id="player1" fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="152.0">
          <image>
-            <Image url="@../../../PongMenu/playerone.png" />
+            <Image url="@resources/playerone.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="202.0">
          <image>
-            <Image url="@../../../PongMenu/moveUp.png" />
+            <Image url="@resources/moveUp.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="245.0">
          <image>
-            <Image url="@../../../PongMenu/moveDown.png" />
+            <Image url="@resources/moveDown.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="291.0">
          <image>
-            <Image url="@../../../PongMenu/movep1.png" />
+            <Image url="@resources/movep1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="202.0">
          <image>
-            <Image url="@../../../PongMenu/playermovetwo.png" />
+            <Image url="@resources/playermovetwo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="414.0" layoutY="413.0">
          <image>
-            <Image url="@../../../PongMenu/back.png" />
+            <Image url="@resources/back.png" />
          </image>
       </ImageView>
       <ImageView fx:id="help" fitHeight="76.0" fitWidth="200.0" layoutY="29.0">
          <image>
-            <Image url="@../../../PongMenu/help.png" />
+            <Image url="@resources/help.png" />
          </image>
       </ImageView>
    </children>

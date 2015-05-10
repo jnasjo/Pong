@@ -137,6 +137,17 @@ public class Menu extends Application {
 						}
 					
 				}
+				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 250)
+				{
+						try {
+							Help help = new Help(stage);
+							
+						} catch (Exception e) { //should never happen
+							e.printStackTrace(); 
+						}
+					
+				}
+				
 
 				System.out.println(arrowDown);
 			}

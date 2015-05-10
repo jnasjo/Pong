@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="546.0" fitWidth="960.0">
          <image>
@@ -15,32 +14,32 @@
       </ImageView>
       <ImageView fx:id="head" fitHeight="164.0" fitWidth="422.0" layoutX="271.0">
          <image>
-            <Image url="@../../../PongMenu/header.png" />
+            <Image url="@resources/header.png" />
          </image>
       </ImageView>
       <ImageView fx:id="smallHead" fitHeight="45.0" fitWidth="422.0" layoutX="271.0" layoutY="164.0">
          <image>
-            <Image url="@../../../PongMenu/HedaSub.png" />
+            <Image url="@resources/HedaSub.png" />
          </image>
       </ImageView>
       <ImageView fx:id="newGame" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="230.0">
          <image>
-            <Image url="@../../../PongMenu/newGame.png" />
+            <Image url="@resources/newGame.png" />
          </image>
       </ImageView>
       <ImageView fx:id="help" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="290.0">
          <image>
-            <Image url="@../../../PongMenu/help.png" />
+            <Image url="@resources/help.png" />
          </image>
       </ImageView>
       <ImageView fx:id="settings" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="350.0">
          <image>
-            <Image url="@../../../PongMenu/settings.png" />
+            <Image url="@resources/settings.png" />
          </image>  
       </ImageView>
       <ImageView fx:id="quit" fitHeight="76.0" fitWidth="200.0" layoutX="384.0" layoutY="450.0">
          <image>
-            <Image url="@../../../PongMenu/quit.png" />
+            <Image url="@resources/quit.png" />
          </image>
       </ImageView>
       <ImageView fx:id="playonline" fitHeight="29.0" fitWidth="200.0" layoutX="384.0" layoutY="410.0">
@@ -50,12 +49,12 @@
       </ImageView>
       <ImageView fx:id="keys" fitHeight="29.0" fitWidth="221.0" layoutX="70.0" layoutY="498.0">
          <image>
-            <Image url="@../../../PongMenu/select.png" />
+            <Image url="@resources/select.png" />
          </image>
       </ImageView>
       <ImageView fx:id="confirm" fitHeight="29.0" fitWidth="200.0" layoutX="690.0" layoutY="498.0">
          <image>
-            <Image url="@../../../PongMenu/confirm.png" />
+            <Image url="@resources/confirm.png" />
          </image>
       </ImageView>
    </children>

@@ -165,7 +165,7 @@ public class Game {
 
 			@Override
 			public void handle(long now) {
-				if (i < 1) {
+				if (i <= 1) {
 					primaryStage.setOpacity(i);
 					i += 0.01;
 				}

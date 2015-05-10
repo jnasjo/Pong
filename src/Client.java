@@ -20,5 +20,6 @@ public class Client extends NetworkNode {
 	private void connect(String IP, int port) throws IOException {
 		displayMessage("Connecting to "+IP+":"+port+"...");
 		connection = new Socket(InetAddress.getByName(IP), port);
+		displayMessage("CONNECTED!");
 	}
 }

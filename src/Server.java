@@ -43,5 +43,6 @@ public class Server extends NetworkNode {
 	private void waitForPartner() throws IOException {
 		displayMessage("Waiting for partner...");
 		connection = server.accept();
+		displayMessage("CONNECTED!");
 	}
 }

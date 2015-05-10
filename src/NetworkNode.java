@@ -123,6 +123,7 @@ public abstract class NetworkNode {
 	 */
 	protected void displayMessage(String msg) {
 		// TODO
+		System.out.println(msg);
 	}
 
 	/**

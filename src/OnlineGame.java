@@ -33,6 +33,10 @@ public class OnlineGame {
 	// This is our connection as a server or client
 	private NetworkNode myConnection;
 
+	private boolean ppp1 = false;
+	private Player player1;
+	private Player player2;
+
 	/**
 	 * Creates a new game online as server
 	 * 
@@ -46,8 +50,9 @@ public class OnlineGame {
 	 */
 	public OnlineGame(Stage stage, String playerName, int port) {
 		PLAYER_1_NAME = playerName;
+		ppp1 = true;
 		PLAYER_2_NAME = "Japanese_PING_";
-		myConnection = new Server(port);
+		myConnection = new Server(port, this);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -76,14 +81,14 @@ public class OnlineGame {
 	public OnlineGame(Stage stage, String playerName, String IP, int port) {
 		PLAYER_1_NAME = "Pong_Master";
 		PLAYER_2_NAME = playerName;
-
-		myConnection = new Client(IP, port);
+		ppp1 = false;
+		myConnection = new Client(IP, port, this);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				// Create our connection as a client
 				myConnection.start();
-				
+
 				// Send our name to the opponent
 				myConnection.sendMessage(PLAYER_2_NAME);
 			}
@@ -130,8 +135,10 @@ public class OnlineGame {
 		Keyboard keysP2 = new Keyboard(KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT,
 				KeyCode.RIGHT, KeyCode.L);
 
-		Player player1 = new Player(keysP1, p1, root);
-		Player player2 = new Player(keysP2, p2, root);
+		// Player player1 = new Player(keysP1, p1, root);
+		// Player player2 = new Player(keysP2, p2, root);
+		player1 = new Player(keysP1, p1, root);
+		player2 = new Player(keysP2, p2, root);
 
 		Ball ball = new Ball(shape.drawCircle(0, 0, 60, BALLCOLOR), root,
 				p1Score, p2Score, player1, player2);
@@ -141,12 +148,16 @@ public class OnlineGame {
 		EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
-				if(myConnection != null)
+				if (myConnection != null)
 					myConnection.sendMessage(key.getCode().toString());
 				else
 					System.out.println("null");
-				player1.handle(key);
-				player2.handle(key);
+				// player1.handle(key);
+				// player2.handle(key);
+				if (ppp1)
+					player1.handle(key);
+				else
+					player2.handle(key);
 			}
 		};
 
@@ -158,5 +169,19 @@ public class OnlineGame {
 		primaryStage.sizeToScene(); // Ensure that we get a correctly sized
 									// canvas and not window
 		primaryStage.show();
+	}
+
+	public void moveP(String key) {
+		try {
+			KeyCode kc = KeyCode.getKeyCode(key);
+			KeyEvent k = new KeyEvent(null, "", "", kc, false, false, false,
+					false);
+			if (!ppp1)
+				player1.handle(k);
+			else
+				player2.handle(k);
+		} catch (Exception e) {
+
+		}
 	}
 }

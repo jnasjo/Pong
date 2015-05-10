@@ -14,6 +14,8 @@ public abstract class NetworkNode {
 
 	// The name of the partner
 	protected String partnerName = "Partner";
+	
+	protected OnlineGame game;
 
 	// Used for the command-functions
 	private interface Actions {
@@ -105,6 +107,8 @@ public abstract class NetworkNode {
 	 */
 	protected void handleMessage(String msg) {
 		System.out.println(msg);
+		
+		game.moveP(msg);
 		msg = msg.trim();
 		String[] res = msg.split("\\s+");
 		for(int i=0; i<commands.length; i++) {

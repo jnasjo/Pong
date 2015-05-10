@@ -531,8 +531,10 @@ public class Ball {
 	 */
 	public void reset() {
 		setPos(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-		velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
-		velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) * START_Y_DIFF;
+//		velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
+//		velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) * START_Y_DIFF;
+		velX = START_X_VEL;
+		velY = START_Y_DIFF;
 		// velX = 0.7075466219424853;
 		// velY = 0.7066666666666667;
 	}

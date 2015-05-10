@@ -171,17 +171,36 @@ public class OnlineGame {
 		primaryStage.show();
 	}
 
-	public void moveP(String key) {
-		try {
-			KeyCode kc = KeyCode.getKeyCode(key);
-			KeyEvent k = new KeyEvent(null, "", "", kc, false, false, false,
-					false);
-			if (!ppp1)
-				player1.handle(k);
-			else
-				player2.handle(k);
-		} catch (Exception e) {
+	private boolean[] down = new boolean[4];
 
+	public void moveP(String key) {
+		int i = -1;
+		if (ppp1) {
+			if (key.equals("UP"))
+				i = 0;
+			else if (key.equals("DOWN"))
+				i = 1;
+			else if (key.equals("LEFT"))
+				i = 2;
+			else if (key.equals("RIGHT"))
+				i = 3;
+			else
+				return;
+			down[i] = !down[i];
+			player2.movePlayer(i, down[i]);
+		} else {
+			if (key.equals("W"))
+				i = 0;
+			else if (key.equals("S"))
+				i = 1;
+			else if (key.equals("A"))
+				i = 2;
+			else if (key.equals("D"))
+				i = 3;
+			else 
+				return;
+			down[i] = !down[i];
+			player1.movePlayer(i, down[i]);
 		}
 	}
 }

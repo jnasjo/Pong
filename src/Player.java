@@ -45,6 +45,15 @@ public class Player {
 	public String getSpeedDEV() {
 		return "" + xMove + ", " + yMove;
 	}
+	
+	public void movePlayer(int i, boolean keyDown) {
+		if(i == -1)
+			return;
+		if(keyDown)
+			animator[i].start();
+		else
+			animator[i].stop();
+	}
 
 	public void handle(KeyEvent event) {
 		Set<KeyCode> keys = keyboard.handle(event);

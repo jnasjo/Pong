@@ -85,8 +85,8 @@ public class connectOnline extends Application {
 		
 		hostLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(MouseEvent arg0) {
-
+			public void handle(MouseEvent mouse) {
+				
 				Timeline timeline = new Timeline();
 				timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -103,8 +103,7 @@ public class connectOnline extends Application {
 							i -= 0.1;
 							txtNameHost.setFocusTraversable(true);
 						}
-						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;
-						}
+						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1; mouse.consume();}
 						if(host.getOpacity() < 1){
 							host.setOpacity(up); nameHost.setOpacity(up); portHost.setOpacity(up); txtNameHost.setOpacity(up);
 							txtPortHost.setOpacity(up);
@@ -121,7 +120,7 @@ public class connectOnline extends Application {
 
 		connectLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(MouseEvent arg0) {
+			public void handle(MouseEvent mouse) {
 
 				Timeline timeline = new Timeline();
 				timeline.setCycleCount(Timeline.INDEFINITE);
@@ -139,8 +138,7 @@ public class connectOnline extends Application {
 							
 							i -= 0.1;
 						}
-						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;
-						}
+						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1; mouse.consume();}
 						if(connect.getOpacity() < 0.9){
 							connect.setOpacity(up);
 							nameConnect.setOpacity(up);

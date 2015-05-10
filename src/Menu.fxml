@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="546.0" fitWidth="960.0">
          <image>
-            <Image url="@../../../PongMenu/background.png" />
+            <Image url="@resources/background.png" />
          </image>
       </ImageView>
       <ImageView fx:id="head" fitHeight="164.0" fitWidth="422.0" layoutX="271.0">
@@ -44,7 +44,7 @@
       </ImageView>
       <ImageView fx:id="playonline" fitHeight="29.0" fitWidth="200.0" layoutX="384.0" layoutY="410.0">
          <image>
-            <Image url="@../../../PongMenu/playOnline.png" />
+            <Image url="@resources/playOnline.png" />
          </image>
       </ImageView>
       <ImageView fx:id="keys" fitHeight="29.0" fitWidth="221.0" layoutX="70.0" layoutY="498.0">

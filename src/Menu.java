@@ -97,11 +97,11 @@ public class Menu extends Application {
 		}
 	}
 
-<<<<<<< HEAD
-	public EventHandler select(Stage stage){
-=======
+
+	
+
 	public EventHandler<KeyEvent> select(Stage stage) {
->>>>>>> origin/Pong
+
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override
@@ -121,7 +121,7 @@ public class Menu extends Application {
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
 					Game newGame = new Game(stage);
 				}
-<<<<<<< HEAD
+
 				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 370)
 				{
 					
@@ -141,11 +141,10 @@ public class Menu extends Application {
 					
 				}
 				
-=======
-				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
+		if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
 					try {
 						Help help = new Help(stage);
->>>>>>> origin/Pong
+
 
 					} catch (IOException e) { // should never happen
 						e.printStackTrace();

@@ -59,6 +59,9 @@ public class connectOnline extends Application {
 				"connectOnline.fxml"));
 		Label connectLabel = (Label) myPane.lookup("#connectLabel");
 		Label hostLabel = (Label) myPane.lookup("#hostLabel");
+		Label backLabel = (Label) myPane.lookup("#backLabel");
+		Label playLabel = (Label) myPane.lookup("#playLabel");
+		
 		ImageView connect = (ImageView) myPane.lookup("#connect");
 		ImageView host = (ImageView) myPane.lookup("#host");
 		ImageView nameConnect = (ImageView) myPane.lookup("#nameConnect");
@@ -95,25 +98,14 @@ public class connectOnline extends Application {
 					public void handle(long arg0) {
 
 						if (connect.getOpacity() >= 0.3) {
-							connect.setOpacity(i);
-							nameConnect.setOpacity(i);
-							portConnect.setOpacity(i);
-							ip.setOpacity(i);
-							txtipTextConnect.setOpacity(i);
-							txtNameConnect.setOpacity(i);
-							txtPortConnect.setOpacity(i);
+							connect.setOpacity(i); nameConnect.setOpacity(i); portConnect.setOpacity(i); ip.setOpacity(i);
+							txtipTextConnect.setOpacity(i); txtNameConnect.setOpacity(i); txtPortConnect.setOpacity(i);
 							i -= 0.1;
 						}
-						if (i <= 0.3) {
-							timeline.stop();
-							timer.stop();
-							i = 1;
+						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;
 						}
 						if(host.getOpacity() < 1){
-							host.setOpacity(up);
-							nameHost.setOpacity(up);
-							portHost.setOpacity(up);
-							txtNameHost.setOpacity(up);
+							host.setOpacity(up); nameHost.setOpacity(up); portHost.setOpacity(up); txtNameHost.setOpacity(up);
 							txtPortHost.setOpacity(up);
 							up +=0.1;
 						}
@@ -122,7 +114,6 @@ public class connectOnline extends Application {
 				};
 				timeline.play();
 				timer.start();
-
 			}
 		});
 		
@@ -142,17 +133,11 @@ public class connectOnline extends Application {
 					public void handle(long arg0) {
 
 						if (host.getOpacity() >= 0.3) {
-							host.setOpacity(i);
-							nameHost.setOpacity(i);
-							portHost.setOpacity(i);
-							txtNameHost.setOpacity(i);
+							host.setOpacity(i); nameHost.setOpacity(i); portHost.setOpacity(i); txtNameHost.setOpacity(i);
 							txtPortHost.setOpacity(i);
 							i -= 0.1;
 						}
-						if (i <= 0.3) {
-							timeline.stop();
-							timer.stop();
-							i = 1;
+						if (i <= 0.3) { timeline.stop(); timer.stop(); i = 1;
 						}
 						if(connect.getOpacity() < 0.9){
 							connect.setOpacity(up);
@@ -164,19 +149,67 @@ public class connectOnline extends Application {
 							txtPortConnect.setOpacity(up);
 							up +=0.1;
 						}
-						
 					}
-
 				};
 				timeline.play();
 				timer.start();
+			}
+		});
+		
+		playLabel.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				if(connect.getOpacity() < 1 && txtNameHost.getText() != null &&
+						txtPortHost != null){
+					String playerName = txtNameConnect.getText();
+					int port = Integer.parseInt(txtPortConnect.getText());
+					
+					OnlineGame hostGame = new OnlineGame(onlineStage, playerName, port);
+			}else if(host.getOpacity() < 1 && txtNameConnect.getText() != null &&
+					txtPortConnect != null && txtipTextConnect != null){
+				String name = txtNameConnect.getText();
+				int port = Integer.parseInt(txtPortConnect.getText());
+				String ip = txtipTextConnect.getText();
+				OnlineGame hostGame = new OnlineGame(onlineStage, name,ip ,port);
 				
 			}
+				
+			}
+			
+		});
+		
+		backLabel.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+			@Override
+			public void handle(MouseEvent event) {
+				Menu back = new Menu();
+				back.getItStarted(onlineStage);
+				
+			}
+			
 		});
 
 		onlineStage.setScene(onlineScene);
 		onlineStage.show();
 
+	}
+	
+	public void playGameClient(Stage stage, String playerName, String IP, int port)
+	{
+		
+		OnlineGame clientGame = new OnlineGame(stage, playerName, IP, port);
+	}
+	public void playGameHost(Stage stage)
+	{
+		if(host.getOpacity() < 1 && txtNameConnect.getText() != null &&
+				txtPortConnect != null && txtipTextConnect != null){
+			String playerName = txtNameConnect.getText();
+			int port = Integer.parseInt(txtPortConnect.getText());
+			
+			OnlineGame hostGame = new OnlineGame(stage, playerName, port);
+		}
+		
 	}
 
 	public void onlineStart(Stage stage) throws Exception {

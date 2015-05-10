@@ -97,7 +97,7 @@ public class Menu extends Application {
 		}
 	}
 
-	public EventHandler<KeyEvent> select(Stage stage) throws Exception {
+	public EventHandler<KeyEvent> select(Stage stage) {
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override

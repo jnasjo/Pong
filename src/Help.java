@@ -29,12 +29,12 @@ public class Help{
 	private ImageView sL;
 	private ImageView sR;
 	
-	public Help(Stage helpStage) throws Exception
+	public Help(Stage helpStage) throws IOException
 	{
 		start(helpStage);
 	}
 	
-	public void start(Stage helpStage) throws Exception {
+	public void start(Stage helpStage) throws IOException {
 	
 		helpStage.setTitle("HELP");
 		try{

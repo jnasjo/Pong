@@ -83,7 +83,6 @@ public class Menu extends Application {
 			sR.setLayoutX(arrowXR);
 			sR.setLayoutY(arrowDown);
 
-			
 			newGame.setOnKeyPressed(select(primaryStage));
 
 			myPane.getChildren().add(sL);
@@ -96,12 +95,11 @@ public class Menu extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	public EventHandler select(Stage stage) throws Exception{
+	public EventHandler<KeyEvent> select(Stage stage) throws Exception {
 
-		EventHandler e = new EventHandler<KeyEvent>() {
+		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
 				if (key.getCode().equals(KeyCode.DOWN) && arrowDown != 430) {
@@ -109,61 +107,35 @@ public class Menu extends Application {
 					arrowDown += 60;
 					sL.setLayoutY(arrowDown);
 					sR.setLayoutY(arrowDown);
-
 				}
 				if (key.getCode().equals(KeyCode.UP) && arrowDown != 190) {
 
 					arrowDown -= 60;
 					sL.setLayoutY(arrowDown);
 					sR.setLayoutY(arrowDown);
+				}
+				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
+					Game newGame = new Game(stage);
+				}
+				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
+					try {
+						Help help = new Help(stage);
 
+					} catch (IOException e) { // should never happen
+						e.printStackTrace();
+					}
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 190)
-				{
-						try {
-							Game newGame = new Game(stage);
-						} catch (Exception e) { //should never happen
-							e.printStackTrace(); 
-						}
-					
-				}
-				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 250)
-				{
-						try {
-							Help help = new Help(stage);
-							
-						} catch (Exception e) { //should never happen
-							e.printStackTrace(); 
-						}
-					
-				}
-				if(key.getCode().equals(KeyCode.ENTER) && arrowDown == 250)
-				{
-						try {
-							Help help = new Help(stage);
-							
-						} catch (Exception e) { //should never happen
-							e.printStackTrace(); 
-						}
-					
-				}
-				
-
 				System.out.println(arrowDown);
 			}
-
 		};
 		return e;
 	}
 
-	
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public void getItStarted(Stage primaryStage) throws Exception {
 		start(primaryStage);
-
 	}
 }

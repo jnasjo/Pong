@@ -41,12 +41,11 @@ public class Game {
 
 	private final static boolean SHOW_DEV_INFO = false;
 
-	public Game(Stage stage) throws Exception {
+	public Game(Stage stage) {
 		start(stage);
-
 	}
 
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Pong");
 
 		primaryStage.setOpacity(0.1);
@@ -178,11 +177,5 @@ public class Game {
 			timeline.stop();
 			timer.stop();
 		}
-
-		
-			
-
-
 	}
-
 }

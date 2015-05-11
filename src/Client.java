@@ -8,7 +8,7 @@ public class Client extends NetworkNode {
 	private String IP;
 	private int port;
 	
-	public Client(String IP, int port, OnlineGame g) {
+	public Client(String IP, int port, GameLoop g) {
 		this.IP = IP;
 		this.port = port;
 		game = g;

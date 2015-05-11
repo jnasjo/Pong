@@ -15,7 +15,7 @@ public class Server extends NetworkNode {
 	 * @param port
 	 *            The port to create the game on
 	 */
-	public Server(int port, OnlineGame g) {
+	public Server(int port, GameLoop g) {
 		this.port = port;
 		game = g;
 	}

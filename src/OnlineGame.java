@@ -52,7 +52,7 @@ public class OnlineGame {
 		PLAYER_1_NAME = playerName;
 		ppp1 = true;
 		PLAYER_2_NAME = "Japanese_PING_";
-		myConnection = new Server(port, this);
+		myConnection = new Server(port, null);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -82,7 +82,7 @@ public class OnlineGame {
 		PLAYER_1_NAME = "Pong_Master";
 		PLAYER_2_NAME = playerName;
 		ppp1 = false;
-		myConnection = new Client(IP, port, this);
+		myConnection = new Client(IP, port, null);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

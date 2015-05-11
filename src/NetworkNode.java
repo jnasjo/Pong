@@ -15,7 +15,9 @@ public abstract class NetworkNode {
 	// The name of the partner
 	protected String partnerName = "Partner";
 	
-	protected OnlineGame game;
+	// Used to make changes to the game
+//	protected OnlineGame game;
+	protected GameLoop game;
 
 	// Used for the command-functions
 	private interface Actions {
@@ -25,14 +27,18 @@ public abstract class NetworkNode {
 	// Array of command-functions
 	private Actions[] action = new Actions[] { new Actions() {
 		public void action(String[] res) {
-			setName(res);
+			if(res.length > 1) {
+				partnerName = res[1];
+				game.setName(res[1]);
+			}
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			addPoint();
+			game.addPoint(res);
 		}
 	}, new Actions() {
 		public void action(String[] res) {
+			game.setPos(res);
 		}
 	}, new Actions() {
 		public void action(String[] res) {
@@ -40,7 +46,7 @@ public abstract class NetworkNode {
 	}, };
 
 	// Array of commands
-	private String[] commands = { "setName", "addPoint", };
+	private String[] commands = { "setName", "addPoint", "setPos"};
 
 	/**
 	 * Setup for both streams
@@ -108,7 +114,7 @@ public abstract class NetworkNode {
 	protected void handleMessage(String msg) {
 		System.out.println(msg);
 		
-		game.moveP(msg);
+//		game.moveP(msg);
 		msg = msg.trim();
 		String[] res = msg.split("\\s+");
 		for(int i=0; i<commands.length; i++) {
@@ -142,19 +148,5 @@ public abstract class NetworkNode {
 	
 	public void start() {
 		
-	}
-
-	/**
-	 * Set's the name of the partner
-	 * 
-	 * @param name
-	 *            The new name for the partner
-	 */
-	private void setName(String[] name) {
-		if(name.length > 1)
-			partnerName = name[1];
-	}
-	
-	private void addPoint() {	
 	}
 }

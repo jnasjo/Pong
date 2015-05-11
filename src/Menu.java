@@ -94,7 +94,7 @@ public class Menu extends Application {
 					sR.setLayoutY(arrowDown);
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
-					Game newGame = new Game(stage);
+					GameLoop newGame = new GameLoop(stage, "Erkan","jonas");
 				}
 
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 370) {

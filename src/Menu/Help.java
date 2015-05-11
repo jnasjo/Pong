@@ -1,3 +1,4 @@
+package Menu;
 import java.io.IOException;
 
 import javafx.event.EventHandler;

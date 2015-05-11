@@ -10,65 +10,65 @@
    <children>
       <ImageView fitHeight="540.0" fitWidth="960.0">
          <image>
-            <Image url="@resources/background.png" />
+            <Image url="@../resources/background.png" />
          </image>
       </ImageView>
       <ImageView fx:id="connect" fitHeight="76.0" fitWidth="294.0" layoutX="46.0" layoutY="115.0">
          <image>
-            <Image url="@resources/connect.png" />
+            <Image url="@../resources/connect.png" />
          </image>
       </ImageView>
       <ImageView fx:id="host" fitHeight="76.0" fitWidth="200.0" layoutX="710.0" layoutY="121.0">
          <image>
-            <Image url="@resources/host.png" />
+            <Image url="@../resources/host.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="76.0" layoutX="424.0" layoutY="115.0">
          <image>
-            <Image url="@resources/or.png" />
+            <Image url="@../resources/or.png" />
          </image>
       </ImageView>
       <ImageView fx:id="nameConnect" fitHeight="41.0" fitWidth="131.0" layoutX="46.0" layoutY="232.0">
          <image>
-            <Image url="@resources/name.png" />
+            <Image url="@../resources/name.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="68.0" fitWidth="400.0">
          <image>
-            <Image url="@resources/connectOnline.png" />
+            <Image url="@../resources/connectOnline.png" />
          </image>
       </ImageView>
       <ImageView fx:id="portConnect" fitHeight="41.0" fitWidth="131.0" layoutX="46.0" layoutY="305.0">
          <image>
-            <Image url="@resources/port.png" />
+            <Image url="@../resources/port.png" />
          </image>
       </ImageView>
       <TextField fx:id="textNameConnect" layoutX="207.0" layoutY="224.0" prefHeight="57.0" prefWidth="236.0" />
       <TextField fx:id="portTextConnect" layoutX="207.0" layoutY="297.0" prefHeight="57.0" prefWidth="236.0" />
       <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="290.0" layoutY="450.0">
          <image>
-            <Image url="@resources/back.png" />
+            <Image url="@../resources/back.png" />
          </image>
       </ImageView>
       <ImageView fx:id="play" fitHeight="76.0" fitWidth="200.0" layoutX="520.0" layoutY="450.0">
          <image>
-            <Image url="@resources/play.png" />
+            <Image url="@../resources/play.png" />
          </image>
       </ImageView>
       <ImageView fx:id="ipConnect" fitHeight="41.0" fitWidth="96.0" layoutX="35.0" layoutY="375.0">
          <image>
-            <Image url="@resources/IP.png" />
+            <Image url="@../resources/IP.png" />
          </image>
       </ImageView>
       <TextField fx:id="ipTextHost" layoutX="207.0" layoutY="367.0" prefHeight="57.0" prefWidth="236.0" />
       <ImageView fx:id="nameHost" fitHeight="41.0" fitWidth="131.0" layoutX="555.0" layoutY="224.0">
          <image>
-            <Image url="@resources/name.png" />
+            <Image url="@../resources/name.png" />
          </image>
       </ImageView>
       <ImageView fx:id="portHost" fitHeight="41.0" fitWidth="131.0" layoutX="555.0" layoutY="297.0">
          <image>
-            <Image url="@resources/port.png" />
+            <Image url="@../resources/port.png" />
          </image>
       </ImageView>
       <TextField fx:id="txtHostName" layoutX="692.0" layoutY="216.0" prefHeight="57.0" prefWidth="236.0" />

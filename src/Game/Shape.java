@@ -1,3 +1,4 @@
+package Game;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Parent;

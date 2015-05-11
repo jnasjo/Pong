@@ -1,3 +1,5 @@
+package Menu;
+
 import java.io.IOException;
 
 import javafx.animation.AnimationTimer;
@@ -12,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import Game.GameLoop;
 
 public class Menu extends Application {
 	private AnimationTimer timer;
@@ -36,36 +39,20 @@ public class Menu extends Application {
 			Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
 					"Menu.fxml"));
 
-			ImageView header = (ImageView) myPane.lookup("#head");
-			ImageView smallHead = (ImageView) myPane.lookup("#smallhead");
-			ImageView newGame = (ImageView) myPane.lookup("#newGame");
-			ImageView help = (ImageView) myPane.lookup("#help");
-			ImageView settings = (ImageView) myPane.lookup("#settings");
-			ImageView quit = (ImageView) myPane.lookup("#quit");
-			ImageView playonline = (ImageView) myPane.lookup("#playonline");
-			ImageView keys = (ImageView) myPane.lookup("#keys");
-			ImageView confirm = (ImageView) myPane.lookup("#confirm");
+			head = (ImageView) myPane.lookup("#head");
+			smallHead = (ImageView) myPane.lookup("#smallhead");
+			newGame = (ImageView) myPane.lookup("#newGame");
+			help = (ImageView) myPane.lookup("#help");
+			settings = (ImageView) myPane.lookup("#settings");
+			quit = (ImageView) myPane.lookup("#quit");
+			playonline = (ImageView) myPane.lookup("#playonline");
+			keys = (ImageView) myPane.lookup("#keys");
+			confirm = (ImageView) myPane.lookup("#confirm");
 
-			Image selectArrowLeft = new Image("selectArrowLeft.png");
-			Image selectArrowRight = new Image("selectArrowRight.png");
-			sL = new ImageView(selectArrowLeft);
-			sR = new ImageView(selectArrowRight);
-			sL.setScaleX(0.3);
-			sL.setScaleY(0.3);
-			sR.setScaleX(0.3);
-			sR.setScaleY(0.3);
-			arrowDown = (int) (newGame.getLayoutY() - 40);
-			arrowXL = newGame.getLayoutX() - 60;
-			arrowXR = newGame.getLayoutX() + newGame.getFitWidth() - 25;
-			sL.setLayoutX(arrowXL);
-			sL.setLayoutY(arrowDown);
-			sR.setLayoutX(arrowXR);
-			sR.setLayoutY(arrowDown);
+			selectArrows(myPane);
 
 			newGame.setOnKeyPressed(select(primaryStage));
 
-			myPane.getChildren().add(sL);
-			myPane.getChildren().add(sR);
 			Scene myScene = new Scene(myPane);
 			myScene.setOnKeyPressed(select(primaryStage));
 			primaryStage.setScene(myScene);
@@ -74,6 +61,27 @@ public class Menu extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void selectArrows(Pane myPane) {
+		Image selectArrowLeft = new Image("selectArrowLeft.png");
+		Image selectArrowRight = new Image("selectArrowRight.png");
+		sL = new ImageView(selectArrowLeft);
+		sR = new ImageView(selectArrowRight);
+		myPane.getChildren().add(sL);
+		myPane.getChildren().add(sR);
+
+		sL.setScaleX(0.3);
+		sL.setScaleY(0.3);
+		sR.setScaleX(0.3);
+		sR.setScaleY(0.3);
+		arrowDown = (int) (newGame.getLayoutY() - 40);
+		arrowXL = newGame.getLayoutX() - 60;
+		arrowXR = newGame.getLayoutX() + newGame.getFitWidth() - 25;
+		sL.setLayoutX(arrowXR);
+		sL.setLayoutY(arrowDown);
+		sR.setLayoutX(arrowXL);
+		sR.setLayoutY(arrowDown);
 	}
 
 	public EventHandler<KeyEvent> select(Stage stage) {
@@ -94,7 +102,13 @@ public class Menu extends Application {
 					sR.setLayoutY(arrowDown);
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
-					GameLoop newGame = new GameLoop(stage, "Erkan","jonas");
+					// GameLoop newGame = new GameLoop(stage, "Erkan","jonas");
+					try {
+						HowManyPlayers game = new HowManyPlayers(stage);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
 				}
 
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 370) {
@@ -118,11 +132,11 @@ public class Menu extends Application {
 					}
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 430) {
-					
-						stage.close();
+
+					stage.close();
 
 				}
-				
+
 				System.out.println(arrowDown);
 			}
 		};

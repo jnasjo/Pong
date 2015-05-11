@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <ImageView fitHeight="546.0" fitWidth="960.0" layoutY="-2.0">
+         <image>
+            <Image url="@resources/background.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="214.0" layoutY="335.0">
+         <image>
+            <Image url="@resources/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="200.0" layoutX="546.0" layoutY="437.0">
+         <image>
+            <Image url="@resources/confirm.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="200.0" layoutX="220.0" layoutY="439.0">
+         <image>
+            <Image url="@resources/select.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play" fitHeight="76.0" fitWidth="200.0" layoutX="552.0" layoutY="335.0">
+         <image>
+            <Image url="@resources/play.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="344.0" layoutX="308.0" layoutY="31.0">
+         <image>
+            <Image url="@resources/oneortwo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pOne" fitHeight="65.0" fitWidth="239.0" layoutX="361.0" layoutY="139.0">
+         <image>
+            <Image url="@resources/oneplayer.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pTwo" fitHeight="65.0" fitWidth="239.0" layoutX="361.0" layoutY="240.0">
+         <image>
+            <Image url="@resources/twoplayer.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

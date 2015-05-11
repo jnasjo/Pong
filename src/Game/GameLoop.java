@@ -1,5 +1,6 @@
 package Game;
 
+import Network.*;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -203,7 +204,7 @@ public class GameLoop implements Runnable {
 	 * @param name
 	 *            The new name for the partner
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		if (isHosting)
 			PLAYER_2_NAME = name;
 		else
@@ -219,7 +220,7 @@ public class GameLoop implements Runnable {
 	 * @param res
 	 *            Specified information
 	 */
-	protected void setPoint(String[] res) {
+	public void setPoint(String[] res) {
 		if (res[1].equals("player1")) {
 			// Add point to player1
 			p1Score = Integer.valueOf(res[2]);
@@ -237,7 +238,7 @@ public class GameLoop implements Runnable {
 	 *            The object and new position // TODO in the form of [command,
 	 *            object, x, y]
 	 */
-	protected void setPos(String[] res) {
+	public void setPos(String[] res) {
 		if (res[1].equals("ball")) {
 			// Move ball
 			ball.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));
@@ -266,7 +267,7 @@ public class GameLoop implements Runnable {
 	 * @param res
 	 */
 	public void keyDown(String[] res) {
-		if(isHosting) {
+		if (isHosting) {
 			KeyCode key = player2.getKeyboard().valueOf(res[1]);
 			int idx = player2.getKeyboard().getIndex(key);
 			player2.setVel(true, idx);
@@ -283,7 +284,7 @@ public class GameLoop implements Runnable {
 	 * @param res
 	 */
 	public void keyUp(String[] res) {
-		if(isHosting) {
+		if (isHosting) {
 			KeyCode key = player2.getKeyboard().valueOf(res[1]);
 			int idx = player2.getKeyboard().getIndex(key);
 			player2.setVel(false, idx);

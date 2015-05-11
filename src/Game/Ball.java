@@ -1,5 +1,6 @@
-import java.util.Random;
+package Game;
 
+import java.util.Random;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;

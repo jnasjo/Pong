@@ -1,3 +1,4 @@
+package Game;
 public class Intersection {
 
 	public double cx, cy, time, nx, ny, ix, iy;

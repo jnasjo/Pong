@@ -1,3 +1,4 @@
+package Game;
 import java.util.EnumSet;
 import java.util.Set;
 

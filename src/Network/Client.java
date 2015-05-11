@@ -1,7 +1,10 @@
+package Network;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import Game.GameLoop;
 
 public class Client extends NetworkNode {
 

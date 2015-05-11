@@ -1,4 +1,9 @@
+package Game;
+
 import javafx.stage.Stage;
+import Network.Client;
+import Network.NetworkNode;
+import Network.Server;
  
 public class GameLoop implements Runnable {
  
@@ -134,7 +139,7 @@ public class GameLoop implements Runnable {
          * @param name
          *            The new name for the partner
          */
-        protected void setName(String name) {
+        public void setName(String name) {
                 if (isPlayer1)
                         PLAYER_2_NAME = name;
                 else
@@ -150,7 +155,7 @@ public class GameLoop implements Runnable {
          * @param res
          *            Specified information
          */
-        protected void addPoint(String[] res) {
+        public void addPoint(String[] res) {
                 if (res[1].equals("player1")) {
                         // Add point to player1
                         p1Score++;
@@ -168,7 +173,7 @@ public class GameLoop implements Runnable {
          *            The object and new position // TODO
          *            in the form of [command, object, x, y]
          */
-        protected void setPos(String[] res) {
+        public void setPos(String[] res) {
                 if (res[1].equals("ball")) {
                         // Move ball
                         ball.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));

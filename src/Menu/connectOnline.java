@@ -1,5 +1,6 @@
+package Menu;
+
 import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,15 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import Game.GameLoop;
 
 public class connectOnline extends Application {
 	private static AnimationTimer timer;
@@ -120,8 +117,8 @@ public class connectOnline extends Application {
 				String playerName = txtNameHost.getText();
 				int port = Integer.parseInt(txtPortHost.getText());
 				System.out.println("server");
-				OnlineGame hostGame = new OnlineGame(onlineStage,
-						playerName, port);
+				GameLoop hostGame = new GameLoop(onlineStage, playerName, "");
+				hostGame.host(port);
 			} else if (host.getOpacity() < 1
 					&& txtNameConnect.getText() != null
 					&& txtPortConnect != null && txtipTextConnect != null) {
@@ -129,8 +126,9 @@ public class connectOnline extends Application {
 				int port = Integer.parseInt(txtPortConnect.getText());
 				String ip = txtipTextConnect.getText();
 				System.out.println("client");
-				OnlineGame connectGame = new OnlineGame(onlineStage, name,
-						ip, port);
+				GameLoop connectGame = new GameLoop(onlineStage, "",name);
+				connectGame.connect(ip, port);
+				
 
 			}
 			

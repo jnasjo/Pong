@@ -9,57 +9,57 @@
    <children>
       <ImageView fitHeight="540.0" fitWidth="960.0">
          <image>
-            <Image url="@resources/background.png" />
+            <Image url="@../resources/background.png" />
          </image>
       </ImageView>
       <ImageView fx:id="player2" fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="152.0">
          <image>
-            <Image url="@resources/playertwo.png" />
+            <Image url="@../resources/playertwo.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="67.0" fitWidth="514.0" layoutX="346.0">
          <image>
-            <Image url="@resources/mostPointsWin.png" />
+            <Image url="@../resources/mostPointsWin.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="52.0" fitWidth="514.0" layoutX="346.0" layoutY="67.0">
          <image>
-            <Image url="@resources/instruct.png" />
+            <Image url="@../resources/instruct.png" />
          </image>
       </ImageView>
       <ImageView fx:id="player1" fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="152.0">
          <image>
-            <Image url="@resources/playerone.png" />
+            <Image url="@../resources/playerone.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="202.0">
          <image>
-            <Image url="@resources/moveUp.png" />
+            <Image url="@../resources/moveUp.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="245.0">
          <image>
-            <Image url="@resources/moveDown.png" />
+            <Image url="@../resources/moveDown.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="291.0">
          <image>
-            <Image url="@resources/movep1.png" />
+            <Image url="@../resources/movep1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="202.0">
          <image>
-            <Image url="@resources/playermovetwo.png" />
+            <Image url="@../resources/playermovetwo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="414.0" layoutY="413.0">
          <image>
-            <Image url="@resources/back.png" />
+            <Image url="@../resources/back.png" />
          </image>
       </ImageView>
       <ImageView fx:id="help" fitHeight="76.0" fitWidth="200.0" layoutY="29.0">
          <image>
-            <Image url="@resources/help.png" />
+            <Image url="@../resources/help.png" />
          </image>
       </ImageView>
    </children>

@@ -1,3 +1,4 @@
+package Game;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;

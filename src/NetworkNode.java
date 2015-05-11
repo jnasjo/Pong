@@ -4,6 +4,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public abstract class NetworkNode {
+	
+	public final static int USE_STANDARD_PORT = 6789;
 
 	// Used to receive commands
 	private ObjectInputStream input;
@@ -14,9 +16,9 @@ public abstract class NetworkNode {
 
 	// The name of the partner
 	protected String partnerName = "Partner";
-	
+
 	// Used to make changes to the game
-//	protected OnlineGame game;
+	// protected OnlineGame game;
 	protected GameLoop game;
 
 	// Used for the command-functions
@@ -27,14 +29,12 @@ public abstract class NetworkNode {
 	// Array of command-functions
 	private Actions[] action = new Actions[] { new Actions() {
 		public void action(String[] res) {
-			if(res.length > 1) {
-				partnerName = res[1];
-				game.setName(res[1]);
-			}
+			partnerName = res[1];
+			game.setName(res[1]);
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.addPoint(res);
+			game.setPoint(res);
 		}
 	}, new Actions() {
 		public void action(String[] res) {
@@ -42,11 +42,20 @@ public abstract class NetworkNode {
 		}
 	}, new Actions() {
 		public void action(String[] res) {
+			game.setVel(res);
+		}
+	}, new Actions() {
+		public void action(String[] res) {
+			game.keyDown(res);
+		}
+	}, new Actions() {
+		public void action(String[] res) {
+			game.keyUp(res);
 		}
 	}, };
 
 	// Array of commands
-	private String[] commands = { "setName", "addPoint", "setPos"};
+	private String[] commands = { "setName", "setPoint", "setPos", "setVel" , "keyDown", "keyUp"};
 
 	/**
 	 * Setup for both streams
@@ -105,21 +114,20 @@ public abstract class NetworkNode {
 	}
 
 	/**
-	 * This will handle every message that was sent to us
-	 * it will match the provided string with valid commands
+	 * This will handle every message that was sent to us it will match the
+	 * provided string with valid commands
 	 * 
 	 * @param msg
 	 *            The message that was received
 	 */
 	protected void handleMessage(String msg) {
 		System.out.println(msg);
-		
-//		game.moveP(msg);
+
 		msg = msg.trim();
 		String[] res = msg.split("\\s+");
-		for(int i=0; i<commands.length; i++) {
-			if(commands[i].equals(res[0])) {
-				action[i].action(res);;
+		for (int i = 0; i < commands.length; i++) {
+			if (commands[i].equals(res[0])) {
+				action[i].action(res);
 				break;
 			}
 		}
@@ -145,8 +153,8 @@ public abstract class NetworkNode {
 	protected void showErrorMessage(String msg) {
 		// TODO
 	}
-	
+
 	public void start() {
-		
+
 	}
 }

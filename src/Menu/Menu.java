@@ -102,6 +102,7 @@ public class Menu extends Application {
 					sR.setLayoutY(arrowDown);
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
+					// GameLoop newGame = new GameLoop(stage, "Erkan","jonas");
 					try {
 						HowManyPlayers game = new HowManyPlayers(stage);
 					} catch (Exception e) {

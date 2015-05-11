@@ -1,7 +1,5 @@
 package Menu;
 
-import java.net.ConnectException;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,8 +16,8 @@ import javafx.stage.Stage;
 public class HowManyPlayers extends Application {
 	ImageView LEFT_ARROW, ARROW;
 	@FXML
-	ImageView pOne, pTwo, back, playOnline;
-	private int pos = 0;
+	ImageView pOne, pTwo, back, play;
+	private int pos = 1;
 
 	public HowManyPlayers(Stage stage) throws Exception {
 		start(stage);
@@ -29,7 +27,7 @@ public class HowManyPlayers extends Application {
 		pOne = (ImageView) myPane.lookup("#pOne");
 		pTwo = (ImageView) myPane.lookup("#pTwo");
 		back = (ImageView) myPane.lookup("#back");
-		playOnline = (ImageView) myPane.lookup("#playOnline");
+		play = (ImageView) myPane.lookup("#play");
 	}
 
 	@Override
@@ -63,73 +61,37 @@ public class HowManyPlayers extends Application {
 
 	}
 
-	public EventHandler<KeyEvent> select(Stage stage) throws Exception{
+	public EventHandler<KeyEvent> select(Stage stage) {
 		double[] xArrow = new double[] { pOne.getLayoutX() - 90,
-				pTwo.getLayoutX() - 90, playOnline.getLayoutX() - 90,back.getLayoutX() - 90
-				 };
+				pTwo.getLayoutX() - 90, back.getLayoutX() - 90,
+				play.getLayoutX() - 90 };
 		double[] yArrow = new double[] { pOne.getLayoutY() - 25,
-				pTwo.getLayoutY() - 25, playOnline.getLayoutY() - 25,back.getLayoutY() - 25
-				 };
+				pTwo.getLayoutY() - 25, back.getLayoutY() - 25,
+				play.getLayoutY() - 25 };
+		
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
-				System.out.println(pos);
-				if (key.getCode().equals(KeyCode.DOWN) && pos != xArrow.length-1) {
+				if (key.getCode().equals(KeyCode.DOWN) && pos >= 0 && pos <= xArrow.length) {
+			System.out.println("DOWN"  + pos);
+					if(pos == xArrow.length){
+						pos = 0;
+					}
+					ARROW.setLayoutX(xArrow[pos]);
+					ARROW.setLayoutY(yArrow[pos]);
 					pos++;
+				}else if(key.getCode().equals(KeyCode.UP) && pos >= 0 && pos <= xArrow.length){
+					System.out.println("UP"+pos);
+					pos--;	
+					if(pos == 0){
+						pos = xArrow.length-1;
+					}
 					ARROW.setLayoutX(xArrow[pos]);
 					ARROW.setLayoutY(yArrow[pos]);
 					
-
-				} else if (key.getCode().equals(KeyCode.UP) && pos != 0) {
-					pos--;
-					ARROW.setLayoutX(xArrow[pos]);
-					ARROW.setLayoutY(yArrow[pos]);
-					
+	
 				}
-				
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0]){ //1 player
-				System.out.println("WT?");
-						try {
-							OnePlayer oneplayerGame = new OnePlayer(stage);
-						} catch (Exception e) {
-							
-							e.printStackTrace();
-						}
-					
-				}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[1]){ //two players
-					System.out.println("WT?");
-							try {
-								TwoPlayer twoPlayerGame = new TwoPlayer(stage);
-							} catch (Exception e) {
-								
-								e.printStackTrace();
-							}
-						
-					}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[3]){ //back to menu
-					System.out.println("WT?");
-							try {
-								Menu menu = new Menu();
-								menu.getItStarted(stage);
-							} catch (Exception e) {
-								
-								e.printStackTrace();
-							}
-						
-					}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[2]){ //back to menu
-					System.out.println("WT?");
-							try {
-								connectOnline onlineGame = new connectOnline();
-								onlineGame.onlineStart(stage);
-							} catch (Exception e) {
-								
-								e.printStackTrace();
-							}
-						
-					}
 			}
 		};
 		return e;

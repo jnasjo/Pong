@@ -12,19 +12,24 @@
             <Image url="@../resources/background.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="back" fitHeight="69.0" fitWidth="200.0" layoutX="392.0" layoutY="421.0">
+      <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="214.0" layoutY="335.0">
          <image>
             <Image url="@../resources/back.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="33.0" fitWidth="235.0" layoutX="679.0" layoutY="472.0">
+      <ImageView fitHeight="20.0" fitWidth="200.0" layoutX="546.0" layoutY="437.0">
          <image>
             <Image url="@../resources/confirm.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="33.0" fitWidth="225.0" layoutX="56.0" layoutY="472.0">
+      <ImageView fitHeight="16.0" fitWidth="200.0" layoutX="220.0" layoutY="439.0">
          <image>
             <Image url="@../resources/select.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play" fitHeight="76.0" fitWidth="200.0" layoutX="552.0" layoutY="335.0">
+         <image>
+            <Image url="@../resources/play.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="82.0" fitWidth="344.0" layoutX="308.0" layoutY="31.0">
@@ -40,11 +45,6 @@
       <ImageView fx:id="pTwo" fitHeight="65.0" fitWidth="239.0" layoutX="361.0" layoutY="240.0">
          <image>
             <Image url="@../resources/twoplayer.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="playOnline" fitHeight="69.0" fitWidth="239.0" layoutX="372.0" layoutY="324.0">
-         <image>
-            <Image url="@../resources/playOnline.png" />
          </image>
       </ImageView>
    </children>

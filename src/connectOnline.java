@@ -162,8 +162,8 @@ public class connectOnline extends Application {
 			public void handle(MouseEvent arg0) {
 				if(connect.getOpacity() < 1 && txtNameHost.getText() != null &&
 						txtPortHost != null){
-					String playerName = txtNameConnect.getText();
-					int port = Integer.parseInt(txtPortConnect.getText());
+					String playerName = txtNameHost.getText();
+					int port = Integer.parseInt(txtPortHost.getText());
 					System.out.println("server");
 					OnlineGame hostGame = new OnlineGame(onlineStage, playerName, port);
 			}else if(host.getOpacity() < 1 && txtNameConnect.getText() != null &&
@@ -172,7 +172,7 @@ public class connectOnline extends Application {
 				int port = Integer.parseInt(txtPortConnect.getText());
 				String ip = txtipTextConnect.getText();
 				System.out.println("client");
-				OnlineGame hostGame = new OnlineGame(onlineStage, name,ip ,port);
+				OnlineGame connectGame = new OnlineGame(onlineStage, name,ip ,port);
 				
 			}
 				

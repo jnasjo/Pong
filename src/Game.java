@@ -3,6 +3,8 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -138,6 +140,7 @@ public class Game {
 				}
 			}.start();
 		}
+		
 
 		primaryStage.getScene().setFill(BACKGROUND);
 		primaryStage.setResizable(false);

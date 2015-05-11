@@ -24,6 +24,8 @@ public abstract class NetworkNode {
 	// Used to make changes to the game
 	// protected OnlineGame game;
 	protected GameLoop game;
+	
+	public final static int USE_STANDARD_PORT = 6789;
 
 	// Used for the command-functions
 	private interface Actions {

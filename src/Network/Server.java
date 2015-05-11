@@ -26,7 +26,7 @@ public class Server extends NetworkNode {
 	@Override
 	public void start() {
 		if (port > 65535 || port < 0)
-			port = OnlineGame.USE_STANDARD_PORT;
+			port = 6789;
 
 		try {
 			server = new ServerSocket(port, NR_OF_PLAYERS);

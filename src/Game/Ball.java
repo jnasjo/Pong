@@ -1,12 +1,8 @@
-<<<<<<< HEAD:src/Game/Ball.java
 package Game;
 
 import java.util.Random;
-=======
-import java.util.Random;
- 
+
 import javafx.animation.AnimationTimer;
->>>>>>> parent of 7cd99c9... OMGGUDD:src/Ball.java
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;

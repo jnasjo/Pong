@@ -2,10 +2,6 @@ package Game;
 
 import java.util.HashSet;
 import java.util.Set;
-<<<<<<< HEAD:src/Game/Player.java
-=======
- 
->>>>>>> parent of 7cd99c9... OMGGUDD:src/Player.java
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;

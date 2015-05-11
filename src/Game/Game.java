@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/Game/Game.java
 package Game;
 
-=======
->>>>>>> parent of 7cd99c9... OMGGUDD:src/Game.java
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;

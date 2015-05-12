@@ -268,8 +268,7 @@ public class GameLoop implements Runnable {
 			PLAYER_1_NAME = name;
 
 		// Update UI
-		Platform.runLater(() -> UI.updatePlayerNames(PLAYER_1_NAME,
-				PLAYER_2_NAME));
+		UI.updatePlayerNames(PLAYER_1_NAME, PLAYER_2_NAME);
 	}
 
 	/**
@@ -286,7 +285,7 @@ public class GameLoop implements Runnable {
 			// Add point to player2
 			p2Score = Integer.valueOf(res[2]);
 		}
-		Platform.runLater(() -> UI.updatePlayerScore(p1Score, p2Score));
+		UI.updatePlayerScore(p1Score, p2Score);
 	}
 
 	/**

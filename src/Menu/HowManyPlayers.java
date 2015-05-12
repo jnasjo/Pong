@@ -1,5 +1,7 @@
 package Menu;
 
+import java.util.Iterator;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,15 +16,23 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class HowManyPlayers extends Application {
-	ImageView LEFT_ARROW, ARROW;
+	private static ImageView ARROW;
+	private static ImageView SELECTED_ONE_PLAYER, SELECTED_TWO_PLAYER;
+
+	private Pane myPane;
+
+	private Scene scene;
 	@FXML
 	ImageView pOne, pTwo, back, play;
-	private int pos = 1;
+	private int pos = 0;
 
 	public HowManyPlayers(Stage stage) throws Exception {
 		start(stage);
 	}
-
+/**
+ * Load menu images.
+ * @param myPane
+ */
 	public void getFXML(Pane myPane) {
 		pOne = (ImageView) myPane.lookup("#pOne");
 		pTwo = (ImageView) myPane.lookup("#pTwo");
@@ -32,68 +42,156 @@ public class HowManyPlayers extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
+		myPane = (Pane) FXMLLoader.load(getClass().getResource(
 				"twoOrOnePlayer.fxml"));
+
 		getFXML(myPane); // load fxml pics
 
-		Scene scene = new Scene(myPane);
-		myPane.setOnKeyPressed(select(primaryStage));
-		scene.setOnKeyPressed(select(primaryStage));
-		setSelectArrows(myPane); // load select arrows;
+		scene = new Scene(myPane);
+		myPane.setOnKeyPressed(select(primaryStage, myPane));
+		setArrow menuArrow = new setArrow(myPane, pOne.getLayoutY() - 25,
+				pOne.getLayoutX() - 90).setSelectArrows();
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 	}
+/**
+ * Set the menu select arrow.
+ * @author Eric
+ *
+ */
+	public static class setArrow {
+		Pane root;
+		double xKord;
+		double yKord;
 
-	public void setSelectArrows(Pane root) {
+		private setArrow(Pane root, double xKord, double yKord) {
+			this.root = root;
+			this.xKord = xKord;
+			this.yKord = yKord;
+		}
 
-		Image arrow = new Image("selectArrowRight.png");
+		public setArrow setSelectArrows() {
 
-		ARROW = new ImageView(arrow);
+			Image arrow = new Image("selectArrowRight.png");
 
-		root.getChildren().add(ARROW);
+			ARROW = new ImageView(arrow);
 
-		ARROW.setScaleX(0.6);
-		ARROW.setScaleY(0.6);
+			root.getChildren().add(ARROW);
+			ARROW.setId("ERIC");
+			ARROW.setScaleX(0.6);
+			ARROW.setScaleY(0.6);
 
-		ARROW.setLayoutY(pOne.getLayoutY() - 25);
-		ARROW.setLayoutX(pOne.getLayoutX() - 90);
-
+			ARROW.setLayoutY(xKord);
+			ARROW.setLayoutX(yKord);
+			ARROW.setFocusTraversable(true);
+			return new setArrow(root, xKord, yKord);
+		}
 	}
 
-	public EventHandler<KeyEvent> select(Stage stage) {
+	private EventHandler<KeyEvent> select(Stage stage, Pane pane) {
+
+		/**
+		 * Positions for each object in the scene
+		 */
 		double[] xArrow = new double[] { pOne.getLayoutX() - 90,
 				pTwo.getLayoutX() - 90, back.getLayoutX() - 90,
 				play.getLayoutX() - 90 };
 		double[] yArrow = new double[] { pOne.getLayoutY() - 25,
 				pTwo.getLayoutY() - 25, back.getLayoutY() - 25,
 				play.getLayoutY() - 25 };
-		
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
+
 			@Override
-			public void handle(KeyEvent key) {
-				if (key.getCode().equals(KeyCode.DOWN) && pos >= 0 && pos <= xArrow.length) {
-			System.out.println("DOWN"  + pos);
-					if(pos == xArrow.length){
+			public void handle(KeyEvent key){
+				/**
+				 * Move around the menu
+				 */
+				if (key.getCode().equals(KeyCode.DOWN)) {
+					pos++;
+					if (pos == xArrow.length) {
 						pos = 0;
 					}
 					ARROW.setLayoutX(xArrow[pos]);
 					ARROW.setLayoutY(yArrow[pos]);
-					pos++;
-				}else if(key.getCode().equals(KeyCode.UP) && pos >= 0 && pos <= xArrow.length){
-					System.out.println("UP"+pos);
-					pos--;	
-					if(pos == 0){
-						pos = xArrow.length-1;
+				} else if (key.getCode().equals(KeyCode.UP)) {
+					pos--;
+					if (pos <= -1) {
+						pos = xArrow.length - 1;
 					}
 					ARROW.setLayoutX(xArrow[pos]);
 					ARROW.setLayoutY(yArrow[pos]);
-					
-	
+
 				}
+				/**
+				 * Select one player
+				 */
+				if (key.getCode().equals(KeyCode.ENTER)
+						&& ARROW.getLayoutY() == yArrow[0]) { // 1player
+					SELECTED_ONE_PLAYER = selected(pane, SELECTED_ONE_PLAYER);
+					SELECTED_ONE_PLAYER.setLayoutY(yArrow[0]);
+					SELECTED_ONE_PLAYER.setLayoutX(xArrow[0]);
+					if (SELECTED_TWO_PLAYER != null) {
+						key.consume();
+						pane.getChildren().remove(SELECTED_TWO_PLAYER);
+					}
+
+				}
+				/**
+				 * Select two players
+				 */
+				if (key.getCode().equals(KeyCode.ENTER)
+						&& ARROW.getLayoutY() == yArrow[1]) { // 1player
+					SELECTED_TWO_PLAYER = selected(pane, SELECTED_TWO_PLAYER);
+					SELECTED_TWO_PLAYER.setLayoutY(yArrow[1]);
+					SELECTED_TWO_PLAYER.setLayoutX(xArrow[1]);
+					if (SELECTED_ONE_PLAYER != null) {
+						key.consume();
+						pane.getChildren().remove(SELECTED_ONE_PLAYER);
+					}
+
+				}
+				/**
+				 * Check if one or two players are selected then go into the correct scene.
+				 * if nothing is selected then just consume the event.
+				 */
+				if (key.getCode().equals(KeyCode.ENTER)	&& ARROW.getLayoutY() == yArrow[3]) {
+					if(SELECTED_TWO_PLAYER != null){
+						try {TwoPlayerMenu two = new TwoPlayerMenu(stage);} catch (Exception e) {	e.printStackTrace();}
+					}
+					else if(SELECTED_ONE_PLAYER != null){
+						try {OnePlayerMenu two = new OnePlayerMenu(stage);} catch (Exception e) {	e.printStackTrace();}
+					}else{key.consume();}
+				}
+				/**
+				 * Go back
+				 */
+				if (key.getCode().equals(KeyCode.ENTER)
+						&& ARROW.getLayoutX() == xArrow[2]) {
+					try {
+						key.consume();
+						Menu menu = new Menu();
+						menu.getItStarted(stage);
+					} catch (Exception e) {
+					}
+
+				}
+				
 			}
+
 		};
 		return e;
 	}
+
+	public ImageView selected(Pane pane, ImageView player) {
+		Image selected = new Image("selectArrowRight.png");
+		player = new ImageView(selected);
+		pane.getChildren().add(player);
+		player.setScaleX(0.6);
+		player.setScaleY(0.6);
+		return player;
+	}
+
 }

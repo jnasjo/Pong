@@ -31,7 +31,8 @@ public class GameLoop implements Runnable {
                         PLAYER_1_NAME = p1Name;
                 if (!p2Name.equals(""))
                         PLAYER_2_NAME = p2Name;
- 
+                
+                System.out.println("hi");
                 // Create a new game with all components that we need
                 // Get the UI components
                 UI = new Game(stage);

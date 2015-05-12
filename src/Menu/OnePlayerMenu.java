@@ -73,7 +73,7 @@ public class OnePlayerMenu extends Application{
 				back.getLayoutX() - 90).setSelectArrows();
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
 		Scene scene = new Scene(myPane);
-		scene.setOnKeyPressed(select(primaryStage,myPane));
+		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -107,12 +107,12 @@ public class OnePlayerMenu extends Application{
 					}
 					ARROW.setLayoutX(xArrow[pos]);
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0]){//go back
+				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0] || key.getCode().equals(KeyCode.ESCAPE)){//go back
 					Menu menu = new Menu();
 					menu.getItStarted(stage);
 				}
 				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[1]){ //play
-					GameLoop game = new GameLoop(stage, getP1Name(), "COMPUTA HAXXAR");
+					GameLoop gameOne = new GameLoop(stage, getP1Name(), "COMPUTA HAXXAR");
 				}
 			}
 			

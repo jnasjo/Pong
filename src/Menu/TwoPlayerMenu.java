@@ -48,7 +48,7 @@ public class TwoPlayerMenu extends Application{
 
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
 		Scene scene = new Scene(myPane);
-		scene.setOnKeyPressed(select(primaryStage,myPane));
+		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -81,7 +81,7 @@ public class TwoPlayerMenu extends Application{
 					}
 					ARROW.setLayoutX(xArrow[pos]);
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0]){//go back
+				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0] || key.getCode().equals(KeyCode.ESCAPE)){//go back
 					Menu menu = new Menu();
 					menu.getItStarted(stage);
 				}

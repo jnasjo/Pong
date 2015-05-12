@@ -38,7 +38,7 @@ public abstract class NetworkNode {
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.addPoint(res);
+			game.setPoint(res);
 		}
 	}, new Actions() {
 		public void action(String[] res) {
@@ -46,11 +46,20 @@ public abstract class NetworkNode {
 		}
 	}, new Actions() {
 		public void action(String[] res) {
+			game.setVel(res);
+		}
+	}, new Actions() {
+		public void action(String[] res) {
+			game.setKeyDown(res);
+		}
+	}, new Actions() {
+		public void action(String[] res) {
+			game.setKeyUp(res);
 		}
 	}, };
 
 	// Array of commands
-	private String[] commands = { "setName", "addPoint", "setPos"};
+	private String[] commands = { "setName", "setPoint", "setPos", "setVel", "keyDown", "keyUp"};
 
 	/**
 	 * Setup for both streams
@@ -118,7 +127,6 @@ public abstract class NetworkNode {
 	protected void handleMessage(String msg) {
 		System.out.println(msg);
 		
-//		game.moveP(msg);
 		msg = msg.trim();
 		String[] res = msg.split("\\s+");
 		for(int i=0; i<commands.length; i++) {
@@ -137,7 +145,7 @@ public abstract class NetworkNode {
 	 */
 	protected void displayMessage(String msg) {
 		// TODO
-		System.out.println(msg);
+		game.displayMessage(msg);
 	}
 
 	/**
@@ -150,7 +158,9 @@ public abstract class NetworkNode {
 		// TODO
 	}
 	
+	/**
+	 * Sub-classes will have to implement this one on their own
+	 */
 	public void start() {
-		
 	}
 }

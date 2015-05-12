@@ -33,11 +33,10 @@ public class Server extends NetworkNode {
 			try {
 				waitForPartner();
 				setup();
+				game.setIsHost(true);
 				listenOnSocket();
 			} catch (EOFException e) {
 				displayMessage(partnerName + " left the game");
-			} finally {
-				closeConnection();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -42,6 +42,57 @@ public class Keyboard {
 	public String getKeysDown() {
 		return pressedKeys.toString();
 	}
+	
+	/**
+	 * Returns the corresponding direction of the key provided. For example if W
+	 * is set as UP, passing KeyCode.W to this function will return "UP"
+	 * 
+	 * @param key
+	 *            The key to be analyzed
+	 * @return A string representation of the key
+	 */
+	public String valueOf(KeyCode key) {
+		if (key.equals(keys[0]))
+			return "UP";
+		if (key.equals(keys[1]))
+			return "DOWN";
+		if (key.equals(keys[2]))
+			return "LEFT";
+		if (key.equals(keys[3]))
+			return "RIGHT";
+		if (key.equals(keys[4]))
+			return "FIRE";
+		return "";
+	}
+
+	/**
+	 * Returns the corresponding KeyCode to the provided string. For example if
+	 * W is set as UP, passing "UP" to this function will return KeyCode.W
+	 * 
+	 * @param key
+	 *            The String key to be analyzed
+	 * @return A KeyCode representation of the direction
+	 */
+	public KeyCode valueOf(String key) {
+		if (key.equals("UP"))
+			return getUp();
+		if (key.equals("DOWN"))
+			return getDown();
+		if (key.equals("LEFT"))
+			return getLeft();
+		if (key.equals("RIGHT"))
+			return getRight();
+		if (key.equals("FIRE"))
+			return getFire();
+		return null;
+	}
+
+	/**
+	 * @return A set of all keys currently pressed down
+	 */
+	public Set<KeyCode> getPressedKeys() {
+		return pressedKeys;
+	}
 
 	/**
 	 * KeyEventHandler for multiple inputs on the keys on this keyboard
@@ -92,6 +143,20 @@ public class Keyboard {
 	 */
 	public KeyCode get(int idx) {
 		return keys[idx];
+	}
+
+	/**
+	 * Returns the index for the specified key on this keyboard
+	 * 
+	 * @param key
+	 *            The key to look for
+	 * @return The key's index
+	 */
+	public int getIndex(KeyCode key) {
+		for(int i=0; i<keys.length; i++)
+			if(keys[i] == key)
+				return i;
+		return -1;
 	}
 
 	/**

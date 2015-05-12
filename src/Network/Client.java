@@ -22,6 +22,7 @@ public class Client extends NetworkNode {
 		try {
 			connect(IP, port);
 			setup();
+			game.setIsClient(true);
 			listenOnSocket();
 		} catch (EOFException e) {
 			displayMessage("You abandoned the game");

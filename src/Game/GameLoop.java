@@ -34,6 +34,8 @@ public class GameLoop implements Runnable {
 	private Set<KeyCode> keysDown;
 	// A set containing the keys pressed down that has been sent
 	private Set<KeyCode> keysDownSent = EnumSet.noneOf(KeyCode.class);
+	// The opponents keys currently pressed down
+	private Set<KeyCode> oppKeys = EnumSet.noneOf(KeyCode.class);
 
 	public GameLoop(Stage stage, String p1Name, String p2Name) {
 		if (!p1Name.equals(""))
@@ -329,12 +331,12 @@ public class GameLoop implements Runnable {
 	public void setKeyDown(String[] res) {
 		if (isHosting) {
 			KeyCode key = player2.getKeyboard().valueOf(res[1]);
-			int idx = player2.getKeyboard().getIndex(key);
-			player2.setVel(true, idx);
+			oppKeys.add(key);
+			player2.setVel(oppKeys);
 		} else {
 			KeyCode key = player1.getKeyboard().valueOf(res[1]);
-			int idx = player1.getKeyboard().getIndex(key);
-			player1.setVel(true, idx);
+			oppKeys.add(key);
+			player1.setVel(oppKeys);
 		}
 	}
 
@@ -346,12 +348,12 @@ public class GameLoop implements Runnable {
 	public void setKeyUp(String[] res) {
 		if (isHosting) {
 			KeyCode key = player2.getKeyboard().valueOf(res[1]);
-			int idx = player2.getKeyboard().getIndex(key);
-			player2.setVel(false, idx);
+			oppKeys.remove(key);
+			player2.setVel(oppKeys);
 		} else {
 			KeyCode key = player1.getKeyboard().valueOf(res[1]);
-			int idx = player1.getKeyboard().getIndex(key);
-			player1.setVel(false, idx);
+			oppKeys.remove(key);
+			player1.setVel(oppKeys);
 		}
 	}
 }

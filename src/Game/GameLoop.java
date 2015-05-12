@@ -252,9 +252,11 @@ public class GameLoop implements Runnable {
 	}
 
 	private void resetGame() {
-		ball.reset();
-		player1.setPos(30, Game.CANVAS_HEIGHT / 2 - 35);
-		player2.setPos(Game.CANVAS_WIDTH - 30 - 20, Game.CANVAS_HEIGHT / 2 - 35);
+		Platform.runLater(() -> {
+			ball.reset();
+			player1.setPos(30, Game.CANVAS_HEIGHT / 2 - 35);
+			player2.setPos(Game.CANVAS_WIDTH - 30 - 20, Game.CANVAS_HEIGHT / 2 - 35);
+		}); 
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class GameLoop implements Runnable {
 	private Player player2;
 	private Ball ball;
 
-	private Powers powerUp;
+//	private Powers powerUp;
 
 	// NETWORK TINGS
 	private NetworkNode myConnection;
@@ -56,10 +56,10 @@ public class GameLoop implements Runnable {
 		player1 = UI.getPlayer1();
 		player2 = UI.getPlayer2();
 		if (p2Name == "") {
-			player2 = new Computer(null, player2.getRect(), null);
-			player2.setBall(ball);
+//			player2 = new Computer(null, player2.getRect(), null);
+//			player2.setBall(ball);
 		}
-		powerUp = new Powers(player1, player2);
+//		powerUp = new Powers(player1, player2);
 
 		// Start the game in it's own thread
 		new AnimationTimer() {
@@ -165,13 +165,13 @@ public class GameLoop implements Runnable {
 				ball.reset();
 				p2Score++;
 				if (p2Score == 1) {
-					powerUp.animateHeight(100, player2);
+//					powerUp.animateHeight(100, player2);
 				}
 			} else {
 				ball.reset();
 				p1Score++;
 				if (p1Score == 1) {
-					powerUp.animateHeight(100, player1);
+//					powerUp.animateHeight(100, player1);
 				}
 
 			}
@@ -210,7 +210,10 @@ public class GameLoop implements Runnable {
 					myConnection.sendMessage("setPos opponent "
 							+ player.getRect().getLayoutX() + " "
 							+ player.getRect().getLayoutY());
-
+					System.out.println("keyDown " + keyboard.valueOf(key));
+					myConnection.sendMessage("setPos opponent "
+							+ player.getRect().getLayoutX() + " "
+							+ player.getRect().getLayoutY());
 					keysDownSent.add(key);
 				} else {
 					clone.remove(key);
@@ -222,6 +225,9 @@ public class GameLoop implements Runnable {
 				KeyCode key = it.next();
 				myConnection.sendMessage("keyUp " + keyboard.valueOf(key));
 				myConnection.sendMessage("setPos opponent "
+						+ player.getRect().getLayoutX() + " "
+						+ player.getRect().getLayoutY());
+				System.out.println("setPos opponent "
 						+ player.getRect().getLayoutX() + " "
 						+ player.getRect().getLayoutY());
 				keysDownSent.remove(key);
@@ -282,6 +288,9 @@ public class GameLoop implements Runnable {
 			ball.reset();
 			player1.setPos(30, Game.CANVAS_HEIGHT / 2 - 35);
 			player2.setPos(Game.CANVAS_WIDTH - 30 - 20, Game.CANVAS_HEIGHT / 2 - 35);
+			p1Score = 0;
+			p2Score = 0;
+			UI.updatePlayerScore(p1Score, p2Score);
 		}); 
 	}
 
@@ -330,7 +339,7 @@ public class GameLoop implements Runnable {
 			// Move ball
 			ball.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));
 		} else if (res[1].equals("opponent")) {
-			// Move opponent
+			// Move opponent		
 			if (isHosting)
 				player2.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));
 			else

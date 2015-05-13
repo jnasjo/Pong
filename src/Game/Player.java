@@ -16,8 +16,6 @@ public class Player {
 
 	private Group root;
 
-	private double xMove = 1;
-	private double yMove = 1;
 	private final static int startSpeedX = 4;
 	private final static int startSpeedY = 4;
 	private int speedX = 0;
@@ -32,8 +30,6 @@ public class Player {
 		this.root = root;
 		this.self = rect;
 		this.keyboard = keyboard;
-		xMove = rect.getLayoutX();
-		yMove = rect.getLayoutY();
 		balls = new HashSet<Ball>();
 
 		// UP, DOWN, LEFT, RIGHT
@@ -42,7 +38,7 @@ public class Player {
 
 	// DEV
 	public String getSpeedDEV() {
-		return "" + xMove + ", " + yMove;
+		return "" + getRect().getLayoutX() + ", " + getRect().getLayoutY();
 	}
 
 	/**
@@ -147,7 +143,14 @@ public class Player {
 	public void setPos(double x, double y) {
 		self.setLayoutX(x);
 		self.setLayoutY(y);
-		
+	}
+	
+	public double getX() {
+		return self.getLayoutX();
+	}
+	
+	public double getY() {
+		return self.getLayoutY();
 	}
 
 	/**
@@ -174,22 +177,17 @@ public class Player {
 
 			Intersection intersect = ball.checkCollision(start, end,
 					getPlayer());
-			if (intersect == null) {
-				xMove += speedX;
-				yMove += speedY;
-			}
+			if (intersect == null)
+				setPos(getX()+speedX, getY()+speedY);
 		}
 		// Check to make sure we are still on the map
-		if (xMove < 0)
-			xMove = 0;
-		else if (xMove > Game.CANVAS_WIDTH - self.getWidth())
-			xMove = Game.CANVAS_WIDTH - self.getWidth();
-		if (yMove < 0)
-			yMove = 0;
-		else if (yMove > Game.CANVAS_HEIGHT - self.getHeight())
-			yMove = Game.CANVAS_HEIGHT - self.getHeight();
-
-		// Apply changes
-		setPos(xMove, yMove);
+		if (getX() < 0)
+			setPos(0, getY());
+		else if (getX() > Game.CANVAS_WIDTH - self.getWidth())
+			setPos(Game.CANVAS_WIDTH - self.getWidth(), getY());
+		if (getY() < 0)
+			setPos(getX(), 0);
+		else if (getY() > Game.CANVAS_HEIGHT - self.getHeight())
+			setPos(getX(), Game.CANVAS_HEIGHT - self.getHeight());
 	}
 }

@@ -53,26 +53,7 @@ public class Player {
 	 * @param i
 	 *            The index of the key corresponding with the movement
 	 */
-	public void setVel(boolean move, int i) {
-		if(move) {
-			speedX = animator[i][0] * startSpeedX;
-			speedY = animator[i][1] * startSpeedY;
-		} else {
-			if(speedX == animator[i][0] * startSpeedX)
-				speedX = 0;
-			if(speedY == animator[i][1] * startSpeedY)
-				speedY = 0;
-		}
-	}
-
-	/**
-	 * Handles input from the user
-	 * 
-	 * @param event
-	 */
-	public void handle(KeyEvent event) {
-		Set<KeyCode> keys = keyboard.handle(event);
-
+	public void setVel(Set<KeyCode> keys) {
 		// Move player
 		boolean x = false, y = false;
 		for (int i = 0; i < animator.length; i++) {
@@ -90,6 +71,18 @@ public class Player {
 			speedX = 0;
 		if (!y)
 			speedY = 0;
+	}
+
+	/**
+	 * Handles input from the user
+	 * 
+	 * @param event
+	 */
+	public void handle(KeyEvent event) {
+		Set<KeyCode> keys = keyboard.handle(event);
+
+		// Move player
+		setVel(keys);
 
 		for (KeyCode key : keys) {
 

@@ -1,5 +1,6 @@
 package Network;
 
+import javafx.application.Platform;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -33,28 +34,28 @@ public abstract class NetworkNode {
 		public void action(String[] res) {
 			if(res.length > 1) {
 				partnerName = res[1];
-				game.setName(res[1]);
+				Platform.runLater(() -> game.setName(res[1]));
 			}
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.setPoint(res);
+			Platform.runLater(() -> game.setPoint(res));
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.setPos(res);
+			Platform.runLater(() -> game.setPos(res));
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.setVel(res);
+			Platform.runLater(() -> game.setVel(res));
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.setKeyDown(res);
+			Platform.runLater(() -> game.setKeyDown(res));
 		}
 	}, new Actions() {
 		public void action(String[] res) {
-			game.setKeyUp(res);
+			Platform.runLater(() -> game.setKeyUp(res));
 		}
 	}, };
 

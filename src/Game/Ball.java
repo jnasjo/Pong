@@ -161,6 +161,11 @@ public class Ball {
 				double newY = intersect.cy + ndy * remainingTime;
 				setPos(newX, newY);
 
+				dy = getY() - p.getRect().getLayoutY() - p.getRect().getHeight()/2;
+				double oneUnit = p.getRect().getHeight()/10;
+				double dySpeed = dy/oneUnit;
+				velY += dySpeed;
+				
 				effect.playRandom();
 
 				collision = new double[] { intersect.ix, intersect.iy };

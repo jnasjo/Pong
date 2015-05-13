@@ -26,6 +26,8 @@ public class GameLoop implements Runnable {
 	private Player player2;
 	private Ball ball;
 
+	private Powers powerUp;
+
 	// NETWORK TINGS
 	private NetworkNode myConnection;
 	private boolean isHosting = false;
@@ -48,9 +50,14 @@ public class GameLoop implements Runnable {
 		UI.updatePlayerNames(PLAYER_1_NAME, PLAYER_2_NAME);
 
 		// Get the objects that we will use often
+		ball = UI.getBall();
 		player1 = UI.getPlayer1();
 		player2 = UI.getPlayer2();
-		ball = UI.getBall();
+		if (p2Name == "") {
+			player2 = new Computer(null, player2.getRect(), null);
+			player2.setBall(ball);
+		}
+		powerUp = new Powers(player1, player2);
 
 		// Start the game in it's own thread
 		new AnimationTimer() {
@@ -127,11 +134,15 @@ public class GameLoop implements Runnable {
 		//
 
 		// Move Ball
+
 		int[] res = ball.moveBall();
+
 		// Check if we need to modify a player's score
 		if (isHosting) {
 			if (res[0] != 0) {
+				ball.reset();
 				if (res[0] == -1) {
+
 					p2Score++;
 					myConnection.sendMessage("setPoint player2 " + p2Score);
 				} else if (res[0] == 1) {
@@ -148,10 +159,20 @@ public class GameLoop implements Runnable {
 						+ ball.getVelY());
 			}
 		} else if (res[0] != 0) {
-			if (res[0] == -1)
+			if (res[0] == -1) {
+				ball.reset();
 				p2Score++;
-			else
+				if (p2Score == 1) {
+					powerUp.animateHeight(100, player2);
+				}
+			} else {
+				ball.reset();
 				p1Score++;
+				if (p1Score == 1) {
+					powerUp.animateHeight(100, player1);
+				}
+
+			}
 			UI.updatePlayerScore(p1Score, p2Score);
 		}
 
@@ -163,12 +184,11 @@ public class GameLoop implements Runnable {
 			if (isHosting) {
 				keysDown = player1.getKeyboard().getPressedKeys();
 				keyboard = player1.getKeyboard();
-			}
-			else {
+			} else {
 				keysDown = player2.getKeyboard().getPressedKeys();
 				keyboard = player2.getKeyboard();
 			}
-				
+
 			Set<KeyCode> clone = EnumSet.noneOf(KeyCode.class);
 			for (Iterator<KeyCode> it = keysDownSent.iterator(); it.hasNext();) {
 				clone.add(it.next());
@@ -179,7 +199,8 @@ public class GameLoop implements Runnable {
 				KeyCode key = it.next();
 				if (!keysDownSent.contains(key)) {
 					// We have not sent this key!
-					myConnection.sendMessage("keyDown " + keyboard.valueOf(key));
+					myConnection
+							.sendMessage("keyDown " + keyboard.valueOf(key));
 					keysDownSent.add(key);
 				} else {
 					clone.remove(key);

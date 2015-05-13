@@ -44,6 +44,8 @@ public class Game {
 	private Group root;
 	private Scene scene;
 	private Text text;
+	
+	
 
 	private final static boolean SHOW_DEV_INFO = false;
 
@@ -70,7 +72,7 @@ public class Game {
 
 		createPlayers();
 
-		ball = new Ball(shape.drawCircle(0, 0, 60, BALLCOLOR), root, p1Score,
+		ball = new Ball(shape.drawCircle(0, 0, 20, BALLCOLOR), root, p1Score,
 				p2Score, player1, player2);
 
 		// Set the actionListeners
@@ -180,7 +182,7 @@ public class Game {
 		updatePlayerScore(0, 0);
 
 		// Create the actual pads
-		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT / 2 - 35, 20, 70,
+		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT / 2 - 35, 20, 280,
 				PLAYER1_COLOR);
 		Rectangle p2 = shape.drawRectangle(CANVAS_WIDTH - 30 - 20,
 				CANVAS_HEIGHT / 2 - 35, 20, 70, PLAYER2_COLOR);

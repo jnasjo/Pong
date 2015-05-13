@@ -27,6 +27,8 @@ public class HowManyPlayers extends Application {
 	private int pos = 0;
 
 	public HowManyPlayers(Stage stage) throws Exception {
+		myPane = (Pane) FXMLLoader.load(getClass().getResource(
+				"twoOrOnePlayer.fxml"));
 		start(stage);
 	}
 /**
@@ -42,8 +44,7 @@ public class HowManyPlayers extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		myPane = (Pane) FXMLLoader.load(getClass().getResource(
-				"twoOrOnePlayer.fxml"));
+		
 
 		getFXML(myPane); // load fxml pics
 
@@ -159,10 +160,10 @@ public class HowManyPlayers extends Application {
 				 */
 				if (key.getCode().equals(KeyCode.ENTER)	&& ARROW.getLayoutY() == yArrow[3]) {
 					if(SELECTED_TWO_PLAYER != null){
-						try {TwoPlayerMenu two = new TwoPlayerMenu(stage);} catch (Exception e) {	e.printStackTrace();}
+						try {OnePlayerMenu one = new OnePlayerMenu(stage, 2);} catch (Exception e) {	e.printStackTrace();}
 					}
 					else if(SELECTED_ONE_PLAYER != null){
-						try {OnePlayerMenu two = new OnePlayerMenu(stage);} catch (Exception e) {	e.printStackTrace();}
+						try {OnePlayerMenu one = new OnePlayerMenu(stage, 1);} catch (Exception e) {	e.printStackTrace();}
 					}else{key.consume();}
 				}
 				/**

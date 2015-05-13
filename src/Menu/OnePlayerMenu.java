@@ -20,12 +20,26 @@ public class OnePlayerMenu extends Application{
 	private int pos = 0;
 	
 	@FXML
-	ImageView back, play;
+	private ImageView back, play;
+	
+	private Pane myPane;
+	
+	private int playerCount;
 	
 	@FXML
-	TextField p1;
-	public OnePlayerMenu(Stage stage) throws Exception
+	private TextField p1,p2;
+	
+	public OnePlayerMenu(Stage stage, int playerCount) throws Exception
 	{
+		this.playerCount = playerCount;
+		
+		if(playerCount == 1){
+			myPane = (Pane) FXMLLoader.load(getClass().getResource(
+					"OnePlayerMenu.fxml"));
+		}else{
+			myPane = (Pane) FXMLLoader.load(getClass().getResource(
+					"TwoPlayerMenu.fxml"));
+		}
 		start(stage);
 	}
 	
@@ -34,6 +48,10 @@ public class OnePlayerMenu extends Application{
 		play = (ImageView) myPane.lookup("#play");
 		p1 = (TextField) myPane.lookup("#p1");
 		p1.setFocusTraversable(false);
+		if(playerCount == 2){
+			p2 = (TextField) myPane.lookup("#p2");	
+			p2.setFocusTraversable(false);
+		}
 		
 	}
 	public static class setArrow {
@@ -54,7 +72,6 @@ public class OnePlayerMenu extends Application{
 			ARROW = new ImageView(arrow);
 
 			root.getChildren().add(ARROW);
-			ARROW.setId("ERIC");
 			ARROW.setScaleX(0.6);
 			ARROW.setScaleY(0.6);
 
@@ -66,8 +83,7 @@ public class OnePlayerMenu extends Application{
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
-				"OnePlayerMenu.fxml"));
+		
 		getFXML(myPane);
 		setArrow menuArrow = new setArrow(myPane, back.getLayoutY() - 25,
 				back.getLayoutX() - 90).setSelectArrows();
@@ -112,7 +128,12 @@ public class OnePlayerMenu extends Application{
 					menu.getItStarted(stage);
 				}
 				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[1]){ //play
-					GameLoop gameOne = new GameLoop(stage, getP1Name(), "COMPUTA HAXXAR");
+					if(playerCount == 1){
+						GameLoop gameOne = new GameLoop(stage, getP1Name(), "");
+					}else{
+						GameLoop game = new GameLoop(stage, getP1Name(), getP2Name());
+					}
+						
 				}
 			}
 			
@@ -122,6 +143,10 @@ public class OnePlayerMenu extends Application{
 	public String getP1Name()
 	{
 		return p1.getText();
+	}
+	public String getP2Name()
+	{
+		return p2.getText();
 	}
 
 }

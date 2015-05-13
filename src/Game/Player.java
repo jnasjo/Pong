@@ -154,6 +154,7 @@ public class Player {
 	public void setPos(double x, double y) {
 		self.setLayoutX(x);
 		self.setLayoutY(y);
+		
 	}
 
 	/**

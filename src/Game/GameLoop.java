@@ -331,6 +331,7 @@ public class GameLoop implements Runnable {
 			ball.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));
 		} else if (res[1].equals("opponent")) {
 			// Move opponent
+			System.out.println(java.util.Arrays.toString(res));
 			if (isHosting)
 				player2.setPos(Double.valueOf(res[2]), Double.valueOf(res[3]));
 			else

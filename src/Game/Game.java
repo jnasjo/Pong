@@ -182,7 +182,7 @@ public class Game {
 		updatePlayerScore(0, 0);
 
 		// Create the actual pads
-		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT / 2 - 35, 20, 280,
+		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT / 2 - 35, 20, 70,
 				PLAYER1_COLOR);
 		Rectangle p2 = shape.drawRectangle(CANVAS_WIDTH - 30 - 20,
 				CANVAS_HEIGHT / 2 - 35, 20, 70, PLAYER2_COLOR);

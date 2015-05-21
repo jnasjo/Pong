@@ -190,7 +190,7 @@ public class Game {
 		Keyboard keysP1 = new Keyboard(KeyCode.W, KeyCode.S, KeyCode.A,
 				KeyCode.D, KeyCode.SPACE);
 		Keyboard keysP2 = new Keyboard(KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT,
-				KeyCode.RIGHT, KeyCode.L);
+				KeyCode.RIGHT, KeyCode.P);
 
 		// Create players
 		player1 = new Player(keysP1, p1, root);
@@ -216,6 +216,11 @@ public class Game {
 				Shape.TextDirection.LEFT_TO_RIGHT, nameP2, PLAYER2_COLOR);
 		p1Name.toBack();
 		p2Name.toBack();
+	}
+	
+	public Group getRoot()
+	{
+		return root;
 	}
 
 	/**

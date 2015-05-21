@@ -1,5 +1,6 @@
 package Menu;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import javafx.application.Application;
@@ -12,12 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class HowManyPlayers extends Application {
-	private static ImageView ARROW;
-	private static ImageView SELECTED_ONE_PLAYER, SELECTED_TWO_PLAYER;
+	private  ImageView ARROW;
+	private  ImageView SELECTED_ONE_PLAYER, SELECTED_TWO_PLAYER;
 
 	private Pane myPane;
 
@@ -26,9 +28,15 @@ public class HowManyPlayers extends Application {
 	ImageView pOne, pTwo, back, play;
 	private int pos = 0;
 
-	public HowManyPlayers(Stage stage) throws Exception {
-		myPane = (Pane) FXMLLoader.load(getClass().getResource(
-				"twoOrOnePlayer.fxml"));
+	public HowManyPlayers(Stage stage) {
+		
+		try {
+			myPane = (Pane) FXMLLoader.load(getClass().getResource(
+					"twoOrOnePlayer.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		start(stage);
 	}
 /**
@@ -43,7 +51,7 @@ public class HowManyPlayers extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		
 
 		getFXML(myPane); // load fxml pics
@@ -52,6 +60,20 @@ public class HowManyPlayers extends Application {
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
 		setArrow menuArrow = new setArrow(myPane, pOne.getLayoutY() - 25,
 				pOne.getLayoutX() - 90).setSelectArrows();
+		
+		myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent e) {
+				if(pOne.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+					OnePlayerMenu one = new OnePlayerMenu(primaryStage, 1);
+			}
+			else if(pTwo.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+				OnePlayerMenu one = new OnePlayerMenu(primaryStage, 2);
+			}
+			
+			
+				
+			}});
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -62,7 +84,7 @@ public class HowManyPlayers extends Application {
  * @author Eric
  *
  */
-	public static class setArrow {
+	public class setArrow {
 		Pane root;
 		double xKord;
 		double yKord;
@@ -135,8 +157,8 @@ public class HowManyPlayers extends Application {
 					SELECTED_ONE_PLAYER.setLayoutY(yArrow[0]);
 					SELECTED_ONE_PLAYER.setLayoutX(xArrow[0]);
 					if (SELECTED_TWO_PLAYER != null) {
-						key.consume();
-						pane.getChildren().remove(SELECTED_TWO_PLAYER);
+						pane.getChildren().remove(SELECTED_TWO_PLAYER);	
+					SELECTED_TWO_PLAYER = null;
 					}
 
 				}
@@ -148,9 +170,10 @@ public class HowManyPlayers extends Application {
 					SELECTED_TWO_PLAYER = selected(pane, SELECTED_TWO_PLAYER);
 					SELECTED_TWO_PLAYER.setLayoutY(yArrow[1]);
 					SELECTED_TWO_PLAYER.setLayoutX(xArrow[1]);
+					
 					if (SELECTED_ONE_PLAYER != null) {
-						key.consume();
 						pane.getChildren().remove(SELECTED_ONE_PLAYER);
+						SELECTED_ONE_PLAYER = null;
 					}
 
 				}
@@ -160,10 +183,11 @@ public class HowManyPlayers extends Application {
 				 */
 				if (key.getCode().equals(KeyCode.ENTER)	&& ARROW.getLayoutY() == yArrow[3]) {
 					if(SELECTED_TWO_PLAYER != null){
-						try {OnePlayerMenu one = new OnePlayerMenu(stage, 2);} catch (Exception e) {	e.printStackTrace();}
+						OnePlayerMenu one = new OnePlayerMenu(stage, 2);
 					}
 					else if(SELECTED_ONE_PLAYER != null){
-						try {OnePlayerMenu one = new OnePlayerMenu(stage, 1);} catch (Exception e) {	e.printStackTrace();}
+						OnePlayerMenu one = new OnePlayerMenu(stage, 1);
+						
 					}else{key.consume();}
 				}
 				/**
@@ -171,12 +195,11 @@ public class HowManyPlayers extends Application {
 				 */
 				if (key.getCode().equals(KeyCode.ENTER)
 						&& ARROW.getLayoutX() == xArrow[2]) {
-					try {
+					
+						pane.getChildren().removeAll(SELECTED_ONE_PLAYER,SELECTED_TWO_PLAYER);
 						key.consume();
 						Menu menu = new Menu();
 						menu.getItStarted(stage);
-					} catch (Exception e) {
-					}
 
 				}
 				

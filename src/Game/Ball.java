@@ -1,5 +1,7 @@
 package Game;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Bounds;
@@ -23,7 +25,7 @@ public class Ball {
 	private static int player1Score = 0;
 	private static int player2Score = 0;
 
-	private Player[] players;
+	private Set<Player> players;
 
 	private Random rand;
 
@@ -46,9 +48,12 @@ public class Ball {
 			Player... player) {
 		this.root = root;
 		this.ball = ball;
-		this.players = player;
-		for (Player p : players)
+		players =new HashSet<Player>();
+		
+		for (Player p : player){
 			p.setBall(this);
+			players.add(p);
+		}
 		CANVAS_HEIGHT = Game.CANVAS_HEIGHT;
 		CANVAS_WIDTH = Game.CANVAS_WIDTH;
 		rand = new Random();
@@ -72,7 +77,17 @@ public class Ball {
 	public double[] colCoords() {
 		return collision;
 	}
+	
+	public  void removePlayer(Player player)
+	{
+		players.remove(player);
+	}
 
+	
+	public void addPlayer(Player player)
+	{
+		players.add(player);
+	}
 	/**
 	 * Chaotic circle-circle collision checking the balls will "sink" and fling
 	 * each other away
@@ -122,6 +137,7 @@ public class Ball {
 	 *         been made to the velocity, 0 if not.
 	 */
 	public int[] moveBall() {
+		double oldX =velX;
 		// If a point should be added
 		int res = 0;
 
@@ -173,9 +189,11 @@ public class Ball {
 			}
 		}
 
-		if (hitPlayer)
+		if (hitPlayer){
+			if(velX == 0)
+				velX = (oldX < 0 ? 1 : -1);
 			return new int[] { 0, 1 };
-
+		}
 		// Move ball
 		setPos(end.x, end.y);
 
@@ -209,9 +227,11 @@ public class Ball {
 
 			effect.playRandom();
 		}
-
+		if(velX == 0)
+			velX = (oldX < 0 ? 1 : -1);
 		return new int[] { res, 0 };
 	}
+	
 
 	/**
 	 * Calculates if the ball will collide with a player whilst moving from
@@ -491,11 +511,10 @@ public class Ball {
 	 */
 	public void reset() {
 		setPos(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-		// velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
-		// velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) *
-		// START_Y_DIFF;
-		velX = START_X_VEL;
-		velY = START_Y_DIFF;
+		velX = rand.nextBoolean() ? -START_X_VEL : START_X_VEL;
+		velY = rand.nextDouble() * (rand.nextBoolean() ? -1 : 1) * START_Y_DIFF;
+		//velX = START_X_VEL;
+		//velY = START_Y_DIFF;
 	}
 
 	/**
@@ -529,8 +548,11 @@ public class Ball {
 	public void setPos(double x, double y) {
 		ball.setLayoutX(x);
 		ball.setLayoutY(y);
+		
 	}
-	
+	public void setBallSize(double radius){
+		ball.setRadius(radius);
+	}
 	public void setVel(double x, double y) {
 		velX = x;
 		velY = y;

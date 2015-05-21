@@ -1,5 +1,7 @@
 package Menu;
 
+import java.io.IOException;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -50,55 +52,65 @@ public class connectOnline extends Application {
 	private int posY = 0;
 
 	@Override
-	public void start(Stage onlineStage) throws Exception {
+	public void start(Stage onlineStage)  {
 
-		Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
-				"connectOnline.fxml"));
-		connectLabel = (Label) myPane.lookup("#connectLabel");
-		hostLabel = (Label) myPane.lookup("#hostLabel");
-		backLabel = (Label) myPane.lookup("#backLabel");
-		playLabel = (Label) myPane.lookup("#playLabel");
+		Pane myPane;
+		try {
+			myPane = (Pane) FXMLLoader.load(getClass().getResource(
+					"connectOnline.fxml"));
+			connectLabel = (Label) myPane.lookup("#connectLabel");
+			hostLabel = (Label) myPane.lookup("#hostLabel");
+			backLabel = (Label) myPane.lookup("#backLabel");
+			playLabel = (Label) myPane.lookup("#playLabel");
 
-		connect = (ImageView) myPane.lookup("#connect");
-		host = (ImageView) myPane.lookup("#host");
-		nameConnect = (ImageView) myPane.lookup("#nameConnect");
-		portConnect = (ImageView) myPane.lookup("#portConnect");
-		back = (ImageView) myPane.lookup("#back");
-		play = (ImageView) myPane.lookup("#play");
-		ip = (ImageView) myPane.lookup("#ipConnect");
-		nameHost = (ImageView) myPane.lookup("#nameHost");
-		portHost = (ImageView) myPane.lookup("#portHost");
+			connect = (ImageView) myPane.lookup("#connect");
+			host = (ImageView) myPane.lookup("#host");
+			nameConnect = (ImageView) myPane.lookup("#nameConnect");
+			portConnect = (ImageView) myPane.lookup("#portConnect");
+			back = (ImageView) myPane.lookup("#back");
+			play = (ImageView) myPane.lookup("#play");
+			ip = (ImageView) myPane.lookup("#ipConnect");
+			nameHost = (ImageView) myPane.lookup("#nameHost");
+			portHost = (ImageView) myPane.lookup("#portHost");
 
-		txtNameConnect = (TextField) myPane.lookup("#textNameConnect");
-		txtPortConnect = (TextField) myPane.lookup("#portTextConnect");
-		txtipTextConnect = (TextField) myPane.lookup("#ipTextHost");
+			txtNameConnect = (TextField) myPane.lookup("#textNameConnect");
+			txtPortConnect = (TextField) myPane.lookup("#portTextConnect");
+			txtipTextConnect = (TextField) myPane.lookup("#ipTextHost");
 
-		txtNameHost = (TextField) myPane.lookup("#txtHostName");
-		txtPortHost = (TextField) myPane.lookup("#txtHostPort");
-
-		Scene onlineScene = new Scene(myPane);
-
-		hostLabel.setOnMouseClicked(new setLeftOpacity());
-
-		connectLabel.setOnMouseClicked(new setRightOpacity());
-
-
-		playLabel.setOnMouseClicked(new createOnlineGame(onlineStage));
-
+			txtNameHost = (TextField) myPane.lookup("#txtHostName");
+			txtPortHost = (TextField) myPane.lookup("#txtHostPort");
 			
-		backLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			Scene onlineScene = new Scene(myPane);
+			
+			hostLabel.setOnMouseClicked(new setLeftOpacity());
 
-			@Override
-			public void handle(MouseEvent event) {
-				Menu back = new Menu();
-				back.getItStarted(onlineStage);
+			connectLabel.setOnMouseClicked(new setRightOpacity());
 
-			}
 
-		});
+			playLabel.setOnMouseClicked(new createOnlineGame(onlineStage));
 
-		onlineStage.setScene(onlineScene);
-		onlineStage.show();
+				
+			backLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					Menu back = new Menu();
+					back.getItStarted(onlineStage);
+
+				}
+
+			});
+
+			onlineStage.setScene(onlineScene);
+			onlineStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+
+	
 
 	}
 	

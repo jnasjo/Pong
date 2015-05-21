@@ -5,40 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javafx.scene.Group;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 
 public class Computer extends Player{
 
 	private Rectangle rect;
 	private double speedY = 6;
-
-	private Set<Ball> balls;
 	
 	public Computer(Keyboard keyboard, Rectangle rect, Group root) {
-		super(null, rect, null);
-		balls = new HashSet<Ball>();
+		super(null, rect, root);
 		this.rect=rect;
-	}
-
-	
-
-	/**
-	 * Creates a new player that is controlled by the computer
-	 * 
-	 * @param rect
-	 *            The computers pad
-	 */
-	//public Player(Keyboard keyboard, Rectangle rect, Group root)
-	
-
-	/**
-	 * Adds a ball to this pads "awareness"
-	 * 
-	 * @param ball
-	 *            The ball to add
-	 */
-	public void setBall(Ball ball) {
-		this.balls.add(ball);
 	}
 
 	/**
@@ -68,12 +45,22 @@ public class Computer extends Player{
 		return rect.getLayoutY();
 		
 	}
+	
+	private int count = 0;
 
 	/**
 	 * Makes the computer makes it move
 	 */
 	@Override
 	public void movePlayer() {
+		if(count > 60) {
+			shooting(KeyCode.P);
+			count = 0;
+		}
+		else {
+			count++;
+		}
+		
 		double shortestDistance = Double.MAX_VALUE;
 		Ball closestBall = null;
 		for (Ball ball : balls) {

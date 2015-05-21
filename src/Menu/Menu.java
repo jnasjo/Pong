@@ -8,10 +8,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import Game.GameLoop;
@@ -30,6 +32,9 @@ public class Menu extends Application {
 	ImageView head, smallHead, newGame, help, settings, quit, playonline, keys,
 			confirm;
 
+	@FXML
+	Pane newGameLabel;
+
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Pong");
@@ -42,6 +47,7 @@ public class Menu extends Application {
 			head = (ImageView) myPane.lookup("#head");
 			smallHead = (ImageView) myPane.lookup("#smallhead");
 			newGame = (ImageView) myPane.lookup("#newGame");
+			newGameLabel =(Pane) myPane.lookup("#newGameLabel");
 			help = (ImageView) myPane.lookup("#help");
 			settings = (ImageView) myPane.lookup("#settings");
 			quit = (ImageView) myPane.lookup("#quit");
@@ -49,11 +55,33 @@ public class Menu extends Application {
 			keys = (ImageView) myPane.lookup("#keys");
 			confirm = (ImageView) myPane.lookup("#confirm");
 
+			
 			selectArrows(myPane);
+			
+			myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				@Override
+				public void handle(MouseEvent e) {
+					if(newGame.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+						HowManyPlayers game = new HowManyPlayers(primaryStage);
+				}
+				else if(help.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+					Help help = new Help(primaryStage);
+				}
+				else if(playonline.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())){
+					connectOnline connect = new connectOnline();
+					connect.start(primaryStage);
+				}else if(playonline.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())){
+					primaryStage.close();
+					
+				}
+				
+					
+				}});
 
 			newGame.setOnKeyPressed(select(primaryStage));
 
 			Scene myScene = new Scene(myPane);
+			
 			myScene.setOnKeyPressed(select(primaryStage));
 			primaryStage.setScene(myScene);
 			primaryStage.show();
@@ -61,6 +89,10 @@ public class Menu extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void handleMouse(MouseEvent e, Stage stage) {
+		select(stage);
 	}
 
 	public void selectArrows(Pane myPane) {
@@ -102,34 +134,22 @@ public class Menu extends Application {
 					sR.setLayoutY(arrowDown);
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
-					//GameLoop newGame = new GameLoop(stage, "Erkan","jonas");
-					try {
-						HowManyPlayers game = new HowManyPlayers(stage);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
 
+					HowManyPlayers game = new HowManyPlayers(stage);
 				}
 
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 370) {
 
 					connectOnline connect = new connectOnline();
 
-					try {
-						connect.start(stage);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					connect.start(stage);
 
 				}
 
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
-					try {
-						Help help = new Help(stage);
 
-					} catch (IOException e) { // should never happen
-						e.printStackTrace();
-					}
+					Help help = new Help(stage);
+
 				}
 				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 430) {
 

@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import Menu.Menu;
 import Network.Client;
 import Network.NetworkNode;
 import Network.Server;
@@ -25,8 +26,12 @@ public class GameLoop implements Runnable {
 	private Player player1;
 	private Player player2;
 	private Ball ball;
+	
+	private final Stage stage;
+	private AnimationTimer theGameLoop;
+	private boolean isPlaying;
 
-//	private Powers powerUp;
+	private Powers powerUp;
 
 	// NETWORK TINGS
 	private NetworkNode myConnection;
@@ -40,11 +45,14 @@ public class GameLoop implements Runnable {
 	private Set<KeyCode> oppKeys = EnumSet.noneOf(KeyCode.class);
 
 	public GameLoop(Stage stage, String p1Name, String p2Name) {
+		
+
 		if (!p1Name.equals(""))
 			PLAYER_1_NAME = p1Name;
 		if (!p2Name.equals(""))
 			PLAYER_2_NAME = p2Name;
 
+		this.stage = stage;
 		// Create a new game with all components that we need
 		// Get the UI components
 		UI = new Game(stage);
@@ -55,19 +63,34 @@ public class GameLoop implements Runnable {
 		ball = UI.getBall();
 		player1 = UI.getPlayer1();
 		player2 = UI.getPlayer2();
-		if (p2Name == "") {
-//			player2 = new Computer(null, player2.getRect(), null);
-//			player2.setBall(ball);
+		if (p2Name.equals("JAPNIZ3_PING_MASTER")) {
+			player2 = new Computer(null, player2.getRect(), UI.getRoot());
+			player2.setBall(ball);
+			UI.setOnAction(true, false);
 		}
-//		powerUp = new Powers(player1, player2);
+		powerUp = new Powers(player1, player2, UI, this);
 
 		// Start the game in it's own thread
-		new AnimationTimer() {
+		isPlaying = true;
+		
+		theGameLoop = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				run();
+				if(isPlaying)
+					run();
 			}
-		}.start();
+		};
+		theGameLoop.start();
+		
+	}
+	
+	public String getP1Name()
+	{
+		return PLAYER_1_NAME;
+	}
+	public String getP2Name()
+	{
+		return PLAYER_2_NAME;
 	}
 
 	/*
@@ -161,21 +184,19 @@ public class GameLoop implements Runnable {
 						+ ball.getVelY());
 			}
 		} else if (res[0] != 0) {
+			
 			if (res[0] == -1) {
-				ball.reset();
 				p2Score++;
-				if (p2Score == 1) {
-//					powerUp.animateHeight(100, player2);
-				}
 			} else {
-				ball.reset();
 				p1Score++;
-				if (p1Score == 1) {
-//					powerUp.animateHeight(100, player1);
-				}
-
 			}
+
+			powerUp.checkPowers(p1Score, p2Score);
+			ball.reset();
 			UI.updatePlayerScore(p1Score, p2Score);
+			if (p1Score == 11 || p2Score == 11)
+				gameWon(p1Score == 11 ? PLAYER_1_NAME : PLAYER_2_NAME);		
+				
 		}
 
 		// Move players
@@ -292,6 +313,32 @@ public class GameLoop implements Runnable {
 			p2Score = 0;
 			UI.updatePlayerScore(p1Score, p2Score);
 		}); 
+	}
+	
+	/**
+	 * Displays who won the game and then returns to the main menu after 5
+	 * seconds
+	 * 
+	 * @param name
+	 *            The player who won the game
+	 */
+	private void gameWon(String name) {
+		final int time = 5;
+		displayMessage(name + " is the bäst.");
+		theGameLoop.stop();
+		
+		long second = 1000000000;
+		final long start = System.nanoTime();
+		new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				long delta = now - start;
+				if(delta > time*second) {
+					stop();
+					new Menu().getItStarted(stage);
+				}
+			}
+		}.start();
 	}
 
 	/**

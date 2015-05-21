@@ -1,6 +1,7 @@
 package Menu;
 import java.io.IOException;
 
+import Game.GameLoop;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -19,11 +21,11 @@ public class Help {
 	private ImageView sL;
 	private ImageView sR;
 
-	public Help(Stage helpStage) throws IOException {
+	public Help(Stage helpStage) {
 		start(helpStage);
 	}
 
-	public void start(Stage helpStage) throws IOException {
+	public void start(Stage helpStage) {
 
 		helpStage.setTitle("HELP");
 		try {
@@ -47,6 +49,15 @@ public class Help {
 			sR.setLayoutX(back.getLayoutX() + back.getFitWidth() - 20);
 			sR.setLayoutY(back.getLayoutY() - 20);
 
+			myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				@Override
+				public void handle(MouseEvent e) {
+					if(back.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+						Menu m = new Menu();
+						m.getItStarted(helpStage);
+				}
+						
+				}});
 			EventHandler<KeyEvent> select = new EventHandler<KeyEvent>() {
 
 				@Override
@@ -64,7 +75,7 @@ public class Help {
 			helpStage.show();
 
 		} catch (IOException e) {
-			throw new IOException();
+			
 		}
 
 	}

@@ -16,15 +16,19 @@ public class Player {
 
 	private Group root;
 
+	private boolean computerWillShoot = false;
+	
 	private final static int startSpeedX = 4;
 	private final static int startSpeedY = 4;
 	private int speedX = 0;
 	private int speedY = 0;
+	
+	private int nrOfShot = 0;
 
 	private int[][] animator;
 
 	// BAAAD lsning
-	private Set<Ball> balls;
+	protected Set<Ball> balls;
 
 	public Player(Keyboard keyboard, Rectangle rect, Group root) {
 		this.root = root;
@@ -81,38 +85,74 @@ public class Player {
 		setVel(keys);
 
 		for (KeyCode key : keys) {
-
 			// WE BE FIRERIN' THE LAZORRZ
-			if (key == keyboard.getFire()) {
-				Shape sp = new Shape(root);
-				@SuppressWarnings("unused")
-				Rectangle shoot;
-
-				new AnimationTimer() {
-					Rectangle shoot = sp.drawRectangle(
-							(int) self.getLayoutX() - 20,
-							(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
-					int ShootspeedX = 4;
-
-					@Override
-					public void handle(long args0) {
-						shoot.setLayoutX(self.getLayoutX());
-						shoot.setLayoutY(self.getLayoutY());
-
-						ShootspeedX += 5;
-						shoot.setLayoutX(self.getLayoutX() + ShootspeedX);
-
-						shoot.setLayoutY(120 * Math.sin(shoot.getLayoutX() / 50));
-
-						if (ShootspeedX > Game.CANVAS_WIDTH) {
-							root.getChildren().remove(shoot);
-							ShootspeedX = (int) self.getLayoutX()
-									- (int) self.getLayoutX() - 5;
-						}
-					}
-				}.start();
+			if (key == keyboard.getFire() && nrOfShot > 0) {
+					shooting(key);
 			}
 		}
+	}
+		
+		public void shooting(KeyCode key)
+		{
+			if(nrOfShot < 0 )
+				return;
+		
+			nrOfShot--;
+			Shape sp = new Shape(root);
+			@SuppressWarnings("unused")
+			Rectangle shoot;
+			
+			new AnimationTimer() {
+				Rectangle shoot = sp.drawRectangle(
+						(int) self.getLayoutX() - 20,
+						(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
+				
+				Player shootPlayer = null;
+				
+				
+				int ShootspeedX = (key == KeyCode.P) ? -4 : 4;
+
+				@Override
+				public void handle(long args0) {
+					
+					if(shootPlayer == null){
+						shootPlayer = new Player(null, shoot, null);
+						for(Ball b : balls){
+							b.addPlayer(shootPlayer);
+						}
+					}
+					shoot.setLayoutX(self.getLayoutX());
+					shoot.setLayoutY(self.getLayoutY());
+
+					ShootspeedX += (key == KeyCode.P) ? -5 : 5;
+					shoot.setLayoutX(self.getLayoutX() + ShootspeedX);
+
+					shoot.setLayoutY(((key == KeyCode.P) ? -120 : 120) * Math.sin(shoot.getLayoutX() / 50)+ self.getLayoutY());
+
+					if (ShootspeedX > Game.CANVAS_WIDTH) {
+						root.getChildren().remove(shoot);
+						for(Ball b : balls){
+							b.removePlayer(shootPlayer);
+						}
+						this.stop();
+						ShootspeedX = (int) self.getLayoutX()
+								- (int) self.getLayoutX() - 5;
+					}
+				}
+			}.start();
+			
+			
+		
+		}
+	
+	/**
+	 * Adds shots that the player can shoot
+	 * @param shots
+	 * The amount of shots
+	 */
+	public void addShots(int shots) {
+		if(shots > 0)
+			nrOfShot += shots;
 	}
 
 	/**
@@ -168,6 +208,7 @@ public class Player {
 	}
 
 	public void movePlayer() {
+		
 		for (Ball ball : balls) {
 			// We move the ball rather than us so the collision
 			// algorithm will work, (does not supper player to

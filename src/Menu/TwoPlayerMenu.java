@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -47,6 +48,18 @@ public class TwoPlayerMenu extends Application{
 		back.getLayoutX() - 90).setSelectArrows();
 
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
+		myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent e) {
+				if(back.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+					Menu menu = new Menu();
+					menu.getItStarted(primaryStage);
+			}
+			else if(play.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+				
+				GameLoop game = new GameLoop(primaryStage, getP1Name(), getP2Name());
+			}			
+			}});
 		Scene scene = new Scene(myPane);
 		
 		primaryStage.setScene(scene);

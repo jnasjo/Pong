@@ -1,5 +1,7 @@
 package Menu;
 
+import java.io.IOException;
+
 import Game.GameLoop;
 import Menu.TwoPlayerMenu.setArrow;
 import javafx.application.Application;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -29,10 +32,12 @@ public class OnePlayerMenu extends Application{
 	@FXML
 	private TextField p1,p2;
 	
-	public OnePlayerMenu(Stage stage, int playerCount) throws Exception
+	private Menu menu;
+	
+	public OnePlayerMenu(Stage stage, int playerCount)
 	{
 		this.playerCount = playerCount;
-		
+	try{	
 		if(playerCount == 1){
 			myPane = (Pane) FXMLLoader.load(getClass().getResource(
 					"OnePlayerMenu.fxml"));
@@ -41,6 +46,9 @@ public class OnePlayerMenu extends Application{
 					"TwoPlayerMenu.fxml"));
 		}
 		start(stage);
+	}catch(IOException e){};
+		
+		
 	}
 	
 	public void getFXML(Pane myPane) {
@@ -82,12 +90,23 @@ public class OnePlayerMenu extends Application{
 		}
 	}
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		
 		getFXML(myPane);
 		setArrow menuArrow = new setArrow(myPane, back.getLayoutY() - 25,
 				back.getLayoutX() - 90).setSelectArrows();
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
+		
+		myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent e) {
+				if(back.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+					Menu menu = new Menu(); menu.getItStarted(primaryStage);
+			}
+			else if(play.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+				GameLoop game = new GameLoop(primaryStage, getP1Name(), getP2Name());
+			}			
+			}});
 		Scene scene = new Scene(myPane);
 		
 		primaryStage.setScene(scene);
@@ -124,7 +143,8 @@ public class OnePlayerMenu extends Application{
 					ARROW.setLayoutX(xArrow[pos]);
 				}
 				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0] || key.getCode().equals(KeyCode.ESCAPE)){//go back
-					Menu menu = new Menu();
+					
+					menu = new Menu();
 					menu.getItStarted(stage);
 				}
 				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[1]){ //play

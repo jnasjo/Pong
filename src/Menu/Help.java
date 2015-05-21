@@ -34,20 +34,7 @@ public class Help {
 			Scene helpScene = new Scene(myPane);
 			ImageView back = (ImageView) myPane.lookup("#back");
 
-			Image selectArrowLeft = new Image("selectArrowLeft.png");
-			Image selectArrowRight = new Image("selectArrowRight.png");
-			sL = new ImageView(selectArrowLeft);
-			sR = new ImageView(selectArrowRight);
-			sL.setScaleX(0.5);
-			sL.setScaleY(0.5);
-			sR.setScaleX(0.5);
-			sR.setScaleY(0.5);
-
-			myPane.getChildren().addAll(sL, sR);
-			sL.setLayoutX(back.getLayoutX() - 70);
-			sL.setLayoutY(back.getLayoutY() - 20);
-			sR.setLayoutX(back.getLayoutX() + back.getFitWidth() - 20);
-			sR.setLayoutY(back.getLayoutY() - 20);
+		
 
 			myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
 				@Override

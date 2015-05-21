@@ -34,7 +34,6 @@ public class HowManyPlayers extends Application {
 			myPane = (Pane) FXMLLoader.load(getClass().getResource(
 					"twoOrOnePlayer.fxml"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		start(stage);
@@ -152,10 +151,11 @@ public class HowManyPlayers extends Application {
 				 * Select one player
 				 */
 				if (key.getCode().equals(KeyCode.ENTER)
-						&& ARROW.getLayoutY() == yArrow[0]) { // 1player
+						&& ARROW.getLayoutY() == yArrow[0]) { 
 					SELECTED_ONE_PLAYER = selected(pane, SELECTED_ONE_PLAYER);
 					SELECTED_ONE_PLAYER.setLayoutY(yArrow[0]);
 					SELECTED_ONE_PLAYER.setLayoutX(xArrow[0]);
+					OnePlayerMenu one = new OnePlayerMenu(stage, 1);
 					if (SELECTED_TWO_PLAYER != null) {
 						pane.getChildren().remove(SELECTED_TWO_PLAYER);	
 					SELECTED_TWO_PLAYER = null;
@@ -166,10 +166,11 @@ public class HowManyPlayers extends Application {
 				 * Select two players
 				 */
 				if (key.getCode().equals(KeyCode.ENTER)
-						&& ARROW.getLayoutY() == yArrow[1]) { // 1player
+						&& ARROW.getLayoutY() == yArrow[1]) {
 					SELECTED_TWO_PLAYER = selected(pane, SELECTED_TWO_PLAYER);
 					SELECTED_TWO_PLAYER.setLayoutY(yArrow[1]);
 					SELECTED_TWO_PLAYER.setLayoutX(xArrow[1]);
+					OnePlayerMenu one = new OnePlayerMenu(stage, 2);
 					
 					if (SELECTED_ONE_PLAYER != null) {
 						pane.getChildren().remove(SELECTED_ONE_PLAYER);

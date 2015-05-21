@@ -5,61 +5,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane prefHeight="546.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
    <children>
-      <ImageView fitHeight="540.0" fitWidth="960.0">
+      <ImageView fitHeight="546.0" fitWidth="960.0">
          <image>
             <Image url="@../resources/background.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2" fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="152.0">
+      <ImageView fitHeight="124.0" fitWidth="627.0" layoutX="167.0" layoutY="23.0">
          <image>
-            <Image url="@../resources/playertwo.png" />
+            <Image url="@../resources/intro.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="514.0" layoutX="346.0">
+      <ImageView fitHeight="51.0" fitWidth="562.0" layoutX="199.0" layoutY="157.0">
          <image>
-            <Image url="@../resources/mostPointsWin.png" />
+            <Image url="@../resources/points.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="514.0" layoutX="346.0" layoutY="67.0">
+      <ImageView fitHeight="88.0" fitWidth="485.0" layoutX="21.0" layoutY="257.0">
          <image>
-            <Image url="@../resources/instruct.png" />
+            <Image url="@../resources/pone.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player1" fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="152.0">
+      <ImageView fitHeight="88.0" fitWidth="485.0" layoutX="21.0" layoutY="342.0">
          <image>
-            <Image url="@../resources/playerone.png" />
+            <Image url="@../resources/ptwo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="202.0">
+      <ImageView fitHeight="176.0" fitWidth="348.0" layoutX="587.0" layoutY="257.0">
          <image>
-            <Image url="@../resources/moveUp.png" />
+            <Image url="@../resources/lvlup.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="245.0">
+      <ImageView fx:id="back" fitHeight="75.0" fitWidth="200.0" layoutX="381.0" layoutY="439.0">
          <image>
-            <Image url="@../resources/moveDown.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="167.0" layoutY="291.0">
-         <image>
-            <Image url="@../resources/movep1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="660.0" layoutY="202.0">
-         <image>
-            <Image url="@../resources/playermovetwo.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="back" fitHeight="76.0" fitWidth="200.0" layoutX="414.0" layoutY="413.0">
-         <image>
-            <Image url="@../resources/back.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="help" fitHeight="76.0" fitWidth="200.0" layoutY="29.0">
-         <image>
-            <Image url="@../resources/help.png" />
+            <Image url="@../resources/BACKCLEANTEXT.png" />
          </image>
       </ImageView>
    </children>

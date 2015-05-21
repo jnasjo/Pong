@@ -17,12 +17,12 @@
             <Image url="@../resources/back.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="200.0" layoutX="546.0" layoutY="437.0">
+      <ImageView fitHeight="40.0" fitWidth="250.0" layoutX="546.0" layoutY="437.0">
          <image>
             <Image url="@../resources/confirm.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="16.0" fitWidth="200.0" layoutX="220.0" layoutY="439.0">
+      <ImageView fitHeight="40.0" fitWidth="250.0" layoutX="220.0" layoutY="439.0">
          <image>
             <Image url="@../resources/select.png" />
          </image>

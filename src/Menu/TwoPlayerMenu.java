@@ -134,7 +134,6 @@ public class TwoPlayerMenu extends Application{
 			ARROW = new ImageView(arrow);
 
 			root.getChildren().add(ARROW);
-			ARROW.setId("ERIC");
 			ARROW.setScaleX(0.6);
 			ARROW.setScaleY(0.6);
 

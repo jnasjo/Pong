@@ -22,9 +22,7 @@ public class Menu extends Application {
 	private AnimationTimer timer;
 
 	private String name;
-	private double arrowDown;
-	private double arrowXL;
-	private double arrowXR;
+	private int arrow_pos = 0;
 	private ImageView sL;
 	private ImageView sR;
 
@@ -103,61 +101,47 @@ public class Menu extends Application {
 		myPane.getChildren().add(sL);
 		myPane.getChildren().add(sR);
 
-		sL.setScaleX(0.3);
-		sL.setScaleY(0.3);
-		sR.setScaleX(0.3);
-		sR.setScaleY(0.3);
-		arrowDown = (int) (newGame.getLayoutY() - 40);
-		arrowXL = newGame.getLayoutX() - 60;
-		arrowXR = newGame.getLayoutX() + newGame.getFitWidth() - 25;
-		sL.setLayoutX(arrowXR);
-		sL.setLayoutY(arrowDown);
-		sR.setLayoutX(arrowXL);
-		sR.setLayoutY(arrowDown);
+		sL.setScaleX(0.3); sL.setScaleY(0.3); sR.setScaleX(0.3); sR.setScaleY(0.3);
+		sL.setLayoutX(newGame.getLayoutX() + newGame.getFitWidth() - 25);
+		sL.setLayoutY(newGame.getLayoutY() - 40);
+		sR.setLayoutX(newGame.getLayoutX() - 60);
+		sR.setLayoutY(newGame.getLayoutY() - 40);
 	}
 
 	public EventHandler<KeyEvent> select(Stage stage) {
+		double[] xArrow = new double[] {newGame.getLayoutX() - 90,
+				help.getLayoutX() - 90, playonline.getLayoutX()-90 , quit.getLayoutX()-90};
+		double[] yArrow = new double[] {newGame.getLayoutY()-40,
+				help.getLayoutY()-40 ,playonline.getLayoutY()-40, quit.getLayoutY()-40};
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent key) {
-				if (key.getCode().equals(KeyCode.DOWN) && arrowDown != 430) {
-
-					arrowDown += 60;
-					sL.setLayoutY(arrowDown);
-					sR.setLayoutY(arrowDown);
+				if (key.getCode().equals(KeyCode.DOWN) && sL.getLayoutY() != yArrow[3]) {
+					arrow_pos++;
+					sL.setLayoutY(yArrow[arrow_pos]);
+					sR.setLayoutY(yArrow[arrow_pos]);
 				}
-				if (key.getCode().equals(KeyCode.UP) && arrowDown != 190) {
-
-					arrowDown -= 60;
-					sL.setLayoutY(arrowDown);
-					sR.setLayoutY(arrowDown);
+				if (key.getCode().equals(KeyCode.UP) && sL.getLayoutY() != yArrow[0]) {
+					arrow_pos--;
+					sL.setLayoutY(yArrow[arrow_pos]);
+					sR.setLayoutY(yArrow[arrow_pos]);
 				}
-				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 190) {
-
+				if (key.getCode().equals(KeyCode.ENTER) && sL.getLayoutY() == yArrow[0]) { // new game was clicked
 					HowManyPlayers game = new HowManyPlayers(stage);
 				}
 
-				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 370) {
-
-					connectOnline connect = new connectOnline();
-
-					connect.start(stage);
-
-				}
-
-				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 250) {
-
+				if (key.getCode().equals(KeyCode.ENTER) && sL.getLayoutY() == yArrow[1]) { // help was clicked
 					Help help = new Help(stage);
-
 				}
-				if (key.getCode().equals(KeyCode.ENTER) && arrowDown == 430) {
 
+				if (key.getCode().equals(KeyCode.ENTER) && sL.getLayoutY() == yArrow[2]) { // online was clicked
+					connectOnline connect = new connectOnline();
+					connect.start(stage);
+				}
+				if (key.getCode().equals(KeyCode.ENTER) && sL.getLayoutY() == yArrow[3]) { // quit wtf?
 					stage.close();
-
 				}
-
-				System.out.println(arrowDown);
 			}
 		};
 		return e;

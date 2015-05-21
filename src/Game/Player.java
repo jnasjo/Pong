@@ -15,10 +15,11 @@ public class Player {
 	private Keyboard keyboard;
 
 	private Group root;
+	
 
 	private boolean computerWillShoot = false;
 	
-	private final static int startSpeedX = 4;
+	private static int startSpeedX = 4;
 	private final static int startSpeedY = 4;
 	private int speedX = 0;
 	private int speedY = 0;
@@ -38,6 +39,11 @@ public class Player {
 
 		// UP, DOWN, LEFT, RIGHT
 		animator = new int[][] { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } };
+	}
+	
+	public void setSpeed()
+	{
+		startSpeedX = 20;
 	}
 
 	// DEV
@@ -83,7 +89,6 @@ public class Player {
 
 		// Move player
 		setVel(keys);
-
 		for (KeyCode key : keys) {
 			// WE BE FIRERIN' THE LAZORRZ
 			if (key == keyboard.getFire() && nrOfShot > 0) {
@@ -96,7 +101,8 @@ public class Player {
 		{
 			if(nrOfShot < 0 )
 				return;
-		
+		System.out.println(nrOfShot);
+			
 			nrOfShot--;
 			Shape sp = new Shape(root);
 			@SuppressWarnings("unused")
@@ -108,7 +114,6 @@ public class Player {
 						(int) self.getLayoutY() - 20, 20, 20, Color.ORANGE);
 				
 				Player shootPlayer = null;
-				
 				
 				int ShootspeedX = (key == KeyCode.P) ? -4 : 4;
 

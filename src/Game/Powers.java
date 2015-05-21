@@ -56,6 +56,10 @@ public class Powers {
 		} else {
 			return;
 		}
+		/** unreliable cheat code works 20 % of the times*/
+		if(p.getKeyboard() != null && p.getKeyboard().cheatModeOn()){ 
+			p1.setSpeed();
+		}
 		
 		switch (score) {
 		case 1:
@@ -63,19 +67,21 @@ public class Powers {
 			break;
 		case 5:
 			if(p.getKeyboard() == null)
-				addFirePower(p,30);
+				addFirePower(p,10);
 			else{
-				addFirePower(p, 10);
+				addFirePower(p, 30);
 			}
 			if(p.getKeyboard() != null)
-				UI.displayMessage(name +" FIIIRE PRESS "+ p.getKeyboard().getFire());
+				UI.displayMessage(name +" FIIIRE PRESS - 30 SHOTS LEFT!!! "+ p.getKeyboard().getFire());
 			else
-				UI.displayMessage(name+" SHOOTS : 30" );
+				UI.displayMessage(name+" SHOOTS : 10" );
 			break;
 		case 8:
 			animateHeight(20, p);
 			break;
 		}
+		
+			
 	}
 	
 	

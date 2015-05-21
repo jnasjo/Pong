@@ -53,7 +53,7 @@ public class Computer extends Player{
 	 */
 	@Override
 	public void movePlayer() {
-		if(count > 60) {
+		if(count > 30) {
 			shooting(KeyCode.P);
 			count = 0;
 		}

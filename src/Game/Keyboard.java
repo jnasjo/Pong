@@ -3,12 +3,16 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 
 public class Keyboard {
 
 	private Set<KeyCode> pressedKeys = EnumSet.noneOf(KeyCode.class);
 	private KeyCode[] keys; // 0 = up, 1 = down, 2 = left, 3 = right
+	
+	private String cheatCode = "";
+	
 
 	/**
 	 * Creates a new keyboard with specified keys
@@ -32,6 +36,7 @@ public class Keyboard {
 		keys[2] = left;
 		keys[3] = right;
 		keys[4] = fire;
+		
 	}
 
 	/**
@@ -103,14 +108,28 @@ public class Keyboard {
 	 *         on the keyboard
 	 */
 	public Set<KeyCode> handle(KeyEvent event) {
-
+		
 		if (KeyEvent.KEY_PRESSED.equals(event.getEventType())) {
-			if (hasKey(event.getCode()))
+			cheatCode += event.getCode().toString().toLowerCase();
+			if(cheatCode.length() > 20) 
+				cheatCode = "";
+			if (hasKey(event.getCode())){
 				pressedKeys.add(event.getCode());
+			}
 		} else if (KeyEvent.KEY_RELEASED.equals(event.getEventType()))
 			pressedKeys.remove(event.getCode());
 
 		return pressedKeys;
+	}
+	
+	public boolean cheatModeOn()
+	{
+		if(cheatCode.contentEquals("letmecheat")){
+			cheatCode = "";
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**

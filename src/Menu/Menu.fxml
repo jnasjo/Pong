@@ -22,41 +22,35 @@
             <Image url="@../resources/HedaSub.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="newGame" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="230.0">
+      <ImageView fx:id="newGame" fitHeight="45.0" fitWidth="240.0" layoutX="360.0" layoutY="228.0">
          <image>
             <Image url="@../resources/newGame.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="help" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="290.0">
+      <ImageView fx:id="help" fitHeight="39.0" fitWidth="190.0" layoutX="386.0" layoutY="281.0">
          <image>
             <Image url="@../resources/help.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="settings" fitHeight="39.0" fitWidth="200.0" layoutX="384.0" layoutY="350.0">
-         <image>
-            <Image url="@../resources/settings.png" />
-         </image>  
-      </ImageView>
-      <ImageView fx:id="quit" fitHeight="76.0" fitWidth="200.0" layoutX="384.0" layoutY="450.0">
+      <ImageView fx:id="quit" fitHeight="39.0" fitWidth="200.0" layoutX="380.0" layoutY="388.0">
          <image>
             <Image url="@../resources/quit.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="playonline" fitHeight="29.0" fitWidth="200.0" layoutX="384.0" layoutY="410.0">
+      <ImageView fx:id="playonline" fitHeight="39.0" fitWidth="200.0" layoutX="386.0" layoutY="335.0">
          <image>
             <Image url="@../resources/playOnline.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="keys" fitHeight="29.0" fitWidth="221.0" layoutX="70.0" layoutY="498.0">
+      <ImageView fx:id="keys" fitHeight="56.0" fitWidth="279.0" layoutX="70.0" layoutY="471.0">
          <image>
             <Image url="@../resources/select.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="confirm" fitHeight="29.0" fitWidth="200.0" layoutX="690.0" layoutY="498.0">
+      <ImageView fx:id="confirm" fitHeight="56.0" fitWidth="279.0" layoutX="640.0" layoutY="476.0">
          <image>
             <Image url="@../resources/confirm.png" />
          </image>
       </ImageView>
-      <Pane fx:id="newGameLabel" layoutX="372.0" layoutY="211.0" prefHeight="76.0" prefWidth="228.0" />
    </children>
 </AnchorPane>

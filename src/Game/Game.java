@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -181,6 +183,7 @@ public class Game {
 		// Create the players score (0 VS. 0)
 		updatePlayerScore(0, 0);
 
+	
 		// Create the actual pads
 		Rectangle p1 = shape.drawRectangle(30, CANVAS_HEIGHT / 2 - 35, 20, 70,
 				PLAYER1_COLOR);

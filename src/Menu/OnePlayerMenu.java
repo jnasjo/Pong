@@ -18,50 +18,51 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class OnePlayerMenu extends Application{
+public class OnePlayerMenu extends Application {
 	private static ImageView ARROW;
 	private int pos = 0;
-	
+
 	@FXML
 	private ImageView back, play;
-	
+
 	private Pane myPane;
-	
+
 	private int playerCount;
-	
+
 	@FXML
-	private TextField p1,p2;
-	
+	private TextField p1, p2;
+
 	private Menu menu;
-	
-	public OnePlayerMenu(Stage stage, int playerCount)
-	{
+
+	public OnePlayerMenu(Stage stage, int playerCount) {
 		this.playerCount = playerCount;
-	try{	
-		if(playerCount == 1){
-			myPane = (Pane) FXMLLoader.load(getClass().getResource(
-					"OnePlayerMenu.fxml"));
-		}else{
-			myPane = (Pane) FXMLLoader.load(getClass().getResource(
-					"TwoPlayerMenu.fxml"));
+		try {
+			if (playerCount == 1) {
+				myPane = (Pane) FXMLLoader.load(getClass().getResource(
+						"OnePlayerMenu.fxml"));
+			} else {
+				myPane = (Pane) FXMLLoader.load(getClass().getResource(
+						"TwoPlayerMenu.fxml"));
+			}
+			start(stage);
+		} catch (IOException e) {
 		}
-		start(stage);
-	}catch(IOException e){};
-		
-		
+		;
+
 	}
-	
+
 	public void getFXML(Pane myPane) {
 		back = (ImageView) myPane.lookup("#back");
 		play = (ImageView) myPane.lookup("#play");
 		p1 = (TextField) myPane.lookup("#p1");
 		p1.setFocusTraversable(false);
-		if(playerCount == 2){
-			p2 = (TextField) myPane.lookup("#p2");	
+		if (playerCount == 2) {
+			p2 = (TextField) myPane.lookup("#p2");
 			p2.setFocusTraversable(false);
 		}
-		
+
 	}
+
 	public static class setArrow {
 		Pane root;
 		double xKord;
@@ -89,83 +90,100 @@ public class OnePlayerMenu extends Application{
 			return new setArrow(root, xKord, yKord);
 		}
 	}
+
 	@Override
 	public void start(Stage primaryStage) {
-		
+
 		getFXML(myPane);
 		setArrow menuArrow = new setArrow(myPane, back.getLayoutY() - 25,
 				back.getLayoutX() - 90).setSelectArrows();
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
-		
-		myPane.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+		myPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
-				if(back.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
-					Menu menu = new Menu(); menu.getItStarted(primaryStage);
+				if (back.getBoundsInParent().contains(e.getSceneX(),
+						e.getSceneY())) {
+					Menu menu = new Menu();
+					menu.getItStarted(primaryStage);
+				}
+
+				else if (play.getBoundsInParent().contains(e.getSceneX(),
+						e.getSceneY())) {
+					if(playerCount == 1){
+						GameLoop game = new GameLoop(primaryStage, getP1Name(),"JAPNIZ3_PING_MASTER");
+					}else{
+						GameLoop game = new GameLoop(primaryStage, getP1Name(),getP2Name());
+					}
+				}
 			}
-			else if(play.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
-				GameLoop game = new GameLoop(primaryStage, getP1Name(), getP2Name());
-			}			
-			}});
+		});
+
 		Scene scene = new Scene(myPane);
-		
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
+
 	}
-	
+
 	private EventHandler<KeyEvent> select(Stage stage, Pane pane) {
 
 		/**
 		 * Positions for each object in the scene
 		 */
-		double[] xArrow = new double[] {back.getLayoutX() - 90,
+		double[] xArrow = new double[] { back.getLayoutX() - 90,
 				play.getLayoutX() - 90 };
-		double[] yArrow = new double[] {back.getLayoutY() - 25,
+		double[] yArrow = new double[] { back.getLayoutY() - 25,
 				play.getLayoutY() - 25 };
 
 		EventHandler<KeyEvent> e = new EventHandler<KeyEvent>() {
 
 			@Override
-			public void handle(KeyEvent key){
+			public void handle(KeyEvent key) {
 				/**
 				 * Move around the menu
 				 */
-				if (key.getCode().equals(KeyCode.DOWN) ||key.getCode().equals(KeyCode.RIGHT)) {
-					if(pos < 1){
+				if (key.getCode().equals(KeyCode.DOWN)
+						|| key.getCode().equals(KeyCode.RIGHT)) {
+					if (pos < 1) {
 						pos++;
 					}
 					ARROW.setLayoutX(xArrow[pos]);
-				} else if (key.getCode().equals(KeyCode.UP) || key.getCode().equals(KeyCode.LEFT)) {
-					if(pos > 0){
+				} else if (key.getCode().equals(KeyCode.UP)
+						|| key.getCode().equals(KeyCode.LEFT)) {
+					if (pos > 0) {
 						pos--;
 					}
 					ARROW.setLayoutX(xArrow[pos]);
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[0] || key.getCode().equals(KeyCode.ESCAPE)){//go back
-					
+				if (key.getCode().equals(KeyCode.ENTER)
+						&& ARROW.getLayoutX() == xArrow[0]
+						|| key.getCode().equals(KeyCode.ESCAPE)) {// go back
+
 					menu = new Menu();
 					menu.getItStarted(stage);
 				}
-				if(key.getCode().equals(KeyCode.ENTER) && ARROW.getLayoutX() == xArrow[1]){ //play
-					if(playerCount == 1){
-						GameLoop gameOne = new GameLoop(stage, getP1Name(), "");
-					}else{
-						GameLoop game = new GameLoop(stage, getP1Name(), getP2Name());
+				if (key.getCode().equals(KeyCode.ENTER)
+						&& ARROW.getLayoutX() == xArrow[1]) { // play
+					if (playerCount == 1) {
+						GameLoop gameOne = new GameLoop(stage, getP1Name(), "JAPNIZ3_PING_MASTER");
+					} else {
+						GameLoop game = new GameLoop(stage, getP1Name(),
+								getP2Name());
 					}
-						
+
 				}
 			}
-			
+
 		};
 		return e;
 	}
-	public String getP1Name()
-	{
+
+	public String getP1Name() {
 		return p1.getText();
 	}
-	public String getP2Name()
-	{
+
+	public String getP2Name() {
 		return p2.getText();
 	}
 

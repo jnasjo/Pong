@@ -101,7 +101,7 @@ public class Player {
 		{
 			if(nrOfShot < 0 )
 				return;
-		System.out.println(nrOfShot);
+		
 			
 			nrOfShot--;
 			Shape sp = new Shape(root);

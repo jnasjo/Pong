@@ -95,8 +95,8 @@ public class OnePlayerMenu extends Application {
 	public void start(Stage primaryStage) {
 
 		getFXML(myPane);
-		setArrow menuArrow = new setArrow(myPane, back.getLayoutY() - 25,
-				back.getLayoutX() - 90).setSelectArrows();
+		setArrow menuArrow = new setArrow(myPane, play.getLayoutY() - 25,
+				play.getLayoutX() - 90).setSelectArrows();
 		myPane.setOnKeyPressed(select(primaryStage, myPane));
 
 		myPane.setOnMouseClicked(new EventHandler<MouseEvent>() {

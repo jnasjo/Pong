@@ -124,7 +124,7 @@ public class Keyboard {
 	
 	public boolean cheatModeOn()
 	{
-		if(cheatCode.contentEquals("letmecheat")){
+		if(cheatCode.equals("letmecheat")){
 			cheatCode = "";
 			return true;
 		}
